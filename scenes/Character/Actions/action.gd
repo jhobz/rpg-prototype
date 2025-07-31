@@ -7,11 +7,9 @@ var action_name := 'roll'
 func _ready() -> void:
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
-func execute() -> void:
-	# GameManager -> hurt this character for X damage
+func execute(_source: Character, _target: Character) -> void:
 	pass

@@ -109,3 +109,13 @@ sprite_frames = SubResource("SpriteFrames_s1ru0")
 animation = &"roll"
 autoplay = "idle"
 frame_progress = 0.909259
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -31.0
+offset_right = 20.0
+offset_bottom = -7.0
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 8
+text = "
+HP: "
