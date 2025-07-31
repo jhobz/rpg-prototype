@@ -43,7 +43,7 @@ func execute_action(action: Action, target: Character):
 	action.execute(self, target)
 	
 func take_damage(amount: int):
-	if hp <= 0:
+	if is_dead():
 		return
 	hp -= amount
 	if is_dead():
