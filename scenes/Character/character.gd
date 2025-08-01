@@ -1,6 +1,7 @@
 class_name Character
 extends Node2D
 
+@export var animated_sprite: AnimatedSprite2D
 @export var char_name: String = ""
 
 @export_group("Stats")
@@ -12,22 +13,19 @@ extends Node2D
 
 @onready var hp: int = max_hp
 var last_hp: int = 0
+var is_queued_for_death := false
 
 @export_group("Actions")
 @export var available_actions: Array[Action] = []
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	animated_sprite.animation_finished.connect(_on_animation_finished)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
 	if !animated_sprite.is_playing():
-		if is_dead():
-			animated_sprite.hide()
-		else:
-			animated_sprite.play('idle')
+		animated_sprite.play('idle')
 	
 	if hp != last_hp:
 		last_hp = hp
@@ -45,11 +43,26 @@ func execute_action(action: Action, target: Character):
 func take_damage(amount: int):
 	if is_dead():
 		return
+
+	animated_sprite.play('hit')
 	hp -= amount
+
 	if is_dead():
 		hp = 0
-		roll()
-		# die
+		die()
 
 func roll():
 	animated_sprite.play('roll')
+
+func _on_animation_finished():
+	if !is_queued_for_death and animated_sprite.animation != 'death':
+		return
+
+	print(char_name + ' died')
+	queue_free()
+
+func die():
+	if animated_sprite.is_playing() and animated_sprite.animation == 'hit':
+		is_queued_for_death = true
+	else:
+		animated_sprite.play('death')
