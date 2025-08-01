@@ -2,6 +2,7 @@ class_name Character
 extends Node2D
 
 @export var char_name: String = ""
+@export var is_player_character: bool = false
 
 @export_group("Stats")
 @export var max_hp: int = 30
@@ -16,6 +17,9 @@ var last_hp: int = 0
 @export_group("Actions")
 @export var available_actions: Array[Action] = []
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+var is_turn_active: bool = false
+var is_turn_complete: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -37,10 +41,10 @@ func is_dead():
 	return hp <= 0
 
 func execute_action(action: Action, target: Character):
-	if action.action_name == 'roll':
-		animated_sprite.play('roll')
-
+	if not is_turn_active:
+		return
 	action.execute(self, target)
+	is_turn_complete = true
 	
 func take_damage(amount: int):
 	if is_dead():

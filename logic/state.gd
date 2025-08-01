@@ -1,5 +1,6 @@
 class_name State extends Node
 
+var is_active: bool = false
 var time_active: float = 0
 
 func enter():

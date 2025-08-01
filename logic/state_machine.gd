@@ -9,11 +9,18 @@ func init_state_machine():
 	
 func change_state(new_state: State):
 	if current_state:
-		current_state.exit()
-		current_state.time_active = 0
-		
+		_exit_state()
+	_enter_state(new_state)
+
+func _enter_state(new_state: State):
 	current_state = new_state
+	current_state.is_active = true
 	current_state.enter()
+
+func _exit_state():
+	current_state.exit()
+	current_state.is_active = false
+	current_state.time_active = 0
 	
 func process_state_machine(delta: float):
 	current_state.time_active += delta
