@@ -20,37 +20,6 @@ func log_instruction(action: Action, initiator: Character, target: Character) ->
 	instructions_list.add_item(instruction.action.name)
 	instructions_list.add_item(instruction.target.char_name)
 
-# func _on_attack_button_pressed() -> void:
-# 	var attack = actions.get_node("Attack")
-# 	var john = characters.get_node("JohnRPG")
-# 	var slime = characters.get_node("Slime/Character")
-
-# 	# TODO: this allows the game to continue but doesn't prevent an error
-# 	if (!attack or !john or !slime):
-# 		return
-
-# 	attack.execute(john, slime)
-# 	log_instruction(attack, john, slime)
-	
-# func _on_attack_bottom_button_pressed() -> void:
-# 	var attack = actions.get_node("Attack")
-# 	var john = characters.get_node("JohnRPG")
-# 	var red_slime = characters.get_node("Red Slime/Character")
-
-# 	# TODO: this allows the game to continue but doesn't prevent an error
-# 	if (!attack or !john or !red_slime):
-# 		return
-
-# 	attack.execute(john, red_slime)
-# 	log_instruction(attack, john, red_slime)
-
-# func _on_roll_button_pressed() -> void:
-# 	var roll = actions.get_node("Roll")
-# 	var john = characters.get_node('JohnRPG')
-# 	roll.execute(john, john)
-# 	log_instruction(roll, john, john)
-
-
 func _on_playback_button_pressed() -> void:
 	if instructions.is_empty():
 		print('nothing to play back!')
