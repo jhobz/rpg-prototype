@@ -9,7 +9,7 @@ var complete: bool = false
 
 func enter():
 	for node in %Characters.get_children():
-		characters.append(node)
+		characters.append(node as Character if node is Character else node.get_node("Character") as Character)
 
 func exit():
 	characters.clear()

@@ -1,10 +1,13 @@
-[gd_scene load_steps=30 format=3 uid="uid://b33y6mn6fv2mw"]
+[gd_scene load_steps=33 format=3 uid="uid://b33y6mn6fv2mw"]
 
 [ext_resource type="Script" uid="uid://c4t4igimji1m2" path="res://logic/state_machine.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://da38x83w6ofja" path="res://scenes/game_manager.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="2_lbhrr"]
 [ext_resource type="Script" uid="uid://cyrlkjq7sj35o" path="res://scenes/Character/Actions/roll.gd" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://cbekf0oq6lt2k" path="res://scenes/Character/character.tscn" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://bfays8ylln5is" path="res://logic/states/BattleIdle.gd" id="3_u5sy4"]
+[ext_resource type="Script" uid="uid://csoovgukgfds2" path="res://logic/states/CharacterTurn.gd" id="4_gee14"]
+[ext_resource type="Script" uid="uid://cw152v0s4sq65" path="res://logic/states/BattleComplete.gd" id="5_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://dc7bufts8305d" path="res://assets/sprites/knight.png" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://b8t3u20c4a6l3" path="res://scenes/Character/Characters/Enemies/slime.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://ckp66wttmrqym" path="res://scenes/Character/Characters/Enemies/red_slime.tscn" id="8_gee14"]
@@ -178,10 +181,26 @@ animations = [{
 unique_name_in_owner = true
 script = ExtResource("1_uwrxv")
 
-[node name="GameStateMachine" type="Node" parent="."]
+[node name="GameStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 unique_name_in_owner = true
 script = ExtResource("1_lbhrr")
+starting_state = NodePath("BattleIdle")
 metadata/_custom_type_script = "uid://c4t4igimji1m2"
+
+[node name="BattleIdle" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("turn_state", "complete_state")]
+script = ExtResource("3_u5sy4")
+turn_state = NodePath("../CharacterTurn")
+complete_state = NodePath("../BattleComplete")
+metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
+
+[node name="CharacterTurn" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("4_gee14")
+idle_state = NodePath("../BattleIdle")
+metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
+
+[node name="BattleComplete" type="Node" parent="GameStateMachine"]
+script = ExtResource("5_0tnpc")
+metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
 [node name="Commands" type="Control" parent="."]
 layout_mode = 3
@@ -269,6 +288,7 @@ unique_name_in_owner = true
 position = Vector2(-88, 117)
 animated_sprite = NodePath("AnimatedSprite2D")
 char_name = "John RPG"
+is_player_character = true
 max_hp = 200
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Characters/JohnRPG"]

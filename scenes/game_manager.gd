@@ -34,7 +34,6 @@ func _on_attack_button_pressed() -> void:
 		return
 
 	john.execute_action(attack, slime)
-	attack.execute(john, slime)
 	log_instruction(attack, john, slime)
 	
 func _on_attack_bottom_button_pressed() -> void:

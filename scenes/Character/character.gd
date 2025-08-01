@@ -63,7 +63,7 @@ func _on_animation_finished():
 		return
 
 	print(char_name + ' died')
-	queue_free()
+	visible = false
 
 func die():
 	if animated_sprite.is_playing() and animated_sprite.animation == 'hit':
