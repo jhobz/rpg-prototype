@@ -1,121 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://cbekf0oq6lt2k"]
+[gd_scene load_steps=3 format=3 uid="uid://cbekf0oq6lt2k"]
 
 [ext_resource type="Script" uid="uid://dips70osbfklu" path="res://scenes/Character/character.gd" id="1_oakiv"]
-[ext_resource type="Texture2D" uid="uid://dc7bufts8305d" path="res://assets/sprites/knight.png" id="2_yenhn"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fqfur"]
-atlas = ExtResource("2_yenhn")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fsvua"]
-atlas = ExtResource("2_yenhn")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6xo28"]
-atlas = ExtResource("2_yenhn")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_myntp"]
-atlas = ExtResource("2_yenhn")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8idae"]
-atlas = ExtResource("2_yenhn")
-region = Rect2(0, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5lfdo"]
-atlas = ExtResource("2_yenhn")
-region = Rect2(32, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ls3cc"]
-atlas = ExtResource("2_yenhn")
-region = Rect2(64, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oeylr"]
-atlas = ExtResource("2_yenhn")
-region = Rect2(96, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b2sdu"]
-atlas = ExtResource("2_yenhn")
-region = Rect2(128, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dqstb"]
-atlas = ExtResource("2_yenhn")
-region = Rect2(160, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xi2ao"]
-atlas = ExtResource("2_yenhn")
-region = Rect2(192, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yjtlb"]
-atlas = ExtResource("2_yenhn")
-region = Rect2(224, 160, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_s1ru0"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fqfur")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fsvua")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6xo28")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_myntp")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8idae")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5lfdo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ls3cc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oeylr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b2sdu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dqstb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xi2ao")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yjtlb")
-}],
-"loop": false,
-"name": &"roll",
-"speed": 10.0
-}]
+[ext_resource type="Theme" uid="uid://dt28hksanooxk" path="res://default_theme.tres" id="3_fqfur"]
 
 [node name="Character" type="Node2D"]
 script = ExtResource("1_oakiv")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_s1ru0")
-animation = &"roll"
-autoplay = "idle"
-frame_progress = 0.909259
-
 [node name="Label" type="Label" parent="."]
-offset_left = -20.0
-offset_top = -31.0
-offset_right = 20.0
-offset_bottom = -7.0
+offset_left = 58.0
+offset_top = 1.0
+offset_right = 117.0
+offset_bottom = 47.0
+theme = ExtResource("3_fqfur")
 theme_override_constants/line_spacing = 0
-theme_override_font_sizes/font_size = 8
 text = "
 HP: "

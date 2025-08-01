@@ -1,10 +1,176 @@
-[gd_scene load_steps=6 format=3 uid="uid://b33y6mn6fv2mw"]
+[gd_scene load_steps=30 format=3 uid="uid://b33y6mn6fv2mw"]
 
 [ext_resource type="Script" uid="uid://c4t4igimji1m2" path="res://logic/state_machine.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://da38x83w6ofja" path="res://scenes/game_manager.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="2_lbhrr"]
 [ext_resource type="Script" uid="uid://cyrlkjq7sj35o" path="res://scenes/Character/Actions/roll.gd" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://cbekf0oq6lt2k" path="res://scenes/Character/character.tscn" id="2_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://dc7bufts8305d" path="res://assets/sprites/knight.png" id="7_gee14"]
+[ext_resource type="PackedScene" uid="uid://b8t3u20c4a6l3" path="res://scenes/Character/Characters/Enemies/slime.tscn" id="7_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://ckp66wttmrqym" path="res://scenes/Character/Characters/Enemies/red_slime.tscn" id="8_gee14"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gee14"]
+atlas = ExtResource("7_gee14")
+region = Rect2(0, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvuet"]
+atlas = ExtResource("7_gee14")
+region = Rect2(32, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trtic"]
+atlas = ExtResource("7_gee14")
+region = Rect2(64, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir15t"]
+atlas = ExtResource("7_gee14")
+region = Rect2(96, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ca42v"]
+atlas = ExtResource("7_gee14")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rysoc"]
+atlas = ExtResource("7_gee14")
+region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssvqc"]
+atlas = ExtResource("7_gee14")
+region = Rect2(64, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_264po"]
+atlas = ExtResource("7_gee14")
+region = Rect2(96, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0tnpc"]
+atlas = ExtResource("7_gee14")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtaks"]
+atlas = ExtResource("7_gee14")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvpfn"]
+atlas = ExtResource("7_gee14")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dinhu"]
+atlas = ExtResource("7_gee14")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kice"]
+atlas = ExtResource("7_gee14")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5newe"]
+atlas = ExtResource("7_gee14")
+region = Rect2(32, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37s47"]
+atlas = ExtResource("7_gee14")
+region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt5mj"]
+atlas = ExtResource("7_gee14")
+region = Rect2(96, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1j6l"]
+atlas = ExtResource("7_gee14")
+region = Rect2(128, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pl11u"]
+atlas = ExtResource("7_gee14")
+region = Rect2(160, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhx41"]
+atlas = ExtResource("7_gee14")
+region = Rect2(192, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnb83"]
+atlas = ExtResource("7_gee14")
+region = Rect2(224, 160, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kvuet"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gee14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvuet")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trtic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir15t")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ca42v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rysoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssvqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_264po")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0tnpc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtaks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvpfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dinhu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kice")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5newe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37s47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt5mj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1j6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pl11u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhx41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnb83")
+}],
+"loop": false,
+"name": &"roll",
+"speed": 10.0
+}]
 
 [node name="Game" type="Node2D"]
 
@@ -17,36 +183,73 @@ unique_name_in_owner = true
 script = ExtResource("1_lbhrr")
 metadata/_custom_type_script = "uid://c4t4igimji1m2"
 
-[node name="AttackTopButton" type="Button" parent="."]
-offset_left = 58.0
-offset_top = -16.0
-offset_right = 184.0
-offset_bottom = 15.0
-scale = Vector2(0.3, 0.3)
-text = "Attack Top Guy"
-metadata/_edit_use_anchors_ = true
+[node name="Commands" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -562.0
+offset_top = 150.0
+offset_right = -149.0
+offset_bottom = 315.0
 
-[node name="AttackBottomButton" type="Button" parent="."]
-offset_left = 58.0
-offset_top = -5.0
-offset_right = 213.0
-offset_bottom = 26.0
-scale = Vector2(0.3, 0.3)
-text = "Attack Bottom Guy
-"
-metadata/_edit_use_anchors_ = true
-
-[node name="RollButton" type="Button" parent="."]
-offset_left = 58.0
+[node name="PanelContainer" type="PanelContainer" parent="Commands"]
+layout_mode = 0
+offset_left = 11.0
 offset_top = 6.0
-offset_right = 158.0
-offset_bottom = 37.0
-scale = Vector2(0.3, 0.3)
+offset_right = 228.0
+offset_bottom = 158.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Commands/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="AttackButton" type="Button" parent="Commands/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Attack"
+metadata/_edit_use_anchors_ = true
+
+[node name="AttackBottomButton" type="Button" parent="Commands/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Attack Red Slime"
+metadata/_edit_use_anchors_ = true
+
+[node name="RollButton" type="Button" parent="Commands/PanelContainer/VBoxContainer"]
+layout_mode = 2
 text = "Roll"
 metadata/_edit_use_anchors_ = true
 
+[node name="PlaybackButton" type="Button" parent="Commands/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Playback"
+flat = true
+
+[node name="Instructions" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -548.0
+offset_top = -309.0
+offset_right = -335.0
+offset_bottom = 147.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Instructions"]
+layout_mode = 0
+offset_right = 212.0
+offset_bottom = 461.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Instructions/PanelContainer"]
+layout_mode = 2
+
+[node name="InstructionList" type="ItemList" parent="Instructions/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+auto_width = true
+auto_height = true
+text_overrun_behavior = 0
+max_columns = 3
+
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
 
 [node name="Actions" type="Node" parent="."]
 unique_name_in_owner = true
@@ -62,20 +265,27 @@ metadata/_custom_type_script = "uid://cyrlkjq7sj35o"
 [node name="Characters" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="JohnRPG" parent="Characters" instance=ExtResource("2_yqjtg")]
-position = Vector2(26, 7)
+[node name="JohnRPG" parent="Characters" node_paths=PackedStringArray("animated_sprite") instance=ExtResource("2_yqjtg")]
+position = Vector2(-88, 117)
+animated_sprite = NodePath("AnimatedSprite2D")
 char_name = "John RPG"
+max_hp = 200
 
-[node name="TopGuy" parent="Characters" instance=ExtResource("2_yqjtg")]
-position = Vector2(-71, -22)
-char_name = "Top Guy"
-max_hp = 15
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Characters/JohnRPG"]
+texture_filter = 1
+position = Vector2(87, 105)
+scale = Vector2(7.22656, 7.22656)
+sprite_frames = SubResource("SpriteFrames_kvuet")
+animation = &"roll"
+autoplay = "idle"
 
-[node name="BottomGuy" parent="Characters" instance=ExtResource("2_yqjtg")]
-position = Vector2(-72, 38)
-char_name = "Bottom Guy"
-max_hp = 15
+[node name="Slime" parent="Characters" instance=ExtResource("7_u5sy4")]
+position = Vector2(-94, -300)
 
-[connection signal="pressed" from="AttackTopButton" to="GameManager" method="_on_attack_top_button_pressed"]
-[connection signal="pressed" from="AttackBottomButton" to="GameManager" method="_on_attack_bottom_button_pressed"]
-[connection signal="pressed" from="RollButton" to="GameManager" method="_on_roll_button_pressed"]
+[node name="Red Slime" parent="Characters" instance=ExtResource("8_gee14")]
+position = Vector2(116, -276)
+
+[connection signal="pressed" from="Commands/PanelContainer/VBoxContainer/AttackButton" to="GameManager" method="_on_attack_button_pressed"]
+[connection signal="pressed" from="Commands/PanelContainer/VBoxContainer/AttackBottomButton" to="GameManager" method="_on_attack_bottom_button_pressed"]
+[connection signal="pressed" from="Commands/PanelContainer/VBoxContainer/RollButton" to="GameManager" method="_on_roll_button_pressed"]
+[connection signal="pressed" from="Commands/PanelContainer/VBoxContainer/PlaybackButton" to="GameManager" method="_on_playback_button_pressed"]

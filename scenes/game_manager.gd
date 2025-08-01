@@ -3,24 +3,58 @@ extends Node
 @onready var actions: Node = %Actions
 @onready var characters: Node = %Characters
 @onready var state_machine: StateMachine = %GameStateMachine
+@onready var instructions_control: Control = %Instructions
+
+var instructions: Array[Dictionary] = []
 
 func _ready() -> void:
 	pass
 
-func _on_attack_top_button_pressed() -> void:
+func log_instruction(action: Action, initiator: Character, target: Character) -> void:
+	var instructions_list = instructions_control.get_node('PanelContainer/VBoxContainer/InstructionList')
+	var instruction = {'action': action, 'initiator': initiator, 'target': target}
+	instructions.append(instruction)
+	instructions_list.add_item(instruction.initiator.char_name)
+	instructions_list.add_item(instruction.action.name)
+	instructions_list.add_item(instruction.target.char_name)
+
+func _on_attack_button_pressed() -> void:
 	var attack = actions.get_node("Attack")
 	var john = characters.get_node("JohnRPG")
-	var top = characters.get_node("TopGuy")
-	attack.execute(john, top)
+	var slime = characters.get_node("Slime/Character")
+
+	# TODO: this allows the game to continue but doesn't prevent an error
+	if (!attack or !john or !slime):
+		return
+
+	attack.execute(john, slime)
+	log_instruction(attack, john, slime)
 	
 func _on_attack_bottom_button_pressed() -> void:
 	var attack = actions.get_node("Attack")
 	var john = characters.get_node("JohnRPG")
-	var bottom = characters.get_node("BottomGuy")
-	attack.execute(john, bottom)
+	var red_slime = characters.get_node("Red Slime/Character")
+
+	# TODO: this allows the game to continue but doesn't prevent an error
+	if (!attack or !john or !red_slime):
+		return
+
+	attack.execute(john, red_slime)
+	log_instruction(attack, john, red_slime)
 
 func _on_roll_button_pressed() -> void:
-	print("hello??")
 	var roll = actions.get_node("Roll")
 	var john = characters.get_node('JohnRPG')
-	roll.execute(john, null)
+	roll.execute(john, john)
+	log_instruction(roll, john, john)
+
+
+func _on_playback_button_pressed() -> void:
+	if instructions.is_empty():
+		print('nothing to play back!')
+		return
+	
+	for instruction in instructions:
+		print('about to execute', instruction.action, instruction.initiator, instruction.target)
+		await get_tree().create_timer(1).timeout
+		instruction.action.execute(instruction.initiator, instruction.target)
