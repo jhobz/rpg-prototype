@@ -1,14 +1,15 @@
-[gd_scene load_steps=32 format=3 uid="uid://b33y6mn6fv2mw"]
+[gd_scene load_steps=33 format=3 uid="uid://b33y6mn6fv2mw"]
 
 [ext_resource type="Script" uid="uid://c4t4igimji1m2" path="res://logic/state_machine.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://da38x83w6ofja" path="res://scenes/game_manager.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="2_lbhrr"]
 [ext_resource type="Script" uid="uid://cyrlkjq7sj35o" path="res://scenes/Character/Actions/roll.gd" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://cbekf0oq6lt2k" path="res://scenes/Character/character.tscn" id="2_yqjtg"]
-[ext_resource type="Script" uid="uid://ddakrcdkm2aku" path="res://scenes/Character/Actions/spell.gd" id="5_0tnpc"]
+[ext_resource type="Script" uid="uid://bfays8ylln5is" path="res://logic/states/BattleIdle.gd" id="3_u5sy4"]
+[ext_resource type="Script" uid="uid://csoovgukgfds2" path="res://logic/states/CharacterTurn.gd" id="4_gee14"]
+[ext_resource type="Script" uid="uid://cw152v0s4sq65" path="res://logic/states/BattleComplete.gd" id="5_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://dc7bufts8305d" path="res://assets/sprites/knight.png" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://b8t3u20c4a6l3" path="res://scenes/Character/Characters/Enemies/slime.tscn" id="7_u5sy4"]
-[ext_resource type="PackedScene" uid="uid://cwyohqsv2tht6" path="res://scenes/Components/action_ui_component.tscn" id="7_vtaks"]
 [ext_resource type="PackedScene" uid="uid://ckp66wttmrqym" path="res://scenes/Character/Characters/Enemies/red_slime.tscn" id="8_gee14"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gee14"]
@@ -176,15 +177,30 @@ animations = [{
 
 [node name="Game" type="Node2D"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("current_enemy")]
+[node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_uwrxv")
-current_enemy = NodePath("../Characters/JohnRPG")
 
-[node name="GameStateMachine" type="Node" parent="."]
+[node name="GameStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 unique_name_in_owner = true
 script = ExtResource("1_lbhrr")
+starting_state = NodePath("BattleIdle")
 metadata/_custom_type_script = "uid://c4t4igimji1m2"
+
+[node name="BattleIdle" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("turn_state", "complete_state")]
+script = ExtResource("3_u5sy4")
+turn_state = NodePath("../CharacterTurn")
+complete_state = NodePath("../BattleComplete")
+metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
+
+[node name="CharacterTurn" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("4_gee14")
+idle_state = NodePath("../BattleIdle")
+metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
+
+[node name="BattleComplete" type="Node" parent="GameStateMachine"]
+script = ExtResource("5_0tnpc")
+metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
 [node name="Commands" type="Control" parent="."]
 layout_mode = 3
@@ -206,6 +222,21 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
+
+[node name="AttackButton" type="Button" parent="Commands/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Attack"
+metadata/_edit_use_anchors_ = true
+
+[node name="AttackBottomButton" type="Button" parent="Commands/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Attack Red Slime"
+metadata/_edit_use_anchors_ = true
+
+[node name="RollButton" type="Button" parent="Commands/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Roll"
+metadata/_edit_use_anchors_ = true
 
 [node name="PlaybackButton" type="Button" parent="Commands/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -250,26 +281,15 @@ metadata/_custom_type_script = "uid://dolcf35kui0ao"
 script = ExtResource("2_lnu2h")
 metadata/_custom_type_script = "uid://cyrlkjq7sj35o"
 
-[node name="Spell" type="Node2D" parent="Actions"]
-script = ExtResource("5_0tnpc")
-metadata/_custom_type_script = "uid://c03acfmtpl6vb"
-
 [node name="Characters" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="JohnRPG" parent="Characters" node_paths=PackedStringArray("animated_sprite", "available_actions") instance=ExtResource("2_yqjtg")]
+[node name="JohnRPG" parent="Characters" node_paths=PackedStringArray("animated_sprite") instance=ExtResource("2_yqjtg")]
 position = Vector2(-88, 117)
 animated_sprite = NodePath("AnimatedSprite2D")
 char_name = "John RPG"
+is_player_character = true
 max_hp = 200
-available_actions = [NodePath("../../Actions/Attack"), NodePath("../../Actions/Roll"), NodePath("../../Actions/Spell")]
-
-[node name="ActionUIComponent" parent="Characters/JohnRPG" node_paths=PackedStringArray("actor") instance=ExtResource("7_vtaks")]
-offset_left = 190.0
-offset_top = 64.0
-offset_right = 190.0
-offset_bottom = 64.0
-actor = NodePath("..")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Characters/JohnRPG"]
 texture_filter = 1
@@ -280,11 +300,12 @@ animation = &"roll"
 autoplay = "idle"
 
 [node name="Slime" parent="Characters" instance=ExtResource("7_u5sy4")]
-visible = false
 position = Vector2(-94, -300)
 
 [node name="Red Slime" parent="Characters" instance=ExtResource("8_gee14")]
-position = Vector2(-69, -274)
+position = Vector2(116, -276)
 
+[connection signal="pressed" from="Commands/PanelContainer/VBoxContainer/AttackButton" to="GameManager" method="_on_attack_button_pressed"]
+[connection signal="pressed" from="Commands/PanelContainer/VBoxContainer/AttackBottomButton" to="GameManager" method="_on_attack_bottom_button_pressed"]
+[connection signal="pressed" from="Commands/PanelContainer/VBoxContainer/RollButton" to="GameManager" method="_on_roll_button_pressed"]
 [connection signal="pressed" from="Commands/PanelContainer/VBoxContainer/PlaybackButton" to="GameManager" method="_on_playback_button_pressed"]
-[connection signal="action_selected" from="Characters/JohnRPG/ActionUIComponent" to="GameManager" method="_on_action_ui_component_action_selected"]

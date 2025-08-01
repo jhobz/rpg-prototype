@@ -3,6 +3,7 @@ extends Node2D
 
 @export var animated_sprite: AnimatedSprite2D
 @export var char_name: String = ""
+@export var is_player_character: bool = false
 
 @export_group("Stats")
 @export var max_hp: int = 30
@@ -17,6 +18,9 @@ var is_queued_for_death := false
 
 @export_group("Actions")
 @export var available_actions: Array[Action] = []
+
+var is_turn_active: bool = false
+var is_turn_complete: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,10 +39,10 @@ func is_dead():
 	return hp <= 0
 
 func execute_action(action: Action, target: Character):
-	if action.action_name == 'roll':
-		animated_sprite.play('roll')
-
+	if not is_turn_active:
+		return
 	action.execute(self, target)
+	is_turn_complete = true
 	
 func take_damage(amount: int):
 	if is_dead():
@@ -59,7 +63,7 @@ func _on_animation_finished():
 		return
 
 	print(char_name + ' died')
-	queue_free()
+	visible = false
 
 func die():
 	if animated_sprite.is_playing() and animated_sprite.animation == 'hit':

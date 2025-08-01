@@ -5,12 +5,17 @@ class_name GameManager extends Node
 @onready var actions: Node = %Actions
 @onready var characters: Node = %Characters
 @onready var state_machine: StateMachine = %GameStateMachine
+@onready var john: Character = %Characters/JohnRPG
 @onready var instructions_control: Control = %Instructions
 
 var instructions: Array[Dictionary] = []
 
 func _ready() -> void:
 	current_enemy = characters.get_node('Red Slime/Character')
+	state_machine.init_state_machine()
+	
+func _process(delta: float):
+	state_machine.process_state_machine(delta)
 
 func log_instruction(action: Action, initiator: Character, target: Character) -> void:
 	var instructions_list = instructions_control.get_node('PanelContainer/VBoxContainer/InstructionList')
@@ -32,5 +37,7 @@ func _on_playback_button_pressed() -> void:
 
 
 func _on_action_ui_component_action_selected(action: Action, source: Character) -> void:
-	action.execute(source, current_enemy)
+	if not source.is_turn_active:
+		return
+	source.execute_action(action, current_enemy)
 	log_instruction(action, source, current_enemy)
