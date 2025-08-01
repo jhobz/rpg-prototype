@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwyohqsv2tht6"]
+
+[ext_resource type="Script" uid="uid://c3x5s8qs7ae4j" path="res://scenes/Components/action_ui_component.gd" id="1_w2a01"]
+
+[node name="ActionUIComponent" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w2a01")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 121.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2

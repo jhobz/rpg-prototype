@@ -1,4 +1,6 @@
-extends Node
+class_name GameManager extends Node
+
+@export var current_enemy: Character
 
 @onready var actions: Node = %Actions
 @onready var characters: Node = %Characters
@@ -8,7 +10,7 @@ extends Node
 var instructions: Array[Dictionary] = []
 
 func _ready() -> void:
-	pass
+	current_enemy = characters.get_node('Red Slime/Character')
 
 func log_instruction(action: Action, initiator: Character, target: Character) -> void:
 	var instructions_list = instructions_control.get_node('PanelContainer/VBoxContainer/InstructionList')
@@ -18,35 +20,35 @@ func log_instruction(action: Action, initiator: Character, target: Character) ->
 	instructions_list.add_item(instruction.action.name)
 	instructions_list.add_item(instruction.target.char_name)
 
-func _on_attack_button_pressed() -> void:
-	var attack = actions.get_node("Attack")
-	var john = characters.get_node("JohnRPG")
-	var slime = characters.get_node("Slime/Character")
+# func _on_attack_button_pressed() -> void:
+# 	var attack = actions.get_node("Attack")
+# 	var john = characters.get_node("JohnRPG")
+# 	var slime = characters.get_node("Slime/Character")
 
-	# TODO: this allows the game to continue but doesn't prevent an error
-	if (!attack or !john or !slime):
-		return
+# 	# TODO: this allows the game to continue but doesn't prevent an error
+# 	if (!attack or !john or !slime):
+# 		return
 
-	attack.execute(john, slime)
-	log_instruction(attack, john, slime)
+# 	attack.execute(john, slime)
+# 	log_instruction(attack, john, slime)
 	
-func _on_attack_bottom_button_pressed() -> void:
-	var attack = actions.get_node("Attack")
-	var john = characters.get_node("JohnRPG")
-	var red_slime = characters.get_node("Red Slime/Character")
+# func _on_attack_bottom_button_pressed() -> void:
+# 	var attack = actions.get_node("Attack")
+# 	var john = characters.get_node("JohnRPG")
+# 	var red_slime = characters.get_node("Red Slime/Character")
 
-	# TODO: this allows the game to continue but doesn't prevent an error
-	if (!attack or !john or !red_slime):
-		return
+# 	# TODO: this allows the game to continue but doesn't prevent an error
+# 	if (!attack or !john or !red_slime):
+# 		return
 
-	attack.execute(john, red_slime)
-	log_instruction(attack, john, red_slime)
+# 	attack.execute(john, red_slime)
+# 	log_instruction(attack, john, red_slime)
 
-func _on_roll_button_pressed() -> void:
-	var roll = actions.get_node("Roll")
-	var john = characters.get_node('JohnRPG')
-	roll.execute(john, john)
-	log_instruction(roll, john, john)
+# func _on_roll_button_pressed() -> void:
+# 	var roll = actions.get_node("Roll")
+# 	var john = characters.get_node('JohnRPG')
+# 	roll.execute(john, john)
+# 	log_instruction(roll, john, john)
 
 
 func _on_playback_button_pressed() -> void:
@@ -58,3 +60,8 @@ func _on_playback_button_pressed() -> void:
 		print('about to execute', instruction.action, instruction.initiator, instruction.target)
 		await get_tree().create_timer(1).timeout
 		instruction.action.execute(instruction.initiator, instruction.target)
+
+
+func _on_action_ui_component_action_selected(action: Action, source: Character) -> void:
+	action.execute(source, current_enemy)
+	log_instruction(action, source, current_enemy)

@@ -1,7 +1,7 @@
 class_name Action
 extends Node2D
 
-var action_name := 'roll'
+var action_name: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
