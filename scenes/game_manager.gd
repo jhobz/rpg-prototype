@@ -33,7 +33,7 @@ func _on_attack_button_pressed() -> void:
 	if (!attack or !john or !slime):
 		return
 
-	john.execute_action(attack, top)
+	john.execute_action(attack, slime)
 	attack.execute(john, slime)
 	log_instruction(attack, john, slime)
 	
