@@ -4,14 +4,17 @@ extends State
 
 var character: Character = null
 
+signal turn_active(character: Character)
+signal turn_complete(character: Character)
+
 func enter():
 	print("It's " + character.char_name + "'s turn!")
-	character.is_turn_active = true
-	pass
+	character.start_turn()
+	turn_active.emit(character)
 	
 func exit():
-	character.is_turn_active = false
-	character.is_turn_complete = false
+	character.end_turn()
+	turn_complete.emit(character)
 	character = null
 
 func process(_delta: float) -> State:

@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://cw152v0s4sq65" path="res://logic/states/BattleComplete.gd" id="5_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://dc7bufts8305d" path="res://assets/sprites/knight.png" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://b8t3u20c4a6l3" path="res://scenes/Character/Characters/Enemies/slime.tscn" id="7_u5sy4"]
-[ext_resource type="Script" path="res://scenes/Character/Actions/spell.gd" id="8_dinhu"]
+[ext_resource type="Script" uid="uid://ddakrcdkm2aku" path="res://scenes/Character/Actions/spell.gd" id="8_dinhu"]
 [ext_resource type="PackedScene" uid="uid://ckp66wttmrqym" path="res://scenes/Character/Characters/Enemies/red_slime.tscn" id="8_gee14"]
 [ext_resource type="PackedScene" path="res://scenes/Components/action_ui_component.tscn" id="11_kvuet"]
 
@@ -304,5 +304,6 @@ position = Vector2(-94, -300)
 [node name="Red Slime" parent="Characters" instance=ExtResource("8_gee14")]
 position = Vector2(-69, -274)
 
+[connection signal="turn_active" from="GameStateMachine/CharacterTurn" to="GameManager" method="_on_character_turn_turn_active"]
 [connection signal="pressed" from="Commands/PanelContainer/VBoxContainer/PlaybackButton" to="GameManager" method="_on_playback_button_pressed"]
 [connection signal="action_selected" from="Characters/JohnRPG/ActionUIComponent" to="GameManager" method="_on_action_ui_component_action_selected"]

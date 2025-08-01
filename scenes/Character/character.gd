@@ -35,6 +35,14 @@ func _process(_delta: float):
 		last_hp = hp
 		$Label.text = char_name + "\n" + ("Swoon" if is_dead() else "HP: " + str(hp))
 
+func start_turn():
+	is_turn_active = true
+	is_turn_complete = false
+
+func end_turn():
+	is_turn_active = false
+	is_turn_complete = false
+
 func is_dead():
 	return hp <= 0
 

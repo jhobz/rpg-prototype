@@ -9,6 +9,7 @@ class_name GameManager extends Node
 @onready var instructions_control: Control = %Instructions
 
 var instructions: Array[Dictionary] = []
+var executing_instruction: int = -1
 
 func _ready() -> void:
 	current_enemy = characters.get_node('Red Slime/Character')
@@ -25,16 +26,42 @@ func log_instruction(action: Action, initiator: Character, target: Character) ->
 	instructions_list.add_item(instruction.action.name)
 	instructions_list.add_item(instruction.target.char_name)
 
+func _on_character_turn_turn_active(_character: Character):
+	if executing_instruction == -1:
+		return
+	
+	try_advance_playback()
+
+func try_advance_playback():
+	# skip instructions that are for characters who died
+	while executing_instruction < instructions.size() and instructions[executing_instruction].initiator.is_dead():
+		var skip_instruction = instructions[executing_instruction]
+		print('skipping instruction because character is dead', skip_instruction.action, skip_instruction.initiator, skip_instruction.target)
+		++executing_instruction
+	
+	# we're done if we pass the end of the list
+	if executing_instruction >= instructions.size():
+		print('done executing playback')
+		executing_instruction = -1
+		return
+	
+	# if the next instruction is for the character whose turn it is, do it
+	# otherwise, sit there until that character's turn comes up
+	if instructions[executing_instruction].initiator.is_turn_active:
+		execute_instruction(instructions[executing_instruction])
+		executing_instruction += 1
+
+func execute_instruction(instruction: Dictionary):
+	print('executing action', instruction.action, instruction.initiator, instruction.target)
+	instruction.initiator.execute_action(instruction.action, instruction.target)
+
 func _on_playback_button_pressed() -> void:
 	if instructions.is_empty():
 		print('nothing to play back!')
 		return
 	
-	for instruction in instructions:
-		print('about to execute', instruction.action, instruction.initiator, instruction.target)
-		await get_tree().create_timer(1).timeout
-		instruction.action.execute(instruction.initiator, instruction.target)
-
+	executing_instruction = 0
+	try_advance_playback()
 
 func _on_action_ui_component_action_selected(action: Action, source: Character) -> void:
 	if not source.is_turn_active:
