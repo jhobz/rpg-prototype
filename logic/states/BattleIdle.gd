@@ -14,6 +14,8 @@ func init():
 		characters.append(node as Character if node is Character else node.get_node("Character") as Character)
 	for node in %Characters/Enemies.get_children():
 		characters.append(node as Character if node is Character else node.get_node("Character") as Character)
+
+func reset_turn():
 	current_actor = -1
 
 func enter():

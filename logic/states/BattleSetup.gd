@@ -9,6 +9,7 @@ var next_battle := 0
 func init(_encounter: Encounter):
 	encounter = _encounter
 	next_battle = 0
+	battle_idle_state.reset_turn()
 
 func enter():
 	if next_battle < encounter.battles.size():
