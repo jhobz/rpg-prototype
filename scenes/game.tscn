@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://pt3wwwwlwnyp" path="res://logic/game_states/RunComplete.gd" id="8_ssvqc"]
 [ext_resource type="Script" uid="uid://bdu40aiqe8n1u" path="res://logic/game_states/RunFailed.gd" id="9_264po"]
 [ext_resource type="PackedScene" uid="uid://ckjw2y4erudd7" path="res://scenes/Character/Characters/PlayerCharacters/knight.tscn" id="13_kvuet"]
-[ext_resource type="PackedScene" uid="uid://b1j3pqpi274f2" path="res://scenes/Character/Characters/PlayerCharacters/fruit_mage.tscn" id="14_trtic"]
+[ext_resource type="PackedScene" path="res://scenes/Character/Characters/PlayerCharacters/fruit_mage.tscn" id="14_trtic"]
 
 [node name="Game" type="Node2D"]
 
@@ -27,8 +27,10 @@ script = ExtResource("1_lbhrr")
 starting_state = NodePath("EncounterSetup")
 metadata/_custom_type_script = "uid://c4t4igimji1m2"
 
-[node name="EncounterSetup" type="Node" parent="GameStateMachine"]
+[node name="EncounterSetup" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("battle_setup_state", "run_complete_state")]
 script = ExtResource("3_ir15t")
+battle_setup_state = NodePath("../BattleSetup")
+run_complete_state = NodePath("../RunComplete")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
 [node name="BattleSetup" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("battle_idle_state", "encounter_complete_state")]
@@ -44,24 +46,27 @@ battle_setup_state = NodePath("../BattleSetup")
 run_failed_state = NodePath("../RunFailed")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
-[node name="CharacterTurn" type="Node" parent="GameStateMachine"]
+[node name="CharacterTurn" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("4_gee14")
+idle_state = NodePath("../BattleIdle")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
 [node name="TurnStateMachine" type="Node" parent="GameStateMachine/CharacterTurn"]
 script = ExtResource("1_lbhrr")
 metadata/_custom_type_script = "uid://c4t4igimji1m2"
 
-[node name="EncounterComplete" type="Node" parent="GameStateMachine"]
+[node name="EncounterComplete" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("encounter_setup_state")]
 script = ExtResource("7_rysoc")
+encounter_setup_state = NodePath("../EncounterSetup")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
 [node name="RunComplete" type="Node" parent="GameStateMachine"]
 script = ExtResource("8_ssvqc")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
-[node name="RunFailed" type="Node" parent="GameStateMachine"]
+[node name="RunFailed" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("encounter_setup_state")]
 script = ExtResource("9_264po")
+encounter_setup_state = NodePath("../EncounterSetup")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
 [node name="Status" type="Label" parent="."]
