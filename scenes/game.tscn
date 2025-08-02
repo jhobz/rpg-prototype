@@ -1,18 +1,20 @@
-[gd_scene load_steps=35 format=3 uid="uid://b33y6mn6fv2mw"]
+[gd_scene load_steps=37 format=3 uid="uid://b33y6mn6fv2mw"]
 
 [ext_resource type="Script" uid="uid://c4t4igimji1m2" path="res://logic/state_machine.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://da38x83w6ofja" path="res://scenes/game_manager.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="2_lbhrr"]
 [ext_resource type="Script" uid="uid://cyrlkjq7sj35o" path="res://scenes/Character/Actions/roll.gd" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://cbekf0oq6lt2k" path="res://scenes/Character/character.tscn" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://uf3whsb6co7i" path="res://logic/states/EncounterSetup.gd" id="3_ir15t"]
 [ext_resource type="Script" uid="uid://bfays8ylln5is" path="res://logic/states/BattleIdle.gd" id="3_u5sy4"]
+[ext_resource type="Script" uid="uid://p7m0esl5q5im" path="res://logic/states/BattleSetup.gd" id="4_ca42v"]
 [ext_resource type="Script" uid="uid://csoovgukgfds2" path="res://logic/states/CharacterTurn.gd" id="4_gee14"]
-[ext_resource type="Script" uid="uid://cw152v0s4sq65" path="res://logic/states/BattleComplete.gd" id="5_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://dc7bufts8305d" path="res://assets/sprites/knight.png" id="7_gee14"]
-[ext_resource type="PackedScene" uid="uid://b8t3u20c4a6l3" path="res://scenes/Character/Characters/Enemies/slime.tscn" id="7_u5sy4"]
+[ext_resource type="Script" uid="uid://d3nd1wjnfgq45" path="res://logic/states/EncounterComplete.gd" id="7_rysoc"]
 [ext_resource type="Script" uid="uid://ddakrcdkm2aku" path="res://scenes/Character/Actions/spell.gd" id="8_dinhu"]
-[ext_resource type="PackedScene" uid="uid://ckp66wttmrqym" path="res://scenes/Character/Characters/Enemies/red_slime.tscn" id="8_gee14"]
-[ext_resource type="PackedScene" path="res://scenes/Components/action_ui_component.tscn" id="11_kvuet"]
+[ext_resource type="Script" uid="uid://pt3wwwwlwnyp" path="res://logic/states/RunComplete.gd" id="8_ssvqc"]
+[ext_resource type="Script" uid="uid://bdu40aiqe8n1u" path="res://logic/states/RunFailed.gd" id="9_264po"]
+[ext_resource type="PackedScene" uid="uid://cwyohqsv2tht6" path="res://scenes/Components/action_ui_component.tscn" id="11_kvuet"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gee14"]
 atlas = ExtResource("7_gee14")
@@ -186,13 +188,26 @@ script = ExtResource("1_uwrxv")
 [node name="GameStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 unique_name_in_owner = true
 script = ExtResource("1_lbhrr")
-starting_state = NodePath("BattleIdle")
+starting_state = NodePath("EncounterSetup")
 metadata/_custom_type_script = "uid://c4t4igimji1m2"
 
-[node name="BattleIdle" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("turn_state", "complete_state")]
+[node name="EncounterSetup" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("battle_setup_state", "run_complete_state")]
+script = ExtResource("3_ir15t")
+battle_setup_state = NodePath("../BattleSetup")
+run_complete_state = NodePath("../RunComplete")
+metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
+
+[node name="BattleSetup" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("battle_idle_state", "encounter_complete_state")]
+script = ExtResource("4_ca42v")
+battle_idle_state = NodePath("../BattleIdle")
+encounter_complete_state = NodePath("../EncounterComplete")
+metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
+
+[node name="BattleIdle" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("turn_state", "battle_setup_state", "run_failed_state")]
 script = ExtResource("3_u5sy4")
 turn_state = NodePath("../CharacterTurn")
-complete_state = NodePath("../BattleComplete")
+battle_setup_state = NodePath("../BattleSetup")
+run_failed_state = NodePath("../RunFailed")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
 [node name="CharacterTurn" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("idle_state")]
@@ -200,9 +215,38 @@ script = ExtResource("4_gee14")
 idle_state = NodePath("../BattleIdle")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
-[node name="BattleComplete" type="Node" parent="GameStateMachine"]
-script = ExtResource("5_0tnpc")
+[node name="EncounterComplete" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("encounter_setup_state")]
+script = ExtResource("7_rysoc")
+encounter_setup_state = NodePath("../EncounterSetup")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
+
+[node name="RunComplete" type="Node" parent="GameStateMachine"]
+script = ExtResource("8_ssvqc")
+metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
+
+[node name="RunFailed" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("encounter_setup_state")]
+script = ExtResource("9_264po")
+encounter_setup_state = NodePath("../EncounterSetup")
+metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
+
+[node name="Status" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.5
+offset_top = -182.5
+offset_right = 124.5
+offset_bottom = -154.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "An enemy is approaching!"
+horizontal_alignment = 1
 
 [node name="Commands" type="Control" parent="."]
 layout_mode = 3
@@ -262,6 +306,7 @@ unique_name_in_owner = true
 
 [node name="Attack" type="Node2D" parent="Actions"]
 script = ExtResource("2_lbhrr")
+base_dmg = 2
 metadata/_custom_type_script = "uid://dolcf35kui0ao"
 
 [node name="Roll" type="Node2D" parent="Actions"]
@@ -270,19 +315,22 @@ metadata/_custom_type_script = "uid://cyrlkjq7sj35o"
 
 [node name="Spell" type="Node2D" parent="Actions"]
 script = ExtResource("8_dinhu")
+base_dmg = 2
 
 [node name="Characters" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="JohnRPG" parent="Characters" node_paths=PackedStringArray("animated_sprite", "available_actions") instance=ExtResource("2_yqjtg")]
+[node name="Players" type="Node" parent="Characters"]
+
+[node name="JohnRPG" parent="Characters/Players" node_paths=PackedStringArray("animated_sprite", "available_actions") instance=ExtResource("2_yqjtg")]
 position = Vector2(-88, 117)
 animated_sprite = NodePath("AnimatedSprite2D")
 char_name = "John RPG"
 is_player_character = true
 max_hp = 200
-available_actions = [NodePath("../../Actions/Attack"), NodePath("../../Actions/Roll"), NodePath("../../Actions/Spell")]
+available_actions = [NodePath("../../../Actions/Attack"), NodePath("../../../Actions/Roll"), NodePath("../../../Actions/Spell")]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Characters/JohnRPG"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Characters/Players/JohnRPG"]
 texture_filter = 1
 position = Vector2(87, 105)
 scale = Vector2(7.22656, 7.22656)
@@ -290,20 +338,15 @@ sprite_frames = SubResource("SpriteFrames_kvuet")
 animation = &"roll"
 autoplay = "idle"
 
-[node name="ActionUIComponent" parent="Characters/JohnRPG" node_paths=PackedStringArray("actor") instance=ExtResource("11_kvuet")]
+[node name="ActionUIComponent" parent="Characters/Players/JohnRPG" node_paths=PackedStringArray("actor") instance=ExtResource("11_kvuet")]
 offset_left = 190.0
 offset_top = 64.0
 offset_right = 190.0
 offset_bottom = 64.0
 actor = NodePath("..")
 
-[node name="Slime" parent="Characters" instance=ExtResource("7_u5sy4")]
-visible = false
-position = Vector2(-94, -300)
-
-[node name="Red Slime" parent="Characters" instance=ExtResource("8_gee14")]
-position = Vector2(-69, -274)
+[node name="Enemies" type="Node" parent="Characters"]
 
 [connection signal="turn_active" from="GameStateMachine/CharacterTurn" to="GameManager" method="_on_character_turn_turn_active"]
 [connection signal="pressed" from="Commands/PanelContainer/VBoxContainer/PlaybackButton" to="GameManager" method="_on_playback_button_pressed"]
-[connection signal="action_selected" from="Characters/JohnRPG/ActionUIComponent" to="GameManager" method="_on_action_ui_component_action_selected"]
+[connection signal="action_selected" from="Characters/Players/JohnRPG/ActionUIComponent" to="GameManager" method="_on_action_ui_component_action_selected"]

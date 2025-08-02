@@ -5,14 +5,13 @@ class_name GameManager extends Node
 @onready var actions: Node = %Actions
 @onready var characters: Node = %Characters
 @onready var state_machine: StateMachine = %GameStateMachine
-@onready var john: Character = %Characters/JohnRPG
+@onready var john: Character = %Characters/Players/JohnRPG
 @onready var instructions_control: Control = %Instructions
 
 var instructions: Array[Dictionary] = []
 var executing_instruction: int = -1
 
 func _ready() -> void:
-	current_enemy = characters.get_node('Red Slime/Character')
 	state_machine.init_state_machine()
 	
 func _process(delta: float):
@@ -20,11 +19,17 @@ func _process(delta: float):
 
 func log_instruction(action: Action, initiator: Character, target: Character) -> void:
 	var instructions_list = instructions_control.get_node('PanelContainer/VBoxContainer/InstructionList')
+	var target_name = target.char_name
+	
+	if target == current_enemy:
+		target_name = "Enemy"
+		target = null
+		
 	var instruction = {'action': action, 'initiator': initiator, 'target': target}
 	instructions.append(instruction)
-	instructions_list.add_item(instruction.initiator.char_name)
-	instructions_list.add_item(instruction.action.name)
-	instructions_list.add_item(instruction.target.char_name)
+	instructions_list.add_item(initiator.char_name)
+	instructions_list.add_item(action.name)
+	instructions_list.add_item(target_name)
 
 func _on_character_turn_turn_active(_character: Character):
 	if executing_instruction == -1:
@@ -37,7 +42,7 @@ func try_advance_playback():
 	while executing_instruction < instructions.size() and instructions[executing_instruction].initiator.is_dead():
 		var skip_instruction = instructions[executing_instruction]
 		print('skipping instruction because character is dead', skip_instruction.action, skip_instruction.initiator, skip_instruction.target)
-		++executing_instruction
+		executing_instruction += 1
 	
 	# we're done if we pass the end of the list
 	if executing_instruction >= instructions.size():
@@ -52,8 +57,11 @@ func try_advance_playback():
 		executing_instruction += 1
 
 func execute_instruction(instruction: Dictionary):
-	print('executing action', instruction.action, instruction.initiator, instruction.target)
-	instruction.initiator.execute_action(instruction.action, instruction.target)
+	var target = instruction.target
+	if not target:
+		target = current_enemy
+	print('executing action', instruction.action, instruction.initiator, target)
+	instruction.initiator.execute_action(instruction.action, target)
 
 func _on_playback_button_pressed() -> void:
 	if instructions.is_empty():

@@ -6,5 +6,5 @@ func _ready() -> void:
 	action_name = 'Attack'
 
 func execute(source: Character, target: Character) -> void:
-	var damage = base_dmg + source.strength
+	var damage = base_dmg * source.strength
 	target.take_damage(damage)

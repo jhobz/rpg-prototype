@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3 uid="uid://cw5oeux8onowk"]
+
+[ext_resource type="Script" uid="uid://d0fqyilf00bfa" path="res://logic/battle.gd" id="1_ifcf0"]
+
+[resource]
+script = ExtResource("1_ifcf0")
+enemies = Array[String](["red_slime"])
+metadata/_custom_type_script = "uid://d0fqyilf00bfa"

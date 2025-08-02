@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Run" load_steps=5 format=3 uid="uid://cy1ct7utjljej"]
+
+[ext_resource type="Script" uid="uid://x4q8y71eujst" path="res://logic/encounter.gd" id="1_7vmew"]
+[ext_resource type="Script" uid="uid://bh2p5luwuetxt" path="res://logic/run.gd" id="2_81u2y"]
+[ext_resource type="Resource" uid="uid://pl8uqq3bqu65" path="res://data/Encounters/first_encounter.tres" id="2_vcm2w"]
+[ext_resource type="Resource" uid="uid://ddwtt3owj56aq" path="res://data/Encounters/tougher_encounter.tres" id="3_cg806"]
+
+[resource]
+script = ExtResource("2_81u2y")
+encounters = Array[ExtResource("1_7vmew")]([ExtResource("2_vcm2w"), ExtResource("2_vcm2w"), ExtResource("3_cg806")])
+metadata/_custom_type_script = "uid://bh2p5luwuetxt"

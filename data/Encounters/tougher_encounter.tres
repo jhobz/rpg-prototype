@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Encounter" load_steps=4 format=3 uid="uid://ddwtt3owj56aq"]
+
+[ext_resource type="Script" uid="uid://d0fqyilf00bfa" path="res://logic/battle.gd" id="1_ypov4"]
+[ext_resource type="Resource" uid="uid://cw5oeux8onowk" path="res://data/Battles/solo_red_slime.tres" id="2_fc1nu"]
+[ext_resource type="Script" uid="uid://x4q8y71eujst" path="res://logic/encounter.gd" id="2_mafy3"]
+
+[resource]
+script = ExtResource("2_mafy3")
+battles = Array[ExtResource("1_ypov4")]([ExtResource("2_fc1nu"), ExtResource("2_fc1nu"), ExtResource("2_fc1nu")])
+metadata/_custom_type_script = "uid://x4q8y71eujst"
