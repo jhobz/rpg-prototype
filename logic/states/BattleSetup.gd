@@ -1,10 +1,10 @@
 extends State
 
-@export var battle_idle_state: State = null
-@export var encounter_complete_state: State = null
+@export var battle_idle_state: State
+@export var encounter_complete_state: State
 
-var encounter: Encounter = null
-var next_battle: int = 0
+var encounter: Encounter
+var next_battle := 0
 
 func init(_encounter: Encounter):
 	encounter = _encounter

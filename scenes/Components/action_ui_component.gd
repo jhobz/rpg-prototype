@@ -2,7 +2,6 @@ class_name ActionUIComponent extends Control
 
 @export var actor: PlayerCharacter
 
-# @onready var game_manager: GameManager = %GameManager
 @onready var container := $PanelContainer/VBoxContainer
 
 signal action_selected(action: Action, source: Character)
@@ -35,9 +34,7 @@ func _process(_delta: float) -> void:
 #region Listeners
 
 func _button_pressed(action: Action):
-	# print('trying to execute action ' + action.action_name + ' from ' + actor.char_name + ' on ' + game_manager.current_enemy.char_name)
 	action_selected.emit(action, actor)
-	# action.execute(actor, game_manager.current_enemy)
 
 func _on_actor_action_added(action: Action):
 	actions.append(action)

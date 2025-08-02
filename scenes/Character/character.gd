@@ -1,32 +1,18 @@
 class_name Character
 extends Node2D
 
-# @export var animated_sprite: AnimatedSprite2D
-@export var char_name: String = ""
+@export var char_name := "Character"
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var gui_component: GUIComponent = $GUIComponent
 @onready var hp_component: HPComponent = $HPComponent
 @onready var stats_component: StatsComponent = $StatsComponent
 
-var is_player_character: bool = false
+var is_player_character := false
+var is_turn_active := false
+var is_turn_complete := false
 
-# @export_group("Stats")
-# @export var max_hp: int = 30
-# @export var strength: int = 5
-# @export var magic: int = 5
-# @export var defense: int = 5
-# @export var magic_defense: int = 5
-
-# @onready var hp: int = max_hp
-var last_hp: int = 0
-var is_queued_for_death := false
-
-# @export_group("Actions")
-# @export var available_actions: Array[Action] = []
-
-var is_turn_active: bool = false
-var is_turn_complete: bool = false
+var _is_queued_for_death := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -62,6 +48,9 @@ func execute_action(action: Action, target: Character):
 		return
 	action.execute(self, target)
 	is_turn_complete = true
+
+
+#region Actions
 	
 func take_damage(amount: int):
 	if is_dead():
@@ -75,15 +64,17 @@ func roll():
 
 func die():
 	if animated_sprite.is_playing() and animated_sprite.animation == 'hit':
-		is_queued_for_death = true
+		_is_queued_for_death = true
 	else:
 		animated_sprite.play('death')
+
+#endregion
 
 
 #region Listeners
 
 func _on_animation_finished():
-	if !is_queued_for_death and animated_sprite.animation != 'death':
+	if !_is_queued_for_death and animated_sprite.animation != 'death':
 		return
 
 	print(char_name + ' died')

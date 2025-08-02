@@ -1,11 +1,11 @@
 class_name HPComponent extends Component
 
-@export var max_hp: int = 30
+@export var max_hp := 30
 
 signal hp_changed(amount: int, current_hp: int)
 signal hp_reached_zero()
 
-var hp: int
+var hp := 0
 
 func _ready() -> void:
     hp = max_hp
