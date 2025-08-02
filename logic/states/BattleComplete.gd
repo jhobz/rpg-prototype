@@ -5,10 +5,11 @@ func enter():
 	
 	var pc_alive = false
 	var npc_alive = false
+
 	for node in %Characters.get_children():
-		var char = (node as Character) if node is Character else node.get_node("Character") as Character
-		if not char.is_dead():
-			if char.is_player_character:
+		var character = (node as Character) if node is Character else node.get_node("Character") as Character
+		if not character.is_dead:
+			if character.is_player_character:
 				pc_alive = true
 			else:
 				npc_alive = true

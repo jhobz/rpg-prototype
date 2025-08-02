@@ -1,8 +1,8 @@
 class_name ActionUIComponent extends Control
 
+@onready var game_manager: GameManager = %GameManager
 @export var actor: Character
 
-@onready var game_manager: GameManager = %GameManager
 @onready var container := $PanelContainer/VBoxContainer
 
 signal action_selected(action: Action, source: Character)
@@ -27,7 +27,7 @@ func _clear():
 		container.remove_child(button)
 
 func _button_pressed(action: Action):
-	print('trying to execute action ' + action.action_name + ' from ' + actor.char_name + ' on ' + game_manager.current_enemy.char_name)
+	# print('trying to execute action ' + action.action_name + ' from ' + actor.char_name + ' on ' + game_manager.current_enemy.char_name)
 	action_selected.emit(action, actor)
 	# action.execute(actor, game_manager.current_enemy)
 
