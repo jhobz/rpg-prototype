@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Battle" load_steps=2 format=3 uid="uid://cw5oeux8onowk"]
+[gd_resource type="Resource" script_class="Battle" load_steps=3 format=3 uid="uid://cw5oeux8onowk"]
 
 [ext_resource type="Script" uid="uid://d0fqyilf00bfa" path="res://logic/battle.gd" id="1_ifcf0"]
+[ext_resource type="PackedScene" uid="uid://ckp66wttmrqym" path="res://scenes/Character/Characters/Enemies/red_slime.tscn" id="1_uv6tg"]
 
 [resource]
 script = ExtResource("1_ifcf0")
-enemies = Array[String](["red_slime"])
+enemies = Array[PackedScene]([ExtResource("1_uv6tg")])
 metadata/_custom_type_script = "uid://d0fqyilf00bfa"

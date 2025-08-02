@@ -34,10 +34,8 @@ func process(_delta: float) -> State:
 	
 	var battle = encounter.battles[next_battle]
 	assert(battle.enemies.size() == 1)
-	var enemy_path = "res://scenes/Character/Characters/Enemies/" + battle.enemies[0] + ".tscn"
 	
-	var enemy_scene: PackedScene = load(enemy_path)
-	var enemy: Node2D = enemy_scene.instantiate()
+	var enemy: Node2D = battle.enemies[0].instantiate()
 	%Characters/Enemies.add_child(enemy)
 	%GameManager.current_enemy = enemy.get_node("Character")
 	enemy.position = Vector2(-69, -274)

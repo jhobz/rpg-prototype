@@ -1,3 +1,3 @@
 class_name Battle extends Resource
 
-@export var enemies: Array[String] = []
+@export var enemies: Array[PackedScene] = []
