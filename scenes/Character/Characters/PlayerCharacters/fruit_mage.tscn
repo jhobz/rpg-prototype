@@ -1,0 +1,134 @@
+[gd_scene load_steps=17 format=3 uid="uid://b1j3pqpi274f2"]
+
+[ext_resource type="Script" uid="uid://lkdoxweingm3" path="res://scenes/Character/Characters/PlayerCharacters/player_character.gd" id="1_omsmc"]
+[ext_resource type="Script" uid="uid://c0xybc034keh1" path="res://scenes/Components/stats_component.gd" id="2_1s1a7"]
+[ext_resource type="Script" uid="uid://c57m8elb52dp7" path="res://scenes/Components/hp_component.gd" id="3_1pq06"]
+[ext_resource type="Texture2D" uid="uid://bicq24aghemmy" path="res://assets/sprites/fruit.png" id="4_l32aa"]
+[ext_resource type="Script" uid="uid://c0fhxyw6tkwyo" path="res://scenes/Components/gui_component.gd" id="5_d3i6l"]
+[ext_resource type="PackedScene" uid="uid://cwyohqsv2tht6" path="res://scenes/Components/action_ui_component.tscn" id="6_q4k1n"]
+[ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="7_wd2q5"]
+[ext_resource type="Script" uid="uid://cyrlkjq7sj35o" path="res://scenes/Character/Actions/roll.gd" id="8_wk8xp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnx6s"]
+atlas = ExtResource("4_l32aa")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s02ka"]
+atlas = ExtResource("4_l32aa")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eb28d"]
+atlas = ExtResource("4_l32aa")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omsmc"]
+atlas = ExtResource("4_l32aa")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s1a7"]
+atlas = ExtResource("4_l32aa")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pq06"]
+atlas = ExtResource("4_l32aa")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l32aa"]
+atlas = ExtResource("4_l32aa")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ch7jv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnx6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s02ka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eb28d")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_omsmc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s1a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pq06")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l32aa")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 10.0
+}]
+
+[node name="FruitMage" type="Node2D"]
+script = ExtResource("1_omsmc")
+char_name = "Orange Fruit Mage"
+metadata/_custom_type_script = "uid://lkdoxweingm3"
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("2_1s1a7")
+strength = 1
+magic = 10
+defense = 1
+magic_defense = 7
+metadata/_custom_type_script = "uid://c0xybc034keh1"
+
+[node name="HPComponent" type="Node" parent="."]
+script = ExtResource("3_1pq06")
+max_hp = 100
+metadata/_custom_type_script = "uid://c57m8elb52dp7"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4.5, 4.5)
+sprite_frames = SubResource("SpriteFrames_ch7jv")
+animation = &"roll"
+autoplay = "idle"
+
+[node name="GUIComponent" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("5_d3i6l")
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar" type="ProgressBar" parent="GUIComponent"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.199468
+anchor_top = 0.314286
+anchor_right = -0.199468
+anchor_bottom = 0.314286
+offset_left = -72.0
+offset_top = -96.0
+offset_right = 78.0
+offset_bottom = -69.0
+
+[node name="ActionUIComponent" parent="GUIComponent" node_paths=PackedStringArray("actor") instance=ExtResource("6_q4k1n")]
+layout_mode = 1
+offset_left = 96.0
+offset_top = -56.0
+offset_right = 216.0
+offset_bottom = 26.0
+actor = NodePath("../..")
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="Attack" type="Node2D" parent="Actions"]
+script = ExtResource("7_wd2q5")
+base_dmg = 1
+metadata/_custom_type_script = "uid://dolcf35kui0ao"
+
+[node name="Roll" type="Node2D" parent="Actions"]
+script = ExtResource("8_wk8xp")
+metadata/_custom_type_script = "uid://cyrlkjq7sj35o"

@@ -1,0 +1,141 @@
+[gd_scene load_steps=18 format=3 uid="uid://43328rqpfo05"]
+
+[ext_resource type="Script" uid="uid://lkdoxweingm3" path="res://scenes/Character/Characters/PlayerCharacters/player_character.gd" id="1_lhqyg"]
+[ext_resource type="Script" uid="uid://c0xybc034keh1" path="res://scenes/Components/stats_component.gd" id="2_rclp8"]
+[ext_resource type="Script" uid="uid://c57m8elb52dp7" path="res://scenes/Components/hp_component.gd" id="3_cdlvh"]
+[ext_resource type="Texture2D" uid="uid://bicq24aghemmy" path="res://assets/sprites/fruit.png" id="4_lhqyg"]
+[ext_resource type="Script" uid="uid://c0fhxyw6tkwyo" path="res://scenes/Components/gui_component.gd" id="5_qadxs"]
+[ext_resource type="PackedScene" uid="uid://cwyohqsv2tht6" path="res://scenes/Components/action_ui_component.tscn" id="6_3f2q8"]
+[ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="7_c6u7o"]
+[ext_resource type="Script" uid="uid://ddakrcdkm2aku" path="res://scenes/Character/Actions/spell.gd" id="8_w06me"]
+[ext_resource type="Script" uid="uid://cyrlkjq7sj35o" path="res://scenes/Character/Actions/roll.gd" id="9_4xej5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rclp8"]
+atlas = ExtResource("4_lhqyg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdlvh"]
+atlas = ExtResource("4_lhqyg")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qekne"]
+atlas = ExtResource("4_lhqyg")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qadxs"]
+atlas = ExtResource("4_lhqyg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3f2q8"]
+atlas = ExtResource("4_lhqyg")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6u7o"]
+atlas = ExtResource("4_lhqyg")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w06me"]
+atlas = ExtResource("4_lhqyg")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uxbck"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rclp8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdlvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qekne")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qadxs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3f2q8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6u7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w06me")
+}],
+"loop": false,
+"name": &"roll",
+"speed": 10.0
+}]
+
+[node name="Mage" type="Node2D"]
+script = ExtResource("1_lhqyg")
+char_name = "Mage"
+metadata/_custom_type_script = "uid://lkdoxweingm3"
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("2_rclp8")
+strength = 1
+magic = 10
+defense = 1
+magic_defense = 7
+metadata/_custom_type_script = "uid://c0xybc034keh1"
+
+[node name="HPComponent" type="Node" parent="."]
+script = ExtResource("3_cdlvh")
+max_hp = 100
+metadata/_custom_type_script = "uid://c57m8elb52dp7"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4.5, 4.5)
+sprite_frames = SubResource("SpriteFrames_uxbck")
+animation = &"roll"
+autoplay = "idle"
+
+[node name="GUIComponent" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("5_qadxs")
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar" type="ProgressBar" parent="GUIComponent"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.199468
+anchor_top = 0.314286
+anchor_right = -0.199468
+anchor_bottom = 0.314286
+offset_left = -72.0
+offset_top = -96.0
+offset_right = 78.0
+offset_bottom = -69.0
+
+[node name="ActionUIComponent" parent="GUIComponent" node_paths=PackedStringArray("actor") instance=ExtResource("6_3f2q8")]
+layout_mode = 1
+offset_left = 96.0
+offset_top = -56.0
+offset_right = 216.0
+offset_bottom = 26.0
+actor = NodePath("../..")
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="Attack" type="Node2D" parent="Actions"]
+script = ExtResource("7_c6u7o")
+base_dmg = 1
+metadata/_custom_type_script = "uid://dolcf35kui0ao"
+
+[node name="Spell" type="Node2D" parent="Actions"]
+script = ExtResource("8_w06me")
+spell_element = "fruit"
+base_dmg = 2
+metadata/_custom_type_script = "uid://ddakrcdkm2aku"
+
+[node name="Roll" type="Node2D" parent="Actions"]
+script = ExtResource("9_4xej5")
+metadata/_custom_type_script = "uid://cyrlkjq7sj35o"
