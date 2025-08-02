@@ -1,8 +1,8 @@
 class_name ActionUIComponent extends Control
 
-@export var actor: Character
+@export var actor: PlayerCharacter
 
-@onready var game_manager: GameManager = %GameManager
+# @onready var game_manager: GameManager = %GameManager
 @onready var container := $PanelContainer/VBoxContainer
 
 signal action_selected(action: Action, source: Character)
@@ -11,27 +11,36 @@ var actions: Array[Action]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_clear()
+	_clear_buttons()
+	actor.action_added.connect(_on_actor_action_added)
 
-	actions = actor.available_actions
-	for action in actions:
-		var action_name = action.action_name
-		var button := Button.new()
-		button.text = action_name
-		button.pressed.connect(_button_pressed.bind(action))
-		container.add_child(button)
-
-func _clear():
+func _clear_buttons():
 	var old_buttons = container.get_children()
 	for button in old_buttons:
 		container.remove_child(button)
 
-func _button_pressed(action: Action):
-	print('trying to execute action ' + action.action_name + ' from ' + actor.char_name + ' on ' + game_manager.current_enemy.char_name)
-	action_selected.emit(action, actor)
-	# action.execute(actor, game_manager.current_enemy)
+func _add_button(action: Action):
+	var button := Button.new()
+	button.text = action.action_name
+	button.pressed.connect(_button_pressed.bind(action))
+	container.add_child(button)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if actor.is_turn_active != visible:
 		visible = actor.is_turn_active
+
+
+#region Listeners
+
+func _button_pressed(action: Action):
+	# print('trying to execute action ' + action.action_name + ' from ' + actor.char_name + ' on ' + game_manager.current_enemy.char_name)
+	action_selected.emit(action, actor)
+	# action.execute(actor, game_manager.current_enemy)
+
+func _on_actor_action_added(action: Action):
+	actions.append(action)
+	_add_button(action)
+
+#endregion

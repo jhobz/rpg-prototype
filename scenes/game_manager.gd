@@ -3,9 +3,8 @@ class_name GameManager extends Node
 @export var current_enemy: Character
 
 @onready var actions: Node = %Actions
-@onready var characters: Node = %Characters
+@onready var player_characters: Array[Node] = %Characters/Players.get_children()
 @onready var state_machine: StateMachine = %GameStateMachine
-@onready var john: Character = %Characters/Players/JohnRPG
 @onready var instructions_control: Control = %Instructions
 
 var instructions: Array[Dictionary] = []
@@ -13,6 +12,11 @@ var executing_instruction: int = -1
 
 func _ready() -> void:
 	state_machine.init_state_machine()
+
+	for character in player_characters:
+		if character is PlayerCharacter:
+			var ui: ActionUIComponent = character.find_child('ActionUIComponent')
+			ui.action_selected.connect(_on_action_ui_component_action_selected)
 	
 func _process(delta: float):
 	state_machine.process_state_machine(delta)

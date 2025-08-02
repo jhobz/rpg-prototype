@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbekf0oq6lt2k"]
+[gd_scene load_steps=5 format=3 uid="uid://cbekf0oq6lt2k"]
 
 [ext_resource type="Script" uid="uid://dips70osbfklu" path="res://scenes/Character/character.gd" id="1_oakiv"]
 [ext_resource type="Theme" uid="uid://dt28hksanooxk" path="res://default_theme.tres" id="3_fqfur"]
+[ext_resource type="Script" uid="uid://c0xybc034keh1" path="res://scenes/Components/stats_component.gd" id="3_fsvua"]
+[ext_resource type="Script" uid="uid://c57m8elb52dp7" path="res://scenes/Components/hp_component.gd" id="4_6xo28"]
 
 [node name="Character" type="Node2D"]
 script = ExtResource("1_oakiv")
@@ -15,3 +17,11 @@ theme = ExtResource("3_fqfur")
 theme_override_constants/line_spacing = 0
 text = "
 HP: "
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("3_fsvua")
+metadata/_custom_type_script = "uid://c0xybc034keh1"
+
+[node name="HPComponent" type="Node" parent="."]
+script = ExtResource("4_6xo28")
+metadata/_custom_type_script = "uid://c57m8elb52dp7"

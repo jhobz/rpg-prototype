@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://ckjw2y4erudd7"]
+
+[ext_resource type="Script" uid="uid://lkdoxweingm3" path="res://scenes/Character/Characters/PlayerCharacters/player_character.gd" id="1_hcu37"]
+[ext_resource type="Script" uid="uid://c0xybc034keh1" path="res://scenes/Components/stats_component.gd" id="2_p2drc"]
+[ext_resource type="Script" uid="uid://c57m8elb52dp7" path="res://scenes/Components/hp_component.gd" id="3_l0wqb"]
+[ext_resource type="SpriteFrames" uid="uid://b3u8br252ur1v" path="res://resources/animations/knight_sprite_frames.tres" id="4_55yqc"]
+[ext_resource type="Script" uid="uid://c0fhxyw6tkwyo" path="res://scenes/Components/gui_component.gd" id="5_4o581"]
+[ext_resource type="PackedScene" uid="uid://cwyohqsv2tht6" path="res://scenes/Components/action_ui_component.tscn" id="6_p2drc"]
+[ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="7_4o581"]
+[ext_resource type="Script" uid="uid://ddakrcdkm2aku" path="res://scenes/Character/Actions/spell.gd" id="8_ywkx2"]
+[ext_resource type="Script" uid="uid://cyrlkjq7sj35o" path="res://scenes/Character/Actions/roll.gd" id="9_6a2p1"]
+
+[node name="Knight" type="Node2D"]
+script = ExtResource("1_hcu37")
+char_name = "Knight"
+metadata/_custom_type_script = "uid://lkdoxweingm3"
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("2_p2drc")
+strength = 10
+magic = 1
+defense = 10
+metadata/_custom_type_script = "uid://c0xybc034keh1"
+
+[node name="HPComponent" type="Node" parent="."]
+script = ExtResource("3_l0wqb")
+max_hp = 100
+metadata/_custom_type_script = "uid://c57m8elb52dp7"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4.5, 4.5)
+sprite_frames = ExtResource("4_55yqc")
+animation = &"death"
+
+[node name="GUIComponent" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("5_4o581")
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar" type="ProgressBar" parent="GUIComponent"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.199468
+anchor_top = 0.314286
+anchor_right = -0.199468
+anchor_bottom = 0.314286
+offset_left = -72.0
+offset_top = -96.0
+offset_right = 78.0
+offset_bottom = -69.0
+
+[node name="ActionUIComponent" parent="GUIComponent" node_paths=PackedStringArray("actor") instance=ExtResource("6_p2drc")]
+layout_mode = 1
+offset_left = 96.0
+offset_top = -56.0
+offset_right = 216.0
+offset_bottom = 26.0
+actor = NodePath("../..")
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="Attack" type="Node2D" parent="Actions"]
+script = ExtResource("7_4o581")
+base_dmg = 1
+metadata/_custom_type_script = "uid://dolcf35kui0ao"
+
+[node name="Spell" type="Node2D" parent="Actions"]
+script = ExtResource("8_ywkx2")
+base_dmg = 1
+metadata/_custom_type_script = "uid://ddakrcdkm2aku"
+
+[node name="Roll" type="Node2D" parent="Actions"]
+script = ExtResource("9_6a2p1")
+metadata/_custom_type_script = "uid://cyrlkjq7sj35o"

@@ -7,5 +7,5 @@ func _ready() -> void:
 	action_name = 'Spell'
 
 func execute(source: Character, target: Character):
-	var damage = base_dmg * source.magic
+	var damage = base_dmg * source.get_stat('magic') / max(1, target.get_stat('magic_defense'))
 	target.take_damage(damage)

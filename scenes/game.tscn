@@ -1,183 +1,18 @@
-[gd_scene load_steps=37 format=3 uid="uid://b33y6mn6fv2mw"]
+[gd_scene load_steps=14 format=3 uid="uid://b33y6mn6fv2mw"]
 
 [ext_resource type="Script" uid="uid://c4t4igimji1m2" path="res://logic/state_machine.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://da38x83w6ofja" path="res://scenes/game_manager.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="2_lbhrr"]
 [ext_resource type="Script" uid="uid://cyrlkjq7sj35o" path="res://scenes/Character/Actions/roll.gd" id="2_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://cbekf0oq6lt2k" path="res://scenes/Character/character.tscn" id="2_yqjtg"]
 [ext_resource type="Script" uid="uid://uf3whsb6co7i" path="res://logic/states/EncounterSetup.gd" id="3_ir15t"]
 [ext_resource type="Script" uid="uid://bfays8ylln5is" path="res://logic/states/BattleIdle.gd" id="3_u5sy4"]
 [ext_resource type="Script" uid="uid://p7m0esl5q5im" path="res://logic/states/BattleSetup.gd" id="4_ca42v"]
 [ext_resource type="Script" uid="uid://csoovgukgfds2" path="res://logic/states/CharacterTurn.gd" id="4_gee14"]
-[ext_resource type="Texture2D" uid="uid://dc7bufts8305d" path="res://assets/sprites/knight.png" id="7_gee14"]
 [ext_resource type="Script" uid="uid://d3nd1wjnfgq45" path="res://logic/states/EncounterComplete.gd" id="7_rysoc"]
 [ext_resource type="Script" uid="uid://ddakrcdkm2aku" path="res://scenes/Character/Actions/spell.gd" id="8_dinhu"]
 [ext_resource type="Script" uid="uid://pt3wwwwlwnyp" path="res://logic/states/RunComplete.gd" id="8_ssvqc"]
 [ext_resource type="Script" uid="uid://bdu40aiqe8n1u" path="res://logic/states/RunFailed.gd" id="9_264po"]
-[ext_resource type="PackedScene" uid="uid://cwyohqsv2tht6" path="res://scenes/Components/action_ui_component.tscn" id="11_kvuet"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gee14"]
-atlas = ExtResource("7_gee14")
-region = Rect2(0, 224, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kvuet"]
-atlas = ExtResource("7_gee14")
-region = Rect2(32, 224, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_trtic"]
-atlas = ExtResource("7_gee14")
-region = Rect2(64, 224, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ir15t"]
-atlas = ExtResource("7_gee14")
-region = Rect2(96, 224, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ca42v"]
-atlas = ExtResource("7_gee14")
-region = Rect2(0, 192, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rysoc"]
-atlas = ExtResource("7_gee14")
-region = Rect2(32, 192, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ssvqc"]
-atlas = ExtResource("7_gee14")
-region = Rect2(64, 192, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_264po"]
-atlas = ExtResource("7_gee14")
-region = Rect2(96, 192, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0tnpc"]
-atlas = ExtResource("7_gee14")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vtaks"]
-atlas = ExtResource("7_gee14")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kvpfn"]
-atlas = ExtResource("7_gee14")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dinhu"]
-atlas = ExtResource("7_gee14")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1kice"]
-atlas = ExtResource("7_gee14")
-region = Rect2(0, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5newe"]
-atlas = ExtResource("7_gee14")
-region = Rect2(32, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_37s47"]
-atlas = ExtResource("7_gee14")
-region = Rect2(64, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bt5mj"]
-atlas = ExtResource("7_gee14")
-region = Rect2(96, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e1j6l"]
-atlas = ExtResource("7_gee14")
-region = Rect2(128, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pl11u"]
-atlas = ExtResource("7_gee14")
-region = Rect2(160, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bhx41"]
-atlas = ExtResource("7_gee14")
-region = Rect2(192, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qnb83"]
-atlas = ExtResource("7_gee14")
-region = Rect2(224, 160, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_kvuet"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gee14")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kvuet")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_trtic")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ir15t")
-}],
-"loop": false,
-"name": &"death",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ca42v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rysoc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ssvqc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_264po")
-}],
-"loop": false,
-"name": &"hit",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0tnpc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vtaks")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kvpfn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dinhu")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1kice")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5newe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_37s47")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bt5mj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e1j6l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pl11u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bhx41")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qnb83")
-}],
-"loop": false,
-"name": &"roll",
-"speed": 10.0
-}]
+[ext_resource type="PackedScene" uid="uid://ckjw2y4erudd7" path="res://scenes/Character/Characters/PlayerCharacters/knight.tscn" id="13_kvuet"]
 
 [node name="Game" type="Node2D"]
 
@@ -231,30 +66,30 @@ metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
 [node name="Status" type="Label" parent="."]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -124.5
-offset_top = -182.5
-offset_right = 124.5
-offset_bottom = -154.5
+offset_left = -128.0
+offset_top = -72.0
+offset_right = 121.0
+offset_bottom = -44.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "An enemy is approaching!"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Commands" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -562.0
-offset_top = 150.0
-offset_right = -149.0
-offset_bottom = 315.0
+offset_left = -576.0
+offset_top = 160.0
+offset_right = -163.0
+offset_bottom = 325.0
 
 [node name="PanelContainer" type="PanelContainer" parent="Commands"]
 layout_mode = 0
@@ -278,10 +113,10 @@ flat = true
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
-offset_left = -548.0
-offset_top = -309.0
-offset_right = -335.0
-offset_bottom = 147.0
+offset_left = -568.0
+offset_top = -320.0
+offset_right = -355.0
+offset_bottom = 136.0
 
 [node name="PanelContainer" type="PanelContainer" parent="Instructions"]
 layout_mode = 0
@@ -322,31 +157,18 @@ unique_name_in_owner = true
 
 [node name="Players" type="Node" parent="Characters"]
 
-[node name="JohnRPG" parent="Characters/Players" node_paths=PackedStringArray("animated_sprite", "available_actions") instance=ExtResource("2_yqjtg")]
-position = Vector2(-88, 117)
-animated_sprite = NodePath("AnimatedSprite2D")
-char_name = "John RPG"
-is_player_character = true
-max_hp = 200
-available_actions = [NodePath("../../../Actions/Attack"), NodePath("../../../Actions/Roll"), NodePath("../../../Actions/Spell")]
+[node name="Knight" parent="Characters/Players" instance=ExtResource("13_kvuet")]
+position = Vector2(-264, 64)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Characters/Players/JohnRPG"]
-texture_filter = 1
-position = Vector2(87, 105)
-scale = Vector2(7.22656, 7.22656)
-sprite_frames = SubResource("SpriteFrames_kvuet")
-animation = &"roll"
-autoplay = "idle"
+[node name="Knight2" parent="Characters/Players" instance=ExtResource("13_kvuet")]
+position = Vector2(56, 248)
+char_name = "Knight2"
 
-[node name="ActionUIComponent" parent="Characters/Players/JohnRPG" node_paths=PackedStringArray("actor") instance=ExtResource("11_kvuet")]
-offset_left = 190.0
-offset_top = 64.0
-offset_right = 190.0
-offset_bottom = 64.0
-actor = NodePath("..")
+[node name="Knight3" parent="Characters/Players" instance=ExtResource("13_kvuet")]
+position = Vector2(304, 64)
+char_name = "Knight3"
 
 [node name="Enemies" type="Node" parent="Characters"]
 
 [connection signal="turn_active" from="GameStateMachine/CharacterTurn" to="GameManager" method="_on_character_turn_turn_active"]
 [connection signal="pressed" from="Commands/PanelContainer/VBoxContainer/PlaybackButton" to="GameManager" method="_on_playback_button_pressed"]
-[connection signal="action_selected" from="Characters/Players/JohnRPG/ActionUIComponent" to="GameManager" method="_on_action_ui_component_action_selected"]
