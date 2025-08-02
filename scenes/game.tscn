@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://pt3wwwwlwnyp" path="res://logic/game_states/RunComplete.gd" id="8_ssvqc"]
 [ext_resource type="Script" uid="uid://bdu40aiqe8n1u" path="res://logic/game_states/RunFailed.gd" id="9_264po"]
 [ext_resource type="PackedScene" uid="uid://ckjw2y4erudd7" path="res://scenes/Character/Characters/PlayerCharacters/knight.tscn" id="13_kvuet"]
-[ext_resource type="PackedScene" path="res://scenes/Character/Characters/PlayerCharacters/fruit_mage.tscn" id="14_trtic"]
+[ext_resource type="PackedScene" uid="uid://b1j3pqpi274f2" path="res://scenes/Character/Characters/PlayerCharacters/fruit_mage.tscn" id="14_trtic"]
 
 [node name="Game" type="Node2D"]
 
