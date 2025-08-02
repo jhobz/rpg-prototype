@@ -4,14 +4,14 @@
 [ext_resource type="Script" uid="uid://da38x83w6ofja" path="res://scenes/game_manager.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="2_lbhrr"]
 [ext_resource type="Script" uid="uid://cyrlkjq7sj35o" path="res://scenes/Character/Actions/roll.gd" id="2_lnu2h"]
-[ext_resource type="Script" uid="uid://uf3whsb6co7i" path="res://logic/states/EncounterSetup.gd" id="3_ir15t"]
-[ext_resource type="Script" uid="uid://bfays8ylln5is" path="res://logic/states/BattleIdle.gd" id="3_u5sy4"]
-[ext_resource type="Script" uid="uid://p7m0esl5q5im" path="res://logic/states/BattleSetup.gd" id="4_ca42v"]
-[ext_resource type="Script" uid="uid://csoovgukgfds2" path="res://logic/states/CharacterTurn.gd" id="4_gee14"]
-[ext_resource type="Script" uid="uid://d3nd1wjnfgq45" path="res://logic/states/EncounterComplete.gd" id="7_rysoc"]
+[ext_resource type="Script" uid="uid://uf3whsb6co7i" path="res://logic/game_states/EncounterSetup.gd" id="3_ir15t"]
+[ext_resource type="Script" uid="uid://bfays8ylln5is" path="res://logic/game_states/BattleIdle.gd" id="3_u5sy4"]
+[ext_resource type="Script" uid="uid://p7m0esl5q5im" path="res://logic/game_states/BattleSetup.gd" id="4_ca42v"]
+[ext_resource type="Script" uid="uid://csoovgukgfds2" path="res://logic/game_states/CharacterTurn.gd" id="4_gee14"]
+[ext_resource type="Script" uid="uid://d3nd1wjnfgq45" path="res://logic/game_states/EncounterComplete.gd" id="7_rysoc"]
 [ext_resource type="Script" uid="uid://ddakrcdkm2aku" path="res://scenes/Character/Actions/spell.gd" id="8_dinhu"]
-[ext_resource type="Script" uid="uid://pt3wwwwlwnyp" path="res://logic/states/RunComplete.gd" id="8_ssvqc"]
-[ext_resource type="Script" uid="uid://bdu40aiqe8n1u" path="res://logic/states/RunFailed.gd" id="9_264po"]
+[ext_resource type="Script" uid="uid://pt3wwwwlwnyp" path="res://logic/game_states/RunComplete.gd" id="8_ssvqc"]
+[ext_resource type="Script" uid="uid://bdu40aiqe8n1u" path="res://logic/game_states/RunFailed.gd" id="9_264po"]
 [ext_resource type="PackedScene" uid="uid://ckjw2y4erudd7" path="res://scenes/Character/Characters/PlayerCharacters/knight.tscn" id="13_kvuet"]
 [ext_resource type="PackedScene" path="res://scenes/Character/Characters/PlayerCharacters/fruit_mage.tscn" id="14_trtic"]
 
@@ -50,6 +50,10 @@ metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 script = ExtResource("4_gee14")
 idle_state = NodePath("../BattleIdle")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
+
+[node name="TurnStateMachine" type="Node" parent="GameStateMachine/CharacterTurn"]
+script = ExtResource("1_lbhrr")
+metadata/_custom_type_script = "uid://c4t4igimji1m2"
 
 [node name="EncounterComplete" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("encounter_setup_state")]
 script = ExtResource("7_rysoc")
