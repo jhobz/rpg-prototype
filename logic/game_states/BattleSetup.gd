@@ -18,10 +18,10 @@ func init(_encounter: Encounter):
 func enter():
 	if next_battle < encounter.battles.size():
 		%Status.text = "An enemy is approaching!"
-		%Status.visible = true
+		%StatusContainer.visible = true
 	
 func exit():
-	%Status.visible = false
+	%StatusContainer.visible = false
 	pass
 	
 func process(_delta: float) -> State:

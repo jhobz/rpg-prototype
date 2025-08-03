@@ -18,16 +18,16 @@ func enter():
 
 	if current_encounter == 0:
 		%Status.text = "Our heroes' journey begins!"
-		%Status.visible = true
+		%StatusContainer.visible = true
 		for character in CharacterManager.player_characters:
 			character.refill_hp()
 			character.visible = true
 	elif current_encounter < run.encounters.size():
 		%Status.text = "More enemies have been spotted!"
-		%Status.visible = true
+		%StatusContainer.visible = true
 	
 func exit():
-	%Status.visible = false
+	%StatusContainer.visible = false
 	
 func process(_delta: float) -> State:
 	if current_encounter >= run.encounters.size():

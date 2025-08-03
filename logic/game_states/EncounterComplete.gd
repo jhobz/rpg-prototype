@@ -4,10 +4,10 @@ extends State
 
 func enter():
 	%Status.text = "You've defeated the enemies!"
-	%Status.visible = true
+	%StatusContainer.visible = true
 	
 func exit():
-	%Status.visible = false
+	%StatusContainer.visible = false
 	
 func process(_delta: float) -> State:
 	if time_active >= 2:
