@@ -39,7 +39,7 @@ func process(_delta: float) -> State:
 	var enemy: Node2D = battle.enemies[0].instantiate()
 	enemies.add_character(enemy)
 	game_manager.current_enemy = enemy
-	enemy.position = Vector2(96, -174)
+	enemy.position = Vector2(96, -90)
 	
 	next_battle += 1
 	battle_idle_state.init()

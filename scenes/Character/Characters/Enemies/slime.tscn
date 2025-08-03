@@ -62,6 +62,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="NameLabel" type="Label" parent="GUIComponent"]
+layout_mode = 0
 offset_left = -70.0
 offset_top = -84.0
 offset_right = -30.0

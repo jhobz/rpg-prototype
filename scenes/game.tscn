@@ -1,10 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://b33y6mn6fv2mw"]
+[gd_scene load_steps=24 format=3 uid="uid://b33y6mn6fv2mw"]
 
 [ext_resource type="Script" uid="uid://c4t4igimji1m2" path="res://logic/state_machine.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://da38x83w6ofja" path="res://scenes/game_manager.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://uf3whsb6co7i" path="res://logic/game_states/EncounterSetup.gd" id="3_ir15t"]
 [ext_resource type="Script" uid="uid://bfays8ylln5is" path="res://logic/game_states/BattleIdle.gd" id="3_u5sy4"]
-[ext_resource type="Resource" uid="uid://donyrf18cmxg7" path="res://data/Runs/debug_run.tres" id="4_37s47"]
 [ext_resource type="Script" uid="uid://p7m0esl5q5im" path="res://logic/game_states/BattleSetup.gd" id="4_ca42v"]
 [ext_resource type="Script" uid="uid://csoovgukgfds2" path="res://logic/game_states/CharacterTurn.gd" id="4_gee14"]
 [ext_resource type="Script" uid="uid://mkypjgonbgn7" path="res://logic/turn_states/turn_start.gd" id="7_264po"]
@@ -53,7 +52,6 @@ metadata/_custom_type_script = "uid://c4t4igimji1m2"
 
 [node name="EncounterSetup" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("battle_setup_state", "run_complete_state")]
 script = ExtResource("3_ir15t")
-run = ExtResource("4_37s47")
 battle_setup_state = NodePath("../BattleSetup")
 run_complete_state = NodePath("../RunComplete")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
