@@ -15,38 +15,33 @@ func add_instruction(instruction: Instruction):
 	var source_name = instruction.source.char_name
 	var action_name = instruction.action.action_name
 
-	# var source_btn = MenuButton.new()
-	var source_btn = grid.get_node('SourceBtn').duplicate()
-	# var uses_label = Label.new()
+	var source_label = grid.get_node('Source').duplicate()
 	var uses_label = grid.get_node('Label').duplicate()
-	# var action_btn = MenuButton.new()
-	var action_btn = grid.get_node('ActionBtn').duplicate()
-	source_btn.text = source_name
+	var action_btn = grid.get_node('Action').duplicate()
+	source_label.text = source_name
 	uses_label.text = 'uses'
 	action_btn.text = action_name
-	grid.add_child(source_btn)
+	grid.add_child(source_label)
 	grid.add_child(uses_label)
 	grid.add_child(action_btn)
-	source_btn.visible = true
+	source_label.visible = true
 	uses_label.visible = true
 	action_btn.visible = true
-	source_btn.about_to_popup.connect(_on_menu_btn_about_to_popup.bind(source_btn, instruction, 'source'))
-	action_btn.about_to_popup.connect(_on_menu_btn_about_to_popup.bind(action_btn, instruction, 'action'))
+	action_btn.about_to_popup.connect(_on_menu_btn_about_to_popup.bind(action_btn, instruction))
 
-func _on_menu_btn_about_to_popup(btn: MenuButton, instruction: Instruction, type: String) -> void:
-	var popup = btn.get_popup()
-	var gm = Globals.game_manager
+func _on_menu_btn_about_to_popup(btn: MenuButton, instruction: Instruction) -> void:
+	var popup: PopupMenu = btn.get_popup()
 
 	var items = []
+	items.append_array(instruction.source.available_actions.map(func(a): return a.action_name))
 
-	match type:
-		'source':
-			items.append_array(gm.player_characters.map(func(c): return c.char_name))
-		'action':
-			items.append_array(instruction.source.available_actions.map(func(a): return a.action_name))
-		# 'target':
-		# 	items.append_array(gm.player_characters.map(func(c): return c.char_name))
-		# 	items.append('Enemy')
 	popup.clear()
 	for item in items:
 		popup.add_item(item)
+
+	popup.index_pressed.connect(_on_popup_window_index_pressed.bind(instruction, btn))
+
+func _on_popup_window_index_pressed(index: int, instruction: Instruction, btn: MenuButton) -> void:
+	var new_action = instruction.source.available_actions[index]
+	instruction.action = new_action
+	btn.text = new_action.action_name

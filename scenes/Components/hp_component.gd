@@ -11,7 +11,7 @@ func _ready() -> void:
     hp = max_hp
 
 func change_hp(amount: int):
-    hp = max(0, hp + amount)
+    hp = min(max_hp, max(0, hp + amount))
     hp_changed.emit(amount, hp)
     if (hp <= 0):
         hp_reached_zero.emit()
