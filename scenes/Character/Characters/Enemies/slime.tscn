@@ -14,8 +14,10 @@ metadata/_custom_type_script = "uid://4v303nifdpdg"
 
 [node name="StatsComponent" type="Node" parent="."]
 script = ExtResource("2_iiei6")
-defense = 1
-magic_defense = 1
+strength = 10
+magic = 10
+defense = 10
+magic_defense = 20
 metadata/_custom_type_script = "uid://c0xybc034keh1"
 
 [node name="HPComponent" type="Node" parent="."]
@@ -48,5 +50,5 @@ offset_bottom = -29.0
 
 [node name="Attack" type="Node2D" parent="Actions"]
 script = ExtResource("6_iiei6")
-base_dmg = 1
+base_dmg = 10
 metadata/_custom_type_script = "uid://dolcf35kui0ao"

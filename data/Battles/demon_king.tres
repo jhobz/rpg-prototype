@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=3 format=3 uid="uid://boaueiky7kmo6"]
+
+[ext_resource type="PackedScene" uid="uid://bgk4jejtmso1f" path="res://scenes/Character/Characters/Enemies/demon_king.tscn" id="1_dbcd6"]
+[ext_resource type="Script" uid="uid://d0fqyilf00bfa" path="res://logic/battle.gd" id="1_mca8i"]
+
+[resource]
+script = ExtResource("1_mca8i")
+enemies = Array[PackedScene]([ExtResource("1_dbcd6")])
+metadata/_custom_type_script = "uid://d0fqyilf00bfa"

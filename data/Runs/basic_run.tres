@@ -1,11 +1,15 @@
-[gd_resource type="Resource" script_class="Run" load_steps=5 format=3 uid="uid://cy1ct7utjljej"]
+[gd_resource type="Resource" script_class="Run" load_steps=9 format=3 uid="uid://cy1ct7utjljej"]
 
 [ext_resource type="Script" uid="uid://x4q8y71eujst" path="res://logic/encounter.gd" id="1_7vmew"]
 [ext_resource type="Script" uid="uid://bh2p5luwuetxt" path="res://logic/run.gd" id="2_81u2y"]
-[ext_resource type="Resource" uid="uid://pl8uqq3bqu65" path="res://data/Encounters/first_encounter.tres" id="2_vcm2w"]
-[ext_resource type="Resource" uid="uid://ddwtt3owj56aq" path="res://data/Encounters/tougher_encounter.tres" id="3_cg806"]
+[ext_resource type="Resource" uid="uid://pl8uqq3bqu65" path="res://data/Encounters/encounter_1.tres" id="2_kjgd2"]
+[ext_resource type="Resource" uid="uid://ddwtt3owj56aq" path="res://data/Encounters/encounter_2.tres" id="3_vhyyc"]
+[ext_resource type="Resource" uid="uid://c3lxp70qhtx2x" path="res://data/Encounters/encounter_3.tres" id="4_l2oev"]
+[ext_resource type="Resource" uid="uid://bgjahwwd6p8r6" path="res://data/Encounters/encounter_4.tres" id="5_odxaf"]
+[ext_resource type="Resource" uid="uid://d3bbvch5armv0" path="res://data/Encounters/encounter_5.tres" id="6_q43qv"]
+[ext_resource type="Resource" uid="uid://pd3aoo5q0qmi" path="res://data/Encounters/encounter_boss.tres" id="7_l0so1"]
 
 [resource]
 script = ExtResource("2_81u2y")
-encounters = Array[ExtResource("1_7vmew")]([ExtResource("2_vcm2w"), ExtResource("2_vcm2w"), ExtResource("3_cg806")])
+encounters = Array[ExtResource("1_7vmew")]([ExtResource("2_kjgd2"), ExtResource("3_vhyyc"), ExtResource("4_l2oev"), ExtResource("5_odxaf"), ExtResource("6_q43qv"), ExtResource("7_l0so1")])
 metadata/_custom_type_script = "uid://bh2p5luwuetxt"

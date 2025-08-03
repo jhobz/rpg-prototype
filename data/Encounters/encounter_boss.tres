@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Encounter" load_steps=4 format=3 uid="uid://pd3aoo5q0qmi"]
+
+[ext_resource type="Script" uid="uid://d0fqyilf00bfa" path="res://logic/battle.gd" id="1_mcivh"]
+[ext_resource type="Resource" uid="uid://boaueiky7kmo6" path="res://data/Battles/demon_king.tres" id="2_mcivh"]
+[ext_resource type="Script" uid="uid://x4q8y71eujst" path="res://logic/encounter.gd" id="3_u0xi7"]
+
+[resource]
+script = ExtResource("3_u0xi7")
+battles = Array[ExtResource("1_mcivh")]([ExtResource("2_mcivh")])
+metadata/_custom_type_script = "uid://x4q8y71eujst"

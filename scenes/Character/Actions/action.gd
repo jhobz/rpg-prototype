@@ -1,7 +1,13 @@
 class_name Action
 extends Node2D
 
+enum DefaultActionTarget {
+	ENEMY,
+	SELF,
+}
+
 var action_name: String
+var default_target: DefaultActionTarget = DefaultActionTarget.ENEMY
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

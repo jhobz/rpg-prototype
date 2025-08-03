@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ckjw2y4erudd7"]
+[gd_scene load_steps=11 format=3 uid="uid://ckjw2y4erudd7"]
 
 [ext_resource type="Script" uid="uid://lkdoxweingm3" path="res://scenes/Character/Characters/PlayerCharacters/player_character.gd" id="1_hcu37"]
 [ext_resource type="Script" uid="uid://c0xybc034keh1" path="res://scenes/Components/stats_component.gd" id="2_p2drc"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://c0fhxyw6tkwyo" path="res://scenes/Components/gui_component.gd" id="5_4o581"]
 [ext_resource type="PackedScene" uid="uid://cwyohqsv2tht6" path="res://scenes/Components/action_ui_component.tscn" id="6_p2drc"]
 [ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="7_4o581"]
+[ext_resource type="Script" uid="uid://c0jywajlfoi5w" path="res://scenes/Character/Actions/cure.gd" id="8_4o581"]
+[ext_resource type="Script" uid="uid://ddakrcdkm2aku" path="res://scenes/Character/Actions/spell.gd" id="8_ywkx2"]
 [ext_resource type="Script" uid="uid://cyrlkjq7sj35o" path="res://scenes/Character/Actions/roll.gd" id="9_6a2p1"]
 
 [node name="Knight" type="Node2D"]
@@ -17,13 +19,14 @@ metadata/_custom_type_script = "uid://lkdoxweingm3"
 [node name="StatsComponent" type="Node" parent="."]
 script = ExtResource("2_p2drc")
 strength = 10
-magic = 1
+magic = 10
 defense = 10
+magic_defense = 10
 metadata/_custom_type_script = "uid://c0xybc034keh1"
 
 [node name="HPComponent" type="Node" parent="."]
 script = ExtResource("3_l0wqb")
-max_hp = 100
+max_hp = 60
 metadata/_custom_type_script = "uid://c57m8elb52dp7"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -63,8 +66,18 @@ actor = NodePath("../..")
 
 [node name="Attack" type="Node2D" parent="Actions"]
 script = ExtResource("7_4o581")
-base_dmg = 1
+base_dmg = 10
 metadata/_custom_type_script = "uid://dolcf35kui0ao"
+
+[node name="Spell" type="Node2D" parent="Actions"]
+script = ExtResource("8_ywkx2")
+base_dmg = 10
+metadata/_custom_type_script = "uid://ddakrcdkm2aku"
+
+[node name="Cure" type="Node2D" parent="Actions"]
+script = ExtResource("8_4o581")
+base_heal = 2
+metadata/_custom_type_script = "uid://c0jywajlfoi5w"
 
 [node name="Roll" type="Node2D" parent="Actions"]
 script = ExtResource("9_6a2p1")

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Battle" load_steps=3 format=3 uid="uid://cy2xmumh24chi"]
+
+[ext_resource type="PackedScene" uid="uid://dxd4dxn2ons8h" path="res://scenes/Character/Characters/Enemies/skeleton.tscn" id="1_kacmf"]
+[ext_resource type="Script" uid="uid://d0fqyilf00bfa" path="res://logic/battle.gd" id="1_wgvr5"]
+
+[resource]
+script = ExtResource("1_wgvr5")
+enemies = Array[PackedScene]([ExtResource("1_kacmf")])
+metadata/_custom_type_script = "uid://d0fqyilf00bfa"

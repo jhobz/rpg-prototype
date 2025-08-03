@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxd4dxn2ons8h"]
+
+[ext_resource type="Script" uid="uid://4v303nifdpdg" path="res://scenes/Character/Characters/Enemies/non_player_character.gd" id="1_8hodr"]
+[ext_resource type="Script" uid="uid://c0xybc034keh1" path="res://scenes/Components/stats_component.gd" id="2_8k8tr"]
+[ext_resource type="Script" uid="uid://c57m8elb52dp7" path="res://scenes/Components/hp_component.gd" id="3_rhpeg"]
+[ext_resource type="SpriteFrames" uid="uid://cfort03ximp0y" path="res://resources/animations/red_slime_sprite_frames.tres" id="4_xda7v"]
+[ext_resource type="Script" uid="uid://c0fhxyw6tkwyo" path="res://scenes/Components/gui_component.gd" id="5_e1u8n"]
+[ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="6_2opdq"]
+
+[node name="Skeleton" type="Node2D"]
+script = ExtResource("1_8hodr")
+char_name = "Skeleton"
+metadata/_custom_type_script = "uid://4v303nifdpdg"
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("2_8k8tr")
+strength = 10
+magic = 10
+defense = 10
+magic_defense = 10
+metadata/_custom_type_script = "uid://c0xybc034keh1"
+
+[node name="HPComponent" type="Node" parent="."]
+script = ExtResource("3_rhpeg")
+max_hp = 70
+metadata/_custom_type_script = "uid://c57m8elb52dp7"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4.5, 4.5)
+sprite_frames = ExtResource("4_xda7v")
+animation = &"attack"
+autoplay = "idle"
+
+[node name="GUIComponent" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("5_e1u8n")
+metadata/_custom_type_script = "uid://c0fhxyw6tkwyo"
+
+[node name="ProgressBar" type="ProgressBar" parent="GUIComponent"]
+layout_mode = 0
+offset_left = -72.0
+offset_top = -56.0
+offset_right = 78.0
+offset_bottom = -29.0
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="Attack" type="Node2D" parent="Actions"]
+script = ExtResource("6_2opdq")
+base_dmg = 30
+metadata/_custom_type_script = "uid://dolcf35kui0ao"

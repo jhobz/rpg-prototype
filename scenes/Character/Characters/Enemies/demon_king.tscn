@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://bgk4jejtmso1f"]
+
+[ext_resource type="Script" uid="uid://4v303nifdpdg" path="res://scenes/Character/Characters/Enemies/non_player_character.gd" id="1_87pbj"]
+[ext_resource type="Script" uid="uid://c0xybc034keh1" path="res://scenes/Components/stats_component.gd" id="2_6lrbv"]
+[ext_resource type="Script" uid="uid://c57m8elb52dp7" path="res://scenes/Components/hp_component.gd" id="3_uvmin"]
+[ext_resource type="SpriteFrames" uid="uid://cfort03ximp0y" path="res://resources/animations/red_slime_sprite_frames.tres" id="4_yhgpr"]
+[ext_resource type="Script" uid="uid://c0fhxyw6tkwyo" path="res://scenes/Components/gui_component.gd" id="5_irw1t"]
+[ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="6_pii60"]
+[ext_resource type="Script" uid="uid://5ff8nljtxq1" path="res://scenes/Character/Actions/cleave.gd" id="7_6lrbv"]
+
+[node name="DemonKing" type="Node2D"]
+script = ExtResource("1_87pbj")
+char_name = "Demon King"
+metadata/_custom_type_script = "uid://4v303nifdpdg"
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("2_6lrbv")
+strength = 10
+magic = 10
+defense = 10
+magic_defense = 10
+metadata/_custom_type_script = "uid://c0xybc034keh1"
+
+[node name="HPComponent" type="Node" parent="."]
+script = ExtResource("3_uvmin")
+max_hp = 200
+metadata/_custom_type_script = "uid://c57m8elb52dp7"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4.5, 4.5)
+sprite_frames = ExtResource("4_yhgpr")
+animation = &"attack"
+autoplay = "idle"
+
+[node name="GUIComponent" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("5_irw1t")
+metadata/_custom_type_script = "uid://c0fhxyw6tkwyo"
+
+[node name="ProgressBar" type="ProgressBar" parent="GUIComponent"]
+layout_mode = 0
+offset_left = -72.0
+offset_top = -56.0
+offset_right = 78.0
+offset_bottom = -29.0
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="Attack" type="Node2D" parent="Actions"]
+script = ExtResource("6_pii60")
+base_dmg = 40
+metadata/_custom_type_script = "uid://dolcf35kui0ao"
+
+[node name="Cleave" type="Node2D" parent="Actions"]
+script = ExtResource("7_6lrbv")
+base_dmg = 15
+metadata/_custom_type_script = "uid://5ff8nljtxq1"

@@ -3,7 +3,6 @@ class_name GameManager extends Node
 @export var current_enemy: Character
 @export var action_source_state: State
 
-@onready var actions: Node = %Actions
 @onready var player_characters: Array[Node] = %Characters/Players.get_children()
 @onready var state_machine: StateMachine = %GameStateMachine
 @onready var turn_state_machine: StateMachine = %GameStateMachine/CharacterTurn/TurnStateMachine
@@ -102,9 +101,12 @@ func _on_action_ui_component_action_selected(action: Action, source: Character) 
 	if current_character != source:
 		return
 	
-	var target = current_enemy
-	if action.action_name == 'Roll':
-		target = source
+	var target = null
+	match action.default_target:
+		Action.DefaultActionTarget.ENEMY:
+			target = current_enemy
+		Action.DefaultActionTarget.SELF:
+			target = source
 
 	var instruction = Instruction.new(action, source, target)
 	log_instruction(instruction)

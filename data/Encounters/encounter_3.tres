@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Encounter" load_steps=6 format=3 uid="uid://c3lxp70qhtx2x"]
+
+[ext_resource type="Script" uid="uid://d0fqyilf00bfa" path="res://logic/battle.gd" id="1_kd2uf"]
+[ext_resource type="Resource" uid="uid://cw5oeux8onowk" path="res://data/Battles/solo_red_slime.tres" id="2_qdthx"]
+[ext_resource type="Resource" uid="uid://bmfgs62wmdx55" path="res://data/Battles/solo_slime.tres" id="3_324wy"]
+[ext_resource type="Script" uid="uid://x4q8y71eujst" path="res://logic/encounter.gd" id="3_o4j4r"]
+[ext_resource type="Resource" uid="uid://cy2xmumh24chi" path="res://data/Battles/solo_skeleton.tres" id="4_8414a"]
+
+[resource]
+script = ExtResource("3_o4j4r")
+battles = Array[ExtResource("1_kd2uf")]([ExtResource("2_qdthx"), ExtResource("3_324wy"), ExtResource("4_8414a")])
+metadata/_custom_type_script = "uid://x4q8y71eujst"
