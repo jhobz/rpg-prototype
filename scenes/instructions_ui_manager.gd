@@ -2,15 +2,6 @@ extends Control
 
 @onready var grid: GridContainer = $PanelContainer/ScrollContainer/VBoxContainer/GridContainer
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func add_instruction(instruction: Instruction):
 	var source_name = instruction.source.char_name
 	var action_name = instruction.action.action_name
