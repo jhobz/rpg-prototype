@@ -20,6 +20,7 @@ func _ready():
 	assert(stats_component)
 	assert(animated_sprite)
 	assert(gui_component)
+
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 	hp_component.hp_changed.connect(_on_hp_changed)
 	hp_component.hp_reached_zero.connect(_on_hp_reached_zero)
@@ -29,13 +30,6 @@ func _ready():
 func _process(_delta: float):
 	if !animated_sprite.is_playing():
 		animated_sprite.play('idle')
-
-func start_turn():
-	is_turn_active = true
-	is_turn_complete = false
-
-func end_turn():
-	is_turn_active = false
 
 func get_stat(type: String):
 	return stats_component[type]
@@ -47,7 +41,6 @@ func execute_action(action: Action, target: Character):
 	if not is_turn_active:
 		return
 	action.execute(self, target)
-	is_turn_complete = true
 
 
 #region Actions
@@ -55,12 +48,11 @@ func execute_action(action: Action, target: Character):
 func take_damage(amount: int):
 	if is_dead():
 		return
-
-	animated_sprite.play('hit')
 	hp_component.change_hp(-1 * amount)
 
 func roll():
-	animated_sprite.play('roll')
+	print("stunt on 'em, kid")
+	pass
 
 func die():
 	if animated_sprite.is_playing() and animated_sprite.animation == 'hit':

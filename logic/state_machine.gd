@@ -22,6 +22,7 @@ func _exit_state():
 	current_state.is_active = false
 	current_state.time_active = 0
 	
+# TODO: this should prob just go off of _process() instead of needing to be called by GameManager?
 func process_state_machine(delta: float):
 	current_state.time_active += delta
 	var new_state = current_state.process(delta)

@@ -1,82 +1,116 @@
 class_name GameManager extends Node
 
 @export var current_enemy: Character
+@export var action_source_state: State
 
 @onready var actions: Node = %Actions
 @onready var player_characters: Array[Node] = %Characters/Players.get_children()
 @onready var state_machine: StateMachine = %GameStateMachine
+@onready var turn_state_machine: StateMachine = %GameStateMachine/CharacterTurn/TurnStateMachine
 @onready var instructions_control: Control = %Instructions
 
 var instructions: Array[Instruction] = []
-var executing_instruction: int = -1
+var current_instruction_index := 0
+var current_character: Character
 
 func _ready() -> void:
 	state_machine.init_state_machine()
 
 	for character in player_characters:
 		if character is PlayerCharacter:
-			var ui: ActionUIComponent = character.find_child('ActionUIComponent')
+			var ui: ActionUIComponent = character.get_node('GUIComponent/ActionUIComponent')
 			ui.action_selected.connect(_on_action_ui_component_action_selected)
 	
 func _process(delta: float):
+	# TODO: these should prob be handled in StateMachine?
 	state_machine.process_state_machine(delta)
+	if turn_state_machine.current_state:
+		turn_state_machine.process_state_machine(delta)
 
-func log_instruction(action: Action, source: Character, target: Character) -> void:
+func log_instruction(instruction: Instruction) -> void:
 	var instructions_list = instructions_control.get_node('PanelContainer/VBoxContainer/InstructionList')
-	var target_name = target.char_name
+	var target_name = instruction.target.char_name
 	
-	if target == current_enemy:
+	# TODO: can check for NonPlayerCharacter instead of setting to null
+	if instruction.target == current_enemy:
 		target_name = "Enemy"
-		target = null
+		instruction.target = null
 		
-	var instruction = Instruction.new(action, source, target)
 	instructions.append(instruction)
-	instructions_list.add_item(source.char_name)
-	instructions_list.add_item(action.name)
+	instructions_list.add_item(instruction.source.char_name)
+	instructions_list.add_item(instruction.action.action_name)
 	instructions_list.add_item(target_name)
 
-func _on_character_turn_turn_active(_character: Character):
-	if executing_instruction == -1:
-		return
-	
-	try_advance_playback()
+func playback_current_instruction():
+	turn_state_machine.change_state(action_source_state)
 
 func try_advance_playback():
-	# skip instructions that are for characters who died
-	while executing_instruction < instructions.size() and instructions[executing_instruction].source.is_dead():
-		var skip_instruction = instructions[executing_instruction]
-		print('skipping instruction because character is dead', skip_instruction.action, skip_instruction.source, skip_instruction.target)
-		executing_instruction += 1
-	
 	# we're done if we pass the end of the list
-	if executing_instruction >= instructions.size():
+	if current_instruction_index >= instructions.size():
 		print('done executing playback')
-		executing_instruction = -1
 		return
+
+	var instruction = instructions[current_instruction_index]
+
+	# skip instructions that are for characters who died
+	while current_instruction_index < instructions.size() and instruction.source.is_dead():
+		var skip_instruction = instructions[current_instruction_index]
+		print('skipping instruction because character is dead', skip_instruction.action, skip_instruction.source, skip_instruction.target)
+		current_instruction_index += 1
 	
 	# if the next instruction is for the character whose turn it is, do it
 	# otherwise, sit there until that character's turn comes up
-	if instructions[executing_instruction].source.is_turn_active:
-		execute_instruction(instructions[executing_instruction])
-		executing_instruction += 1
+	if instruction.source == current_character:
+		execute_instruction(instructions[current_instruction_index])
+		current_instruction_index += 1
 
 func execute_instruction(instruction: Instruction):
 	var target = instruction.target
 	if not target:
 		target = current_enemy
-	print('executing action', instruction.action, instruction.source, target)
+
 	instruction.source.execute_action(instruction.action, target)
+
+
+#region Listeners
+
+func _on_character_turn_turn_active(character: Character):
+	current_character = character
+	turn_state_machine.init_state_machine()
+
+	# if we have instructions left to execute, bypass player input
+	if character is PlayerCharacter and current_instruction_index < instructions.size():
+		character.gui_component.toggle_action_menu(false)
+		playback_current_instruction()
+		return
+
+	if character is PlayerCharacter:
+		character.gui_component.toggle_action_menu(true)
+
 
 func _on_playback_button_pressed() -> void:
 	if instructions.is_empty():
 		print('nothing to play back!')
 		return
 	
-	executing_instruction = 0
-	try_advance_playback()
+	current_character.gui_component.toggle_action_menu(false)
+	current_instruction_index = 0
+	playback_current_instruction()
 
 func _on_action_ui_component_action_selected(action: Action, source: Character) -> void:
-	if not source.is_turn_active:
+	# safeguard in case the player gets the action UI up on the wrong turn somehow
+	if current_character != source:
 		return
-	source.execute_action(action, current_enemy)
-	log_instruction(action, source, current_enemy)
+	
+	var target = current_enemy
+	if action.action_name == 'Roll':
+		target = source
+
+	var instruction = Instruction.new(action, source, target)
+	log_instruction(instruction)
+	playback_current_instruction()
+
+func _on_encounter_setup_encounter_started() -> void:
+	current_instruction_index = 0
+
+#endregion

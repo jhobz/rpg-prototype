@@ -1,19 +1,18 @@
 extends State
 
-@export var idle_state: State = null
+@export var idle_state: State
 
-var character: Character = null
+# TODO: get this from GameManager and remove wherever it's getting set
+var character: Character
 
 signal turn_active(character: Character)
 signal turn_complete(character: Character)
 
 func enter():
 	print("It's " + character.char_name + "'s turn!")
-	character.start_turn()
 	turn_active.emit(character)
 	
 func exit():
-	character.end_turn()
 	turn_complete.emit(character)
 	character = null
 
@@ -22,6 +21,6 @@ func process(_delta: float) -> State:
 		if character.is_turn_complete:
 			return idle_state
 	else:
-		if time_active >= 1.0:
+		# if time_active >= 1.0:
 			return idle_state
 	return null

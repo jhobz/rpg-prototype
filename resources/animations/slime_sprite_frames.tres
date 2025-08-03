@@ -1,6 +1,26 @@
-[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://bunoqs26lcfvl"]
+[gd_resource type="SpriteFrames" load_steps=19 format=3 uid="uid://bunoqs26lcfvl"]
 
 [ext_resource type="Texture2D" uid="uid://qdnc3d3bc8du" path="res://assets/sprites/slime_green.png" id="1_rxey1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxey1"]
+atlas = ExtResource("1_rxey1")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_daf58"]
+atlas = ExtResource("1_rxey1")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14p8p"]
+atlas = ExtResource("1_rxey1")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bf8hl"]
+atlas = ExtResource("1_rxey1")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcjw3"]
+atlas = ExtResource("1_rxey1")
+region = Rect2(0, 48, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fhlda"]
 atlas = ExtResource("1_rxey1")
@@ -52,6 +72,26 @@ region = Rect2(0, 48, 24, 24)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxey1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_daf58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14p8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bf8hl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcjw3")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fhlda")

@@ -30,7 +30,8 @@ metadata/_custom_type_script = "uid://c57m8elb52dp7"
 texture_filter = 1
 scale = Vector2(4.5, 4.5)
 sprite_frames = ExtResource("4_55yqc")
-animation = &"death"
+animation = &"roll"
+autoplay = "idle"
 
 [node name="GUIComponent" type="Control" parent="."]
 layout_mode = 3

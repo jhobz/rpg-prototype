@@ -27,8 +27,8 @@ func _add_button(action: Action):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if actor.is_turn_active != visible:
-		visible = actor.is_turn_active
+	if !actor.is_turn_active:
+		visible = false
 
 
 #region Listeners

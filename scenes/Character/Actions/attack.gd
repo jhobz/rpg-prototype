@@ -7,5 +7,4 @@ func _ready() -> void:
 
 func execute(source: Character, target: Character) -> void:
 	var damage = base_dmg * source.get_stat('strength') / max(1, target.get_stat('defense'))
-	print('making target take ' + str(damage) + ' damage')
 	target.take_damage(damage)
