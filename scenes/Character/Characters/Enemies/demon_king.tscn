@@ -245,9 +245,10 @@ metadata/_custom_type_script = "uid://c0fhxyw6tkwyo"
 [node name="ProgressBar" type="ProgressBar" parent="GUIComponent"]
 layout_mode = 0
 offset_left = -72.0
-offset_top = -56.0
+offset_top = -128.0
 offset_right = 78.0
-offset_bottom = -29.0
+offset_bottom = -101.0
+show_percentage = false
 
 [node name="BattleAI" type="Node" parent="." node_paths=PackedStringArray("attack_action", "special_action", "cleave_action")]
 script = ExtResource("6_uvmin")

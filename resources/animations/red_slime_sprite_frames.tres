@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=28 format=3 uid="uid://cfort03ximp0y"]
+[gd_resource type="SpriteFrames" load_steps=25 format=3 uid="uid://cfort03ximp0y"]
 
 [ext_resource type="Texture2D" uid="uid://b7y5ulkfmuvyr" path="res://assets/sprites/slime_purple.png" id="1_c471u"]
 [ext_resource type="Texture2D" uid="uid://dc7bufts8305d" path="res://assets/sprites/knight.png" id="2_56688"]
@@ -58,18 +58,6 @@ region = Rect2(0, 24, 24, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_lcy1c"]
 atlas = ExtResource("1_c471u")
 region = Rect2(24, 24, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y17g3"]
-atlas = ExtResource("1_c471u")
-region = Rect2(48, 24, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jkc8e"]
-atlas = ExtResource("1_c471u")
-region = Rect2(72, 24, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ncha2"]
-atlas = ExtResource("1_c471u")
-region = Rect2(0, 48, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1kice"]
 atlas = ExtResource("2_56688")
@@ -168,19 +156,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lcy1c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y17g3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jkc8e")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ncha2")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,

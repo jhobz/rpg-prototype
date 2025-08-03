@@ -234,7 +234,7 @@ metadata/_custom_type_script = "uid://c57m8elb52dp7"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(4.5, 4.5)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_e1u8n")
 animation = &"hit"
 autoplay = "idle"
@@ -253,6 +253,7 @@ offset_left = -72.0
 offset_top = -56.0
 offset_right = 78.0
 offset_bottom = -29.0
+show_percentage = false
 
 [node name="BattleAI" type="Node" parent="." node_paths=PackedStringArray("attack_action")]
 script = ExtResource("6_8k8tr")
