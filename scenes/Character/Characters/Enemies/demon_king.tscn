@@ -245,10 +245,30 @@ metadata/_custom_type_script = "uid://c0fhxyw6tkwyo"
 [node name="ProgressBar" type="ProgressBar" parent="GUIComponent"]
 layout_mode = 0
 offset_left = -72.0
-offset_top = -128.0
+offset_top = -112.0
 offset_right = 78.0
-offset_bottom = -101.0
+offset_bottom = -85.0
 show_percentage = false
+
+[node name="HPLabel" type="Label" parent="GUIComponent"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -110.0
+offset_right = 23.0
+offset_bottom = -87.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="GUIComponent"]
+offset_left = -70.0
+offset_top = -138.0
+offset_right = -30.0
+offset_bottom = -115.0
 
 [node name="BattleAI" type="Node" parent="." node_paths=PackedStringArray("attack_action", "special_action", "cleave_action")]
 script = ExtResource("6_uvmin")

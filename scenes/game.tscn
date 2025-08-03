@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://ckjw2y4erudd7" path="res://scenes/Character/Characters/PlayerCharacters/knight.tscn" id="13_kvuet"]
 [ext_resource type="Script" uid="uid://ckgj35awmpkwb" path="res://logic/game_states/RunResults.gd" id="15_1kice"]
 [ext_resource type="Script" uid="uid://bk4nrf3hatx2u" path="res://scenes/instructions_ui_manager.gd" id="15_rysoc"]
-[ext_resource type="Script" uid="uid://ddbhdfuiub5a4" path="res://scenes/scroll_container.gd" id="17_5newe"]
+[ext_resource type="Script" path="res://scenes/scroll_container.gd" id="17_5newe"]
 [ext_resource type="Script" uid="uid://31qx03oyx10a" path="res://scenes/Character/Actions/dead.gd" id="17_ssvqc"]
 [ext_resource type="Script" uid="uid://d246jol7cepep" path="res://scenes/Character/character_group.gd" id="18_1kice"]
 [ext_resource type="Script" uid="uid://daadsqqlq05r5" path="res://scenes/Character/Actions/nothing.gd" id="18_264po"]
@@ -263,10 +263,10 @@ top_level = true
 z_index = 1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.117188
-anchor_top = -0.0895062
-anchor_right = 0.117188
-anchor_bottom = -0.0895062
+anchor_left = 0.113715
+anchor_top = 0.131173
+anchor_right = 0.113715
+anchor_bottom = 0.131173
 offset_left = -215.0
 offset_top = -14.0
 offset_right = 215.0
@@ -299,15 +299,15 @@ unique_name_in_owner = true
 script = ExtResource("18_1kice")
 
 [node name="Knight" parent="Characters/Players" instance=ExtResource("13_kvuet")]
-position = Vector2(-216, 56)
+position = Vector2(-216, 240)
 char_name = "Jane"
 
 [node name="John" parent="Characters/Players" instance=ExtResource("13_kvuet")]
-position = Vector2(64, 240)
+position = Vector2(75, 240)
 char_name = "John"
 
 [node name="OtherOne" parent="Characters/Players" instance=ExtResource("13_kvuet")]
-position = Vector2(304, 56)
+position = Vector2(362, 239)
 char_name = "Jill"
 
 [node name="Enemies" type="Node" parent="Characters"]

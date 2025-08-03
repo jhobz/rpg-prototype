@@ -54,6 +54,7 @@ offset_left = -72.0
 offset_top = -96.0
 offset_right = 78.0
 offset_bottom = -69.0
+show_percentage = false
 
 [node name="ActionUIComponent" parent="GUIComponent" node_paths=PackedStringArray("actor") instance=ExtResource("6_p2drc")]
 layout_mode = 1
@@ -62,6 +63,27 @@ offset_top = -56.0
 offset_right = 216.0
 offset_bottom = 26.0
 actor = NodePath("../..")
+
+[node name="HPLabel" type="Label" parent="GUIComponent"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -94.0
+offset_right = 23.0
+offset_bottom = -71.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="GUIComponent"]
+layout_mode = 0
+offset_left = -69.0
+offset_top = -124.0
+offset_right = -29.0
+offset_bottom = -101.0
 
 [node name="Actions" type="Node" parent="."]
 

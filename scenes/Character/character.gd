@@ -26,7 +26,7 @@ func _ready():
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 	hp_component.hp_changed.connect(_on_hp_changed)
 	hp_component.hp_reached_zero.connect(_on_hp_reached_zero)
-	gui_component.setup(hp_component.max_hp, hp_component.max_hp)
+	gui_component.setup(hp_component.max_hp, hp_component.max_hp, char_name)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
