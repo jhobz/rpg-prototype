@@ -45,10 +45,9 @@ offset_top = -56.0
 offset_right = 78.0
 offset_bottom = -29.0
 
-[node name="BattleAI" type="Node" parent="." node_paths=PackedStringArray("attack_action", "actor")]
+[node name="BattleAI" type="Node" parent="." node_paths=PackedStringArray("attack_action")]
 script = ExtResource("6_jkc8e")
 attack_action = NodePath("../Actions/Attack")
-actor = NodePath("")
 metadata/_custom_type_script = "uid://d1d1eadsr0obb"
 
 [node name="Actions" type="Node" parent="."]

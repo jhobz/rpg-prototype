@@ -29,18 +29,12 @@ func _process(delta: float):
 		turn_state_machine.process_state_machine(delta)
 
 func log_instruction(instruction: Instruction) -> void:
-	var instructions_list = instructions_control.get_node('PanelContainer/VBoxContainer/InstructionList')
-	var target_name = instruction.target.char_name
-	
 	# TODO: can check for NonPlayerCharacter instead of setting to null
 	if instruction.target == current_enemy:
-		target_name = "Enemy"
 		instruction.target = null
 		
 	instructions.append(instruction)
-	instructions_list.add_item(instruction.source.char_name)
-	instructions_list.add_item(instruction.action.action_name)
-	instructions_list.add_item(target_name)
+	instructions_control.add_instruction(instruction)
 
 func playback_current_instruction():
 	turn_state_machine.change_state(action_source_state)
