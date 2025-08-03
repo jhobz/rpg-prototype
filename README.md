@@ -2,7 +2,7 @@
 
 ## Credits
 
-Almost everything: JHobz & Vulajin
+Almost everything: [JHobz](https://twitch.tv/jhobz296) & [Vulajin](https://twitch.tv/vulajin)
 
 ### Art
 
