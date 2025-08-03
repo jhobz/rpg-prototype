@@ -14,6 +14,7 @@ var current_character: Character
 var current_enemy_instruction: Instruction
 
 func _ready() -> void:
+	Globals.game_manager = self
 	state_machine.init_state_machine()
 
 	for character in player_characters:
