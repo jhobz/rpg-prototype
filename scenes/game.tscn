@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b33y6mn6fv2mw"]
+[gd_scene load_steps=18 format=3 uid="uid://b33y6mn6fv2mw"]
 
 [ext_resource type="Script" uid="uid://c4t4igimji1m2" path="res://logic/state_machine.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://da38x83w6ofja" path="res://scenes/game_manager.gd" id="1_uwrxv"]
@@ -15,9 +15,8 @@
 [ext_resource type="Script" uid="uid://mknvwf0pj63r" path="res://logic/turn_states/turn_end.gd" id="10_37s47"]
 [ext_resource type="Script" uid="uid://eellji2s7jel" path="res://logic/turn_states/turn_inactive.gd" id="11_bt5mj"]
 [ext_resource type="PackedScene" uid="uid://ckjw2y4erudd7" path="res://scenes/Character/Characters/PlayerCharacters/knight.tscn" id="13_kvuet"]
-[ext_resource type="Script" uid="uid://31qx03oyx10a" path="res://scenes/Character/Actions/dead.gd" id="17_ssvqc"]
+[ext_resource type="Script" uid="uid://bk4nrf3hatx2u" path="res://scenes/instructions_ui_manager.gd" id="15_rysoc"]
 [ext_resource type="Script" uid="uid://d246jol7cepep" path="res://scenes/Character/character_group.gd" id="18_1kice"]
-[ext_resource type="Script" uid="uid://daadsqqlq05r5" path="res://scenes/Character/Actions/nothing.gd" id="18_264po"]
 
 [node name="Game" type="Node2D"]
 
@@ -153,22 +152,46 @@ offset_left = -568.0
 offset_top = -320.0
 offset_right = -355.0
 offset_bottom = 136.0
+script = ExtResource("15_rysoc")
 
 [node name="PanelContainer" type="PanelContainer" parent="Instructions"]
 layout_mode = 0
-offset_right = 212.0
+offset_right = 300.0
 offset_bottom = 461.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Instructions/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Instructions/PanelContainer"]
 layout_mode = 2
 
-[node name="InstructionList" type="ItemList" parent="Instructions/PanelContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Instructions/PanelContainer/ScrollContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
-auto_width = true
-auto_height = true
-text_overrun_behavior = 0
-max_columns = 3
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="GridContainer" parent="Instructions/PanelContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.8
+columns = 3
+
+[node name="Source" type="Label" parent="Instructions/PanelContainer/ScrollContainer/VBoxContainer/GridContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "John"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Instructions/PanelContainer/ScrollContainer/VBoxContainer/GridContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.407843)
+text = "uses"
+horizontal_alignment = 1
+
+[node name="Action" type="MenuButton" parent="Instructions/PanelContainer/ScrollContainer/VBoxContainer/GridContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Hate"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -191,16 +214,6 @@ char_name = "The Other One"
 
 [node name="Enemies" type="Node" parent="Characters"]
 script = ExtResource("18_1kice")
-
-[node name="SpecialActions" type="Node" parent="."]
-
-[node name="Dead" type="Node2D" parent="SpecialActions"]
-script = ExtResource("17_ssvqc")
-metadata/_custom_type_script = "uid://31qx03oyx10a"
-
-[node name="Nothing" type="Node2D" parent="SpecialActions"]
-script = ExtResource("18_264po")
-metadata/_custom_type_script = "uid://daadsqqlq05r5"
 
 [connection signal="encounter_started" from="GameStateMachine/EncounterSetup" to="GameManager" method="_on_encounter_setup_encounter_started"]
 [connection signal="turn_active" from="GameStateMachine/CharacterTurn" to="GameManager" method="_on_character_turn_turn_active"]
