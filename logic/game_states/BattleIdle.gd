@@ -13,8 +13,8 @@ var complete: bool = false
 
 func init():
 	characters.clear()
-	characters.append(players.characters)
-	characters.append(enemies.characters)
+	characters.append_array(players.characters)
+	characters.append_array(enemies.characters)
 
 func reset_turn():
 	current_actor = -1
