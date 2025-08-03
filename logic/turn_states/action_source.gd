@@ -15,7 +15,6 @@ func enter() -> void:
 		current_instruction = game_manager.instructions[game_manager.current_instruction_index]
 	else:
 		current_instruction = game_manager.current_enemy_instruction
-		print('current_instruction: ' + current_instruction.action.action_name + current_instruction.source.char_name + current_instruction.target.char_name)
 	var source = current_instruction.source
 
 	if source is PlayerCharacter:

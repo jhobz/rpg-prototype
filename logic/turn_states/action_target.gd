@@ -9,7 +9,6 @@ var is_animating := false
 
 func enter() -> void:
 	super.enter()
-	print('entering action target')
 
 	is_animating = true
 	var current_instruction: Instruction

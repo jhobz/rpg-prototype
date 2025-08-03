@@ -29,8 +29,8 @@ func process(_delta: float) -> State:
 		return encounter_complete_state
 		
 	# whee artificial delays, let's pretend it's for "loading"
-	if time_active < 1:
-		return null
+	# if time_active < 1:
+	# 	return null
 		
 	enemies.clear()
 	var battle = encounter.battles[next_battle]

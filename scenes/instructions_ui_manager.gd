@@ -1,4 +1,4 @@
-extends Control
+class_name InstructionsUIManager extends Control
 
 @onready var grid: GridContainer = $PanelContainer/ScrollContainer/VBoxContainer/GridContainer
 
@@ -8,31 +8,43 @@ func add_instruction(instruction: Instruction):
 
 	var source_label = grid.get_node('Source').duplicate()
 	var uses_label = grid.get_node('Label').duplicate()
-	var action_btn = grid.get_node('Action').duplicate()
+	var action_btn: MenuButton = grid.get_node('Action').duplicate()
 	source_label.text = source_name
 	uses_label.text = 'uses'
 	action_btn.text = action_name
+	populate_menu_items(action_btn, instruction)
 	grid.add_child(source_label)
 	grid.add_child(uses_label)
 	grid.add_child(action_btn)
 	source_label.visible = true
 	uses_label.visible = true
 	action_btn.visible = true
-	action_btn.about_to_popup.connect(_on_menu_btn_about_to_popup.bind(action_btn, instruction))
+	action_btn.get_popup().index_pressed.connect(_on_popup_window_index_pressed.bind(instruction, action_btn))
 
-func _on_menu_btn_about_to_popup(btn: MenuButton, instruction: Instruction) -> void:
+func populate_menu_items(btn: MenuButton, instruction: Instruction) -> void:
 	var popup: PopupMenu = btn.get_popup()
-
 	var items = []
+	popup.clear()
 	items.append_array(instruction.source.available_actions.map(func(a): return a.action_name))
 
-	popup.clear()
 	for item in items:
 		popup.add_item(item)
 
-	popup.index_pressed.connect(_on_popup_window_index_pressed.bind(instruction, btn))
+func replace_instruction_at_index(index: int, instruction: Instruction) -> void:
+	print('index', index)
+	# there are 3 ui items per instruction, +3 nodes for positioning, +2 to get to action
+	var i := index * 3 + 3 + 2
+	var ui_items = grid.get_children()
+	print('size', ui_items.size())
+	print(ui_items[i])
+	ui_items[i].text = instruction.action.action_name
+
+#region Listeners
 
 func _on_popup_window_index_pressed(index: int, instruction: Instruction, btn: MenuButton) -> void:
 	var new_action = instruction.source.available_actions[index]
 	instruction.action = new_action
+	instruction.target = null
 	btn.text = new_action.action_name
+
+#endregion

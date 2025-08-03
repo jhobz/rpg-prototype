@@ -32,8 +32,8 @@ func process(_delta: float) -> State:
 	if current_encounter >= run.encounters.size():
 		return run_complete_state
 		
-	if time_active < 2:
-		return null
+	# if time_active < 2:
+	# 	return null
 		
 	battle_setup_state.init(run.encounters[current_encounter])
 	current_encounter += 1

@@ -2,11 +2,12 @@ class_name GameManager extends Node
 
 @export var current_enemy: Character
 @export var action_source_state: State
+@export var turn_end_state: State
 
 @onready var player_characters: Array[Node] = %Characters/Players.get_children()
 @onready var state_machine: StateMachine = %GameStateMachine
 @onready var turn_state_machine: StateMachine = %GameStateMachine/CharacterTurn/TurnStateMachine
-@onready var instructions_control: Control = %Instructions
+@onready var instructions_control: InstructionsUIManager = %Instructions
 
 var instructions: Array[Instruction] = []
 var current_instruction_index := 0
@@ -14,6 +15,7 @@ var current_character: Character
 var current_enemy_instruction: Instruction
 
 func _ready() -> void:
+	Engine.time_scale = 4
 	Globals.game_manager = self
 	state_machine.init_state_machine()
 
@@ -40,16 +42,18 @@ func playback_current_instruction():
 	turn_state_machine.change_state(action_source_state)
 
 func try_advance_playback():
+	# end turn for characters who died
+	if current_instruction_index < instructions.size() and instructions[current_instruction_index].source.is_dead():
+		var skip_instruction = instructions[current_instruction_index]
+		print('skipping instruction because character is dead', skip_instruction.action, skip_instruction.source, skip_instruction.target)
+		current_instruction_index += 1
+		turn_state_machine.change_state(turn_end_state)
+
+	print('debug: ' + str(current_instruction_index))
 	# we're done if we pass the end of the list
 	if current_instruction_index >= instructions.size():
 		print('done executing playback')
 		return
-
-	# skip instructions that are for characters who died
-	while current_instruction_index < instructions.size() and instructions[current_instruction_index].source.is_dead():
-		var skip_instruction = instructions[current_instruction_index]
-		print('skipping instruction because character is dead', skip_instruction.action, skip_instruction.source, skip_instruction.target)
-		current_instruction_index += 1
 
 	var instruction = instructions[current_instruction_index]
 	
@@ -62,9 +66,29 @@ func try_advance_playback():
 func execute_instruction(instruction: Instruction):
 	var target = instruction.target
 	if not target:
-		target = current_enemy
+		match instruction.action.default_target:
+			Action.DefaultActionTarget.SELF:
+				target = instruction.source
+			Action.DefaultActionTarget.ENEMY:
+				target = current_enemy
+	
+	print('executing instruction: ', instruction.source.char_name, instruction.action.action_name, target.char_name)
 
 	instruction.source.execute_action(instruction.action, target)
+
+func replace_instruction_action_at_index(index: int, action: Action):
+	var instruction = instructions[index]
+	var target: Character
+
+	match action.default_target:
+		Action.DefaultActionTarget.ENEMY:
+			target = current_enemy
+		Action.DefaultActionTarget.SELF:
+			target = instruction.source
+
+	instruction.action = action
+	instruction.target = target
+	instructions_control.replace_instruction_at_index(index, instruction)
 
 
 #region Listeners
@@ -110,7 +134,7 @@ func _on_action_ui_component_action_selected(action: Action, source: Character) 
 	if current_character != source:
 		return
 	
-	var target = null
+	var target: Character
 	match action.default_target:
 		Action.DefaultActionTarget.ENEMY:
 			target = current_enemy
@@ -119,8 +143,7 @@ func _on_action_ui_component_action_selected(action: Action, source: Character) 
 
 	if current_instruction_index < instructions.size():
 		assert(instructions[current_instruction_index].action.action_name == 'Dead')
-		instructions[current_instruction_index].action = action
-		instructions[current_instruction_index].target = target
+		replace_instruction_action_at_index(current_instruction_index, action)
 	else:
 		var instruction = Instruction.new(action, source, target)
 		log_instruction(instruction)

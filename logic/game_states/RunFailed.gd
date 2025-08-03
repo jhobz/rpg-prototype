@@ -1,6 +1,7 @@
 extends State
 
-@export var encounter_setup_state: State = null
+@export var encounter_setup_state: State
+@export var run_results_state: State
 
 func enter():
 	%Status.text = "Alas, all of our heroes have perished..."
@@ -12,5 +13,5 @@ func exit():
 func process(_delta: float) -> State:
 	if time_active < 5:
 		return null
-	encounter_setup_state.init()
-	return encounter_setup_state
+	
+	return run_results_state
