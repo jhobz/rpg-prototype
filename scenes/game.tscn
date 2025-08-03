@@ -1,9 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://b33y6mn6fv2mw"]
+[gd_scene load_steps=18 format=3 uid="uid://b33y6mn6fv2mw"]
 
 [ext_resource type="Script" uid="uid://c4t4igimji1m2" path="res://logic/state_machine.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://da38x83w6ofja" path="res://scenes/game_manager.gd" id="1_uwrxv"]
-[ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="2_lbhrr"]
-[ext_resource type="Script" uid="uid://cyrlkjq7sj35o" path="res://scenes/Character/Actions/roll.gd" id="2_lnu2h"]
 [ext_resource type="Script" uid="uid://uf3whsb6co7i" path="res://logic/game_states/EncounterSetup.gd" id="3_ir15t"]
 [ext_resource type="Script" uid="uid://bfays8ylln5is" path="res://logic/game_states/BattleIdle.gd" id="3_u5sy4"]
 [ext_resource type="Script" uid="uid://p7m0esl5q5im" path="res://logic/game_states/BattleSetup.gd" id="4_ca42v"]
@@ -11,7 +9,6 @@
 [ext_resource type="Script" uid="uid://mkypjgonbgn7" path="res://logic/turn_states/turn_start.gd" id="7_264po"]
 [ext_resource type="Script" uid="uid://d3nd1wjnfgq45" path="res://logic/game_states/EncounterComplete.gd" id="7_rysoc"]
 [ext_resource type="Script" uid="uid://dwnhqnx3psg1" path="res://logic/turn_states/action_source.gd" id="8_1kice"]
-[ext_resource type="Script" uid="uid://ddakrcdkm2aku" path="res://scenes/Character/Actions/spell.gd" id="8_dinhu"]
 [ext_resource type="Script" uid="uid://pt3wwwwlwnyp" path="res://logic/game_states/RunComplete.gd" id="8_ssvqc"]
 [ext_resource type="Script" uid="uid://di4uyjoev74ov" path="res://logic/turn_states/action_target.gd" id="9_5newe"]
 [ext_resource type="Script" uid="uid://bdu40aiqe8n1u" path="res://logic/game_states/RunFailed.gd" id="9_264po"]
@@ -19,6 +16,7 @@
 [ext_resource type="Script" uid="uid://eellji2s7jel" path="res://logic/turn_states/turn_inactive.gd" id="11_bt5mj"]
 [ext_resource type="PackedScene" uid="uid://ckjw2y4erudd7" path="res://scenes/Character/Characters/PlayerCharacters/knight.tscn" id="13_kvuet"]
 [ext_resource type="PackedScene" uid="uid://b1j3pqpi274f2" path="res://scenes/Character/Characters/PlayerCharacters/fruit_mage.tscn" id="14_trtic"]
+[ext_resource type="Script" uid="uid://d246jol7cepep" path="res://scenes/Character/character_group.gd" id="18_1kice"]
 
 [node name="Game" type="Node2D"]
 
@@ -173,26 +171,11 @@ max_columns = 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Actions" type="Node" parent="."]
-unique_name_in_owner = true
-
-[node name="Attack" type="Node2D" parent="Actions"]
-script = ExtResource("2_lbhrr")
-base_dmg = 2
-metadata/_custom_type_script = "uid://dolcf35kui0ao"
-
-[node name="Roll" type="Node2D" parent="Actions"]
-script = ExtResource("2_lnu2h")
-metadata/_custom_type_script = "uid://cyrlkjq7sj35o"
-
-[node name="Spell" type="Node2D" parent="Actions"]
-script = ExtResource("8_dinhu")
-base_dmg = 2
-
 [node name="Characters" type="Node" parent="."]
 unique_name_in_owner = true
 
 [node name="Players" type="Node" parent="Characters"]
+script = ExtResource("18_1kice")
 
 [node name="Knight" parent="Characters/Players" instance=ExtResource("13_kvuet")]
 position = Vector2(-264, 64)
@@ -206,6 +189,7 @@ position = Vector2(304, 64)
 char_name = "Lune"
 
 [node name="Enemies" type="Node" parent="Characters"]
+script = ExtResource("18_1kice")
 
 [connection signal="encounter_started" from="GameStateMachine/EncounterSetup" to="GameManager" method="_on_encounter_setup_encounter_started"]
 [connection signal="turn_active" from="GameStateMachine/CharacterTurn" to="GameManager" method="_on_character_turn_turn_active"]

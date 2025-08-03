@@ -8,6 +8,8 @@ extends Node2D
 @onready var hp_component: HPComponent = $HPComponent
 @onready var stats_component: StatsComponent = $StatsComponent
 
+var character_group: CharacterGroup
+
 var is_player_character := false
 var is_turn_active := false
 var is_turn_complete := false

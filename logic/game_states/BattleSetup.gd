@@ -3,6 +3,10 @@ extends State
 @export var battle_idle_state: State
 @export var encounter_complete_state: State
 
+@onready var players: CharacterGroup = %Characters/Players
+@onready var enemies: CharacterGroup = %Characters/Enemies
+@onready var game_manager: GameManager = %GameManager
+
 var encounter: Encounter
 var next_battle := 0
 
@@ -28,18 +32,14 @@ func process(_delta: float) -> State:
 	if time_active < 1:
 		return null
 		
-	var prev_enemies = %Characters/Enemies.get_children()
-	for enemy in prev_enemies:
-		%Characters/Enemies.remove_child(enemy)
-		enemy.queue_free()
-	
+	enemies.clear()
 	var battle = encounter.battles[next_battle]
 	assert(battle.enemies.size() == 1)
 	
 	var enemy: Node2D = battle.enemies[0].instantiate()
-	%Characters/Enemies.add_child(enemy)
-	%GameManager.current_enemy = enemy
-	enemy.position = Vector2(-69, -174)
+	enemies.add_character(enemy)
+	game_manager.current_enemy = enemy
+	enemy.position = Vector2(96, -174)
 	
 	next_battle += 1
 	battle_idle_state.init()
