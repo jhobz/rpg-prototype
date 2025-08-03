@@ -11,7 +11,12 @@ func enter() -> void:
 	super.enter()
 
 	is_animating = true
-	var current_instruction = game_manager.instructions[game_manager.current_instruction_index]
+	var current_instruction: Instruction
+	if game_manager.current_character is PlayerCharacter:
+		current_instruction = game_manager.instructions[game_manager.current_instruction_index]
+	else:
+		current_instruction = game_manager.current_enemy_instruction
+		print('current_instruction: ' + current_instruction.action.action_name + current_instruction.source.char_name + current_instruction.target.char_name)
 	var source = current_instruction.source
 
 	if source is PlayerCharacter:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b1j3pqpi274f2"]
+[gd_scene load_steps=28 format=3 uid="uid://b1j3pqpi274f2"]
 
 [ext_resource type="Script" uid="uid://lkdoxweingm3" path="res://scenes/Character/Characters/PlayerCharacters/player_character.gd" id="1_omsmc"]
 [ext_resource type="Script" uid="uid://c0xybc034keh1" path="res://scenes/Components/stats_component.gd" id="2_1s1a7"]
@@ -25,6 +25,14 @@ region = Rect2(16, 48, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_wk8xp"]
 atlas = ExtResource("4_l32aa")
 region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s1a7"]
+atlas = ExtResource("4_l32aa")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s65t8"]
+atlas = ExtResource("4_l32aa")
+region = Rect2(16, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dnx6s"]
 atlas = ExtResource("4_l32aa")
@@ -106,6 +114,59 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_1s1a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s65t8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s1a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s65t8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s1a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s65t8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s1a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s65t8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s1a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s65t8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s1a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s65t8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s1a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s65t8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s1a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s65t8")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_dnx6s")
 }, {
 "duration": 1.0,
@@ -114,7 +175,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_eb28d")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -170,7 +231,7 @@ metadata/_custom_type_script = "uid://c57m8elb52dp7"
 texture_filter = 1
 scale = Vector2(4.5, 4.5)
 sprite_frames = SubResource("SpriteFrames_ch7jv")
-animation = &"roll"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="GUIComponent" type="Control" parent="."]

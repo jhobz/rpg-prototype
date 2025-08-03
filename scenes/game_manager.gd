@@ -11,6 +11,7 @@ class_name GameManager extends Node
 var instructions: Array[Instruction] = []
 var current_instruction_index := 0
 var current_character: Character
+var current_enemy_instruction: Instruction
 
 func _ready() -> void:
 	state_machine.init_state_machine()
@@ -76,6 +77,11 @@ func execute_instruction(instruction: Instruction):
 func _on_character_turn_turn_active(character: Character):
 	current_character = character
 	turn_state_machine.init_state_machine()
+
+	if character is NonPlayerCharacter:
+		current_enemy_instruction = character.get_turn_instruction()
+		playback_current_instruction()
+		return
 
 	# if we have instructions left to execute, bypass player input
 	if character is PlayerCharacter and current_instruction_index < instructions.size():
