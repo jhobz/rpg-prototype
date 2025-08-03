@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bgk4jejtmso1f"]
+[gd_scene load_steps=10 format=3 uid="uid://bgk4jejtmso1f"]
 
 [ext_resource type="Script" uid="uid://4v303nifdpdg" path="res://scenes/Character/Characters/Enemies/non_player_character.gd" id="1_87pbj"]
 [ext_resource type="Script" uid="uid://c0xybc034keh1" path="res://scenes/Components/stats_component.gd" id="2_6lrbv"]
@@ -6,7 +6,9 @@
 [ext_resource type="SpriteFrames" uid="uid://cfort03ximp0y" path="res://resources/animations/red_slime_sprite_frames.tres" id="4_yhgpr"]
 [ext_resource type="Script" uid="uid://c0fhxyw6tkwyo" path="res://scenes/Components/gui_component.gd" id="5_irw1t"]
 [ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="6_pii60"]
+[ext_resource type="Script" uid="uid://df36e3iijkjt5" path="res://scenes/Components/boss_attack_ai_component.gd" id="6_uvmin"]
 [ext_resource type="Script" uid="uid://5ff8nljtxq1" path="res://scenes/Character/Actions/cleave.gd" id="7_6lrbv"]
+[ext_resource type="Script" uid="uid://cyrlkjq7sj35o" path="res://scenes/Character/Actions/roll.gd" id="9_yhgpr"]
 
 [node name="DemonKing" type="Node2D"]
 script = ExtResource("1_87pbj")
@@ -46,6 +48,13 @@ offset_top = -56.0
 offset_right = 78.0
 offset_bottom = -29.0
 
+[node name="BattleAI" type="Node" parent="." node_paths=PackedStringArray("attack_action", "special_action", "cleave_action")]
+script = ExtResource("6_uvmin")
+attack_action = NodePath("../Actions/Attack")
+special_action = NodePath("../Actions/Roll")
+cleave_action = NodePath("../Actions/Cleave")
+metadata/_custom_type_script = "uid://df36e3iijkjt5"
+
 [node name="Actions" type="Node" parent="."]
 
 [node name="Attack" type="Node2D" parent="Actions"]
@@ -57,3 +66,7 @@ metadata/_custom_type_script = "uid://dolcf35kui0ao"
 script = ExtResource("7_6lrbv")
 base_dmg = 15
 metadata/_custom_type_script = "uid://5ff8nljtxq1"
+
+[node name="Roll" type="Node2D" parent="Actions"]
+script = ExtResource("9_yhgpr")
+metadata/_custom_type_script = "uid://cyrlkjq7sj35o"
