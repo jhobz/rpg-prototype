@@ -29,7 +29,7 @@ scale = Vector2(4.5, 4.5)
 sprite_frames = ExtResource("4_b8ylj")
 animation = &"attack"
 autoplay = "idle"
-frame = 4
+frame = 16
 frame_progress = 1.0
 
 [node name="GUIComponent" type="Control" parent="."]

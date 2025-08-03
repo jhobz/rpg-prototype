@@ -18,7 +18,7 @@ metadata/_custom_type_script = "uid://lkdoxweingm3"
 script = ExtResource("2_p2drc")
 strength = 10
 magic = 1
-defense = 10
+defense = 1
 metadata/_custom_type_script = "uid://c0xybc034keh1"
 
 [node name="HPComponent" type="Node" parent="."]

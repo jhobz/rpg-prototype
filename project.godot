@@ -15,6 +15,10 @@ run/main_scene="uid://b33y6mn6fv2mw"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+CharacterManager="*res://character_manager.gd"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

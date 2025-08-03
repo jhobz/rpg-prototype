@@ -3,7 +3,6 @@ class_name GameManager extends Node
 @export var current_enemy: Character
 @export var action_source_state: State
 
-@onready var actions: Node = %Actions
 @onready var player_characters: Array[Node] = %Characters/Players.get_children()
 @onready var state_machine: StateMachine = %GameStateMachine
 @onready var turn_state_machine: StateMachine = %GameStateMachine/CharacterTurn/TurnStateMachine

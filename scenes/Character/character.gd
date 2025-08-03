@@ -30,8 +30,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
-	if !animated_sprite.is_playing():
-		animated_sprite.play('idle')
+	pass
+	# if !animated_sprite.is_playing():
+	# 	animated_sprite.play('idle')
 
 func get_stat(type: String):
 	return stats_component[type]
