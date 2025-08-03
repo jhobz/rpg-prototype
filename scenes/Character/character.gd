@@ -39,6 +39,9 @@ func get_stat(type: String):
 
 func is_dead():
 	return hp_component.hp <= 0
+	
+func refill_hp():
+	hp_component.change_hp(hp_component.max_hp)
 
 func execute_action(action: Action, target: Character):
 	if not is_turn_active:

@@ -10,7 +10,6 @@ var is_animating := false
 func enter() -> void:
 	super.enter()
 
-	is_animating = true
 	var current_instruction: Instruction
 	if game_manager.current_character is PlayerCharacter:
 		current_instruction = game_manager.instructions[game_manager.current_instruction_index]
@@ -22,16 +21,18 @@ func enter() -> void:
 	if source is PlayerCharacter:
 		source.gui_component.toggle_action_menu(false)
 
-	animated_sprite = source.get_node('AnimatedSprite2D')
-	animated_sprite.animation_finished.connect(_on_animated_sprite_animation_finished)
+	var animation := 'attack'
 	# TODO: add an ActionType enum to Action and match case off of that instead of name
 	match current_instruction.action.action_name:
-		'Attack':
-			animated_sprite.play('attack')
 		'Roll':
-			animated_sprite.play('roll')
-		_:
-			animated_sprite.play('attack')
+			animation = 'roll'
+		'No Action':
+			return
+	
+	is_animating = true
+	animated_sprite = source.animated_sprite
+	animated_sprite.play(animation)
+	animated_sprite.animation_finished.connect(_on_animated_sprite_animation_finished)
 
 func exit() -> void:
 	super.exit()

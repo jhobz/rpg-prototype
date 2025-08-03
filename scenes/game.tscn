@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b33y6mn6fv2mw"]
+[gd_scene load_steps=19 format=3 uid="uid://b33y6mn6fv2mw"]
 
 [ext_resource type="Script" uid="uid://c4t4igimji1m2" path="res://logic/state_machine.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://da38x83w6ofja" path="res://scenes/game_manager.gd" id="1_uwrxv"]
@@ -15,7 +15,9 @@
 [ext_resource type="Script" uid="uid://mknvwf0pj63r" path="res://logic/turn_states/turn_end.gd" id="10_37s47"]
 [ext_resource type="Script" uid="uid://eellji2s7jel" path="res://logic/turn_states/turn_inactive.gd" id="11_bt5mj"]
 [ext_resource type="PackedScene" uid="uid://ckjw2y4erudd7" path="res://scenes/Character/Characters/PlayerCharacters/knight.tscn" id="13_kvuet"]
+[ext_resource type="Script" uid="uid://31qx03oyx10a" path="res://scenes/Character/Actions/dead.gd" id="17_ssvqc"]
 [ext_resource type="Script" uid="uid://d246jol7cepep" path="res://scenes/Character/character_group.gd" id="18_1kice"]
+[ext_resource type="Script" uid="uid://daadsqqlq05r5" path="res://scenes/Character/Actions/nothing.gd" id="18_264po"]
 
 [node name="Game" type="Node2D"]
 
@@ -189,6 +191,16 @@ char_name = "The Other One"
 
 [node name="Enemies" type="Node" parent="Characters"]
 script = ExtResource("18_1kice")
+
+[node name="SpecialActions" type="Node" parent="."]
+
+[node name="Dead" type="Node2D" parent="SpecialActions"]
+script = ExtResource("17_ssvqc")
+metadata/_custom_type_script = "uid://31qx03oyx10a"
+
+[node name="Nothing" type="Node2D" parent="SpecialActions"]
+script = ExtResource("18_264po")
+metadata/_custom_type_script = "uid://daadsqqlq05r5"
 
 [connection signal="encounter_started" from="GameStateMachine/EncounterSetup" to="GameManager" method="_on_encounter_setup_encounter_started"]
 [connection signal="turn_active" from="GameStateMachine/CharacterTurn" to="GameManager" method="_on_character_turn_turn_active"]

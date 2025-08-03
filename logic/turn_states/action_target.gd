@@ -29,7 +29,7 @@ func enter() -> void:
 		game_manager.execute_instruction(current_instruction)
 
 	# TODO: change this to a match case based on ActionType enum of the current instruction (e.g. cure vs. hit)
-	if current_instruction.action.action_name == 'Roll':
+	if current_instruction.action.action_name == 'Roll' or current_instruction.action.action_name == 'No Action':
 		cleanup()
 		return
 

@@ -18,6 +18,9 @@ func enter():
 	if current_encounter == 0:
 		%Status.text = "Our heroes' journey begins!"
 		%Status.visible = true
+		for character in CharacterManager.player_characters:
+			character.refill_hp()
+			character.visible = true
 	elif current_encounter < run.encounters.size():
 		%Status.text = "More enemies have been spotted!"
 		%Status.visible = true

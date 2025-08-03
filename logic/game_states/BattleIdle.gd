@@ -33,7 +33,7 @@ func process(_delta: float) -> State:
 		
 	# loop the character list (wrapping around) until we find the next not-dead character
 	current_actor = wrapi(current_actor + 1, 0, characters.size())
-	while characters[current_actor].is_dead():
+	while characters[current_actor].is_dead() and not characters[current_actor].is_player_character:
 		current_actor = wrapi(current_actor + 1, 0, characters.size())
 	
 	turn_state.character = characters[current_actor]

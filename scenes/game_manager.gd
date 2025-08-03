@@ -51,13 +51,13 @@ func try_advance_playback():
 		print('done executing playback')
 		return
 
-	var instruction = instructions[current_instruction_index]
-
 	# skip instructions that are for characters who died
-	while current_instruction_index < instructions.size() and instruction.source.is_dead():
+	while current_instruction_index < instructions.size() and instructions[current_instruction_index].source.is_dead():
 		var skip_instruction = instructions[current_instruction_index]
 		print('skipping instruction because character is dead', skip_instruction.action, skip_instruction.source, skip_instruction.target)
 		current_instruction_index += 1
+
+	var instruction = instructions[current_instruction_index]
 	
 	# if the next instruction is for the character whose turn it is, do it
 	# otherwise, sit there until that character's turn comes up
@@ -86,12 +86,20 @@ func _on_character_turn_turn_active(character: Character):
 
 	# if we have instructions left to execute, bypass player input
 	if character is PlayerCharacter and current_instruction_index < instructions.size():
-		character.gui_component.toggle_action_menu(false)
-		playback_current_instruction()
-		return
+		if instructions[current_instruction_index].action.action_name != 'Dead':
+			character.gui_component.toggle_action_menu(false)
+			playback_current_instruction()
+			return
 
 	if character is PlayerCharacter:
-		character.gui_component.toggle_action_menu(true)
+		if character.is_dead():
+			if current_instruction_index >= instructions.size():
+				var instruction = Instruction.new(Globals.dead_action, character, character)
+				log_instruction(instruction)
+			character.is_turn_complete = true
+			current_instruction_index += 1
+		else:
+			character.gui_component.toggle_action_menu(true)
 
 
 func _on_playback_button_pressed() -> void:
@@ -115,8 +123,13 @@ func _on_action_ui_component_action_selected(action: Action, source: Character) 
 		Action.DefaultActionTarget.SELF:
 			target = source
 
-	var instruction = Instruction.new(action, source, target)
-	log_instruction(instruction)
+	if current_instruction_index < instructions.size():
+		assert(instructions[current_instruction_index].action.action_name == 'Dead')
+		instructions[current_instruction_index].action = action
+		instructions[current_instruction_index].target = target
+	else:
+		var instruction = Instruction.new(action, source, target)
+		log_instruction(instruction)
 	playback_current_instruction()
 
 func _on_encounter_setup_encounter_started() -> void:
