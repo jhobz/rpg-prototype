@@ -66,6 +66,12 @@ func die():
 #region Listeners
 
 func _on_animation_finished():
+	# this is a lazy patch for the fact that the turn state machine executes the
+	# action (which causes fatal damage, triggering the death animation) but
+	# then immediately forces a hit animation
+	if is_dead() and animated_sprite.animation == 'hit':
+		animated_sprite.play('death')
+		return
 	if !_is_queued_for_death and animated_sprite.animation != 'death':
 		return
 
