@@ -6,10 +6,14 @@ Almost everything: JHobz & Vulajin
 
 ### Art
 
+Knight and Slimes
+
+From [Brackeys' Platformer Bundle](https://brackeysgames.itch.io/brackeys-platformer-bundle)!
+
 Zombie Mage
 
 - body/bodies/female/zombie_green.png
-  - Note: see details at https://opengameart.org/content/lpc-character-bases
+  - Note: [see details](https://opengameart.org/content/lpc-character-bases)
   - Licenses:
     - OGA-BY 3.0
     - CC-BY-SA 3.0
