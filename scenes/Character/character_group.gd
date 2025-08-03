@@ -14,11 +14,11 @@ func add_character(character: Character):
 	add_child(character)
 
 func clear():
-	var nodes = get_children()
-	for node in nodes:
-		remove_child(node)
-		node.queue_free()
-		
+	for character in characters:
+		remove_child(character)
+		character.queue_free()
+	characters.clear()
+
 func any_alive():
 	for character in characters:
 		if not character.is_dead():
