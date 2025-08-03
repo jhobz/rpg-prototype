@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b33y6mn6fv2mw"]
+[gd_scene load_steps=17 format=3 uid="uid://b33y6mn6fv2mw"]
 
 [ext_resource type="Script" uid="uid://c4t4igimji1m2" path="res://logic/state_machine.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://da38x83w6ofja" path="res://scenes/game_manager.gd" id="1_uwrxv"]
@@ -15,7 +15,6 @@
 [ext_resource type="Script" uid="uid://mknvwf0pj63r" path="res://logic/turn_states/turn_end.gd" id="10_37s47"]
 [ext_resource type="Script" uid="uid://eellji2s7jel" path="res://logic/turn_states/turn_inactive.gd" id="11_bt5mj"]
 [ext_resource type="PackedScene" uid="uid://ckjw2y4erudd7" path="res://scenes/Character/Characters/PlayerCharacters/knight.tscn" id="13_kvuet"]
-[ext_resource type="PackedScene" uid="uid://b1j3pqpi274f2" path="res://scenes/Character/Characters/PlayerCharacters/fruit_mage.tscn" id="14_trtic"]
 [ext_resource type="Script" uid="uid://d246jol7cepep" path="res://scenes/Character/character_group.gd" id="18_1kice"]
 
 [node name="Game" type="Node2D"]
@@ -184,9 +183,9 @@ position = Vector2(-264, 64)
 position = Vector2(56, 248)
 char_name = "John RPG"
 
-[node name="FruitMage" parent="Characters/Players" instance=ExtResource("14_trtic")]
+[node name="OtherOne" parent="Characters/Players" instance=ExtResource("13_kvuet")]
 position = Vector2(304, 64)
-char_name = "Lune"
+char_name = "The Other One"
 
 [node name="Enemies" type="Node" parent="Characters"]
 script = ExtResource("18_1kice")
