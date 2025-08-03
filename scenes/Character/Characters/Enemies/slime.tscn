@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8t3u20c4a6l3"]
+[gd_scene load_steps=8 format=3 uid="uid://b8t3u20c4a6l3"]
 
 [ext_resource type="Script" uid="uid://4v303nifdpdg" path="res://scenes/Character/Characters/Enemies/non_player_character.gd" id="1_b8ylj"]
 [ext_resource type="Script" uid="uid://c0xybc034keh1" path="res://scenes/Components/stats_component.gd" id="2_iiei6"]
@@ -6,6 +6,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bunoqs26lcfvl" path="res://resources/animations/slime_sprite_frames.tres" id="4_b8ylj"]
 [ext_resource type="Script" uid="uid://c0fhxyw6tkwyo" path="res://scenes/Components/gui_component.gd" id="5_ck7se"]
 [ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="6_iiei6"]
+[ext_resource type="Script" uid="uid://d1d1eadsr0obb" path="res://scenes/Components/simple_attack_ai_component.gd" id="7_6qpe4"]
 
 [node name="Slime" type="Node2D"]
 script = ExtResource("1_b8ylj")
@@ -43,6 +44,12 @@ offset_left = -72.0
 offset_top = -56.0
 offset_right = 78.0
 offset_bottom = -29.0
+
+[node name="BattleAI" type="Node" parent="." node_paths=PackedStringArray("attack_action", "actor")]
+script = ExtResource("7_6qpe4")
+attack_action = NodePath("../Actions/Attack")
+actor = NodePath("..")
+metadata/_custom_type_script = "uid://d1d1eadsr0obb"
 
 [node name="Actions" type="Node" parent="."]
 

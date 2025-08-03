@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckp66wttmrqym"]
+[gd_scene load_steps=8 format=3 uid="uid://ckp66wttmrqym"]
 
 [ext_resource type="Script" uid="uid://4v303nifdpdg" path="res://scenes/Character/Characters/Enemies/non_player_character.gd" id="1_fgqk7"]
 [ext_resource type="Script" uid="uid://c0xybc034keh1" path="res://scenes/Components/stats_component.gd" id="2_bxy7a"]
 [ext_resource type="Script" uid="uid://c57m8elb52dp7" path="res://scenes/Components/hp_component.gd" id="3_lcy1c"]
 [ext_resource type="SpriteFrames" uid="uid://cfort03ximp0y" path="res://resources/animations/red_slime_sprite_frames.tres" id="4_y17g3"]
 [ext_resource type="Script" uid="uid://c0fhxyw6tkwyo" path="res://scenes/Components/gui_component.gd" id="5_lcy1c"]
+[ext_resource type="Script" uid="uid://d1d1eadsr0obb" path="res://scenes/Components/simple_attack_ai_component.gd" id="6_jkc8e"]
+[ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="7_ncha2"]
 
 [node name="RedSlime" type="Node2D"]
 script = ExtResource("1_fgqk7")
@@ -42,3 +44,14 @@ offset_left = -72.0
 offset_top = -56.0
 offset_right = 78.0
 offset_bottom = -29.0
+
+[node name="BattleAI" type="Node" parent="." node_paths=PackedStringArray("attack_action")]
+script = ExtResource("6_jkc8e")
+attack_action = NodePath("../Actions/Attack")
+metadata/_custom_type_script = "uid://d1d1eadsr0obb"
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="Attack" type="Node2D" parent="Actions"]
+script = ExtResource("7_ncha2")
+metadata/_custom_type_script = "uid://dolcf35kui0ao"
