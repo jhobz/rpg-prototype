@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://ckjw2y4erudd7" path="res://scenes/Character/Characters/PlayerCharacters/knight.tscn" id="13_kvuet"]
 [ext_resource type="Script" uid="uid://ckgj35awmpkwb" path="res://logic/game_states/RunResults.gd" id="15_1kice"]
 [ext_resource type="Script" uid="uid://bk4nrf3hatx2u" path="res://scenes/instructions_ui_manager.gd" id="15_rysoc"]
-[ext_resource type="Script" path="res://scenes/scroll_container.gd" id="17_5newe"]
+[ext_resource type="Script" uid="uid://ddbhdfuiub5a4" path="res://scenes/scroll_container.gd" id="17_5newe"]
 [ext_resource type="Script" uid="uid://31qx03oyx10a" path="res://scenes/Character/Actions/dead.gd" id="17_ssvqc"]
 [ext_resource type="Script" uid="uid://d246jol7cepep" path="res://scenes/Character/character_group.gd" id="18_1kice"]
 [ext_resource type="Script" uid="uid://daadsqqlq05r5" path="res://scenes/Character/Actions/nothing.gd" id="18_264po"]
@@ -272,6 +272,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HSplitContainer/MarginContainer/StatusContainer"]
 layout_mode = 2
