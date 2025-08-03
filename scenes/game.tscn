@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://b33y6mn6fv2mw"]
+[gd_scene load_steps=25 format=3 uid="uid://b33y6mn6fv2mw"]
 
 [ext_resource type="Script" uid="uid://c4t4igimji1m2" path="res://logic/state_machine.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://da38x83w6ofja" path="res://scenes/game_manager.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://uf3whsb6co7i" path="res://logic/game_states/EncounterSetup.gd" id="3_ir15t"]
 [ext_resource type="Script" uid="uid://bfays8ylln5is" path="res://logic/game_states/BattleIdle.gd" id="3_u5sy4"]
+[ext_resource type="Resource" uid="uid://donyrf18cmxg7" path="res://data/Runs/debug_run.tres" id="4_37s47"]
 [ext_resource type="Script" uid="uid://p7m0esl5q5im" path="res://logic/game_states/BattleSetup.gd" id="4_ca42v"]
 [ext_resource type="Script" uid="uid://csoovgukgfds2" path="res://logic/game_states/CharacterTurn.gd" id="4_gee14"]
 [ext_resource type="Script" uid="uid://mkypjgonbgn7" path="res://logic/turn_states/turn_start.gd" id="7_264po"]
@@ -21,6 +22,9 @@
 [ext_resource type="Script" uid="uid://31qx03oyx10a" path="res://scenes/Character/Actions/dead.gd" id="17_ssvqc"]
 [ext_resource type="Script" uid="uid://d246jol7cepep" path="res://scenes/Character/character_group.gd" id="18_1kice"]
 [ext_resource type="Script" uid="uid://daadsqqlq05r5" path="res://scenes/Character/Actions/nothing.gd" id="18_264po"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37s47"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kice"]
 content_margin_left = 50.0
@@ -49,6 +53,7 @@ metadata/_custom_type_script = "uid://c4t4igimji1m2"
 
 [node name="EncounterSetup" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("battle_setup_state", "run_complete_state")]
 script = ExtResource("3_ir15t")
+run = ExtResource("4_37s47")
 battle_setup_state = NodePath("../BattleSetup")
 run_complete_state = NodePath("../RunComplete")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
@@ -121,6 +126,8 @@ encounter_setup_state = NodePath("../EncounterSetup")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
 [node name="Control" type="Control" parent="."]
+visibility_layer = 2
+z_index = 1
 layout_mode = 3
 anchors_preset = 0
 offset_left = -576.0
@@ -226,28 +233,32 @@ mouse_filter = 2
 mouse_default_cursor_shape = 2
 text = "Hate"
 
-[node name="BoxContainer" type="BoxContainer" parent="Control/MarginContainer/HSplitContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="Control/MarginContainer/HSplitContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RunResultsPanel" type="GridContainer" parent="Control/MarginContainer/HSplitContainer/BoxContainer"]
+[node name="RunResultsPanel" type="GridContainer" parent="Control/MarginContainer/HSplitContainer/MarginContainer/BoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/HSplitContainer/BoxContainer/RunResultsPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/HSplitContainer/MarginContainer/BoxContainer/RunResultsPanel"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_bottom = 10
 
-[node name="Panel" type="Panel" parent="Control/MarginContainer/HSplitContainer/BoxContainer/RunResultsPanel/MarginContainer"]
+[node name="Panel" type="Panel" parent="Control/MarginContainer/HSplitContainer/MarginContainer/BoxContainer/RunResultsPanel/MarginContainer"]
 custom_minimum_size = Vector2(0, 550)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_37s47")
 
-[node name="NextRunButton" type="Button" parent="Control/MarginContainer/HSplitContainer/BoxContainer/RunResultsPanel"]
+[node name="NextRunButton" type="Button" parent="Control/MarginContainer/HSplitContainer/MarginContainer/BoxContainer/RunResultsPanel"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 3
@@ -257,22 +268,28 @@ text = "Next run →"
 icon_alignment = 2
 expand_icon = true
 
-[node name="Status" type="Label" parent="Control"]
+[node name="StatusContainer" type="CenterContainer" parent="Control/MarginContainer/HSplitContainer/MarginContainer"]
 unique_name_in_owner = true
-top_level = true
-z_index = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.113715
-anchor_top = 0.131173
-anchor_right = 0.113715
-anchor_bottom = 0.131173
-offset_left = -215.0
-offset_top = -14.0
-offset_right = 215.0
-offset_bottom = 14.0
-grow_horizontal = 2
-grow_vertical = 2
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HSplitContainer/MarginContainer/StatusContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/HSplitContainer/MarginContainer/StatusContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 25
+
+[node name="Status" type="Label" parent="Control/MarginContainer/HSplitContainer/MarginContainer/StatusContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+visibility_layer = 2
+z_index = 2
+layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "An enemy is approaching!"
@@ -298,7 +315,7 @@ unique_name_in_owner = true
 [node name="Players" type="Node" parent="Characters"]
 script = ExtResource("18_1kice")
 
-[node name="Knight" parent="Characters/Players" instance=ExtResource("13_kvuet")]
+[node name="Jane" parent="Characters/Players" instance=ExtResource("13_kvuet")]
 position = Vector2(-216, 240)
 char_name = "Jane"
 
@@ -306,7 +323,7 @@ char_name = "Jane"
 position = Vector2(75, 240)
 char_name = "John"
 
-[node name="OtherOne" parent="Characters/Players" instance=ExtResource("13_kvuet")]
+[node name="Jill" parent="Characters/Players" instance=ExtResource("13_kvuet")]
 position = Vector2(362, 239)
 char_name = "Jill"
 
@@ -316,4 +333,4 @@ script = ExtResource("18_1kice")
 [connection signal="encounter_started" from="GameStateMachine/EncounterSetup" to="GameManager" method="_on_encounter_setup_encounter_started"]
 [connection signal="turn_active" from="GameStateMachine/CharacterTurn" to="GameManager" method="_on_character_turn_turn_active"]
 [connection signal="pressed" from="Control/MarginContainer/Commands/PanelContainer/VBoxContainer/PlaybackButton" to="GameManager" method="_on_playback_button_pressed"]
-[connection signal="pressed" from="Control/MarginContainer/HSplitContainer/BoxContainer/RunResultsPanel/NextRunButton" to="GameStateMachine/RunResults" method="_on_next_run_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/HSplitContainer/MarginContainer/BoxContainer/RunResultsPanel/NextRunButton" to="GameStateMachine/RunResults" method="_on_next_run_button_pressed"]
