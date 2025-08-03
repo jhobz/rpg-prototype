@@ -10,6 +10,6 @@ func exit():
 	%Status.visible = false
 	
 func process(_delta: float) -> State:
-	# if time_active >= 2:
-	return encounter_setup_state
-	# return null
+	if time_active >= 2:
+		return encounter_setup_state
+	return null
