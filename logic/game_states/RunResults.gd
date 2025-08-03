@@ -5,12 +5,14 @@ extends State
 var ready_for_next_run := false
 
 func enter():
-	# %Status.text = "IT'S EDIT TIME, BABY!"
-	# %Status.visible = true
+	%Status.text = "The party perished! But the adventure does not end there...\nUse the left panel to modify your moves and try again!"
+	%Status.visible = true
+	%Instructions.toggle_input(true)
 	%RunResultsPanel.visible = true
 	ready_for_next_run = false
 	
 func exit():
+	%Status.visible = false
 	%RunResultsPanel.visible = false
 	
 func process(_delta: float) -> State:

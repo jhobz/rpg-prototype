@@ -35,7 +35,7 @@ scale = Vector2(4.5, 4.5)
 sprite_frames = ExtResource("4_55yqc")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.297758
+frame_progress = 0.496907
 
 [node name="GUIComponent" type="Control" parent="."]
 layout_mode = 3

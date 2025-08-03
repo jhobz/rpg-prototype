@@ -1,6 +1,6 @@
 class_name InstructionsUIManager extends Control
 
-@onready var grid: GridContainer = $PanelContainer/ScrollContainer/VBoxContainer/GridContainer
+@onready var grid: GridContainer = $PanelContainer/ScrollContainer/VBoxContainer/MarginContainer/GridContainer
 
 func add_instruction(instruction: Instruction):
 	var source_name = instruction.source.char_name
@@ -38,6 +38,11 @@ func replace_instruction_at_index(index: int, instruction: Instruction) -> void:
 	print('size', ui_items.size())
 	print(ui_items[i])
 	ui_items[i].text = instruction.action.action_name
+
+func toggle_input(state: bool):
+	var value = Control.MOUSE_FILTER_PASS if state else Control.MOUSE_FILTER_IGNORE
+	self.propagate_call("set_mouse_filter", [value])
+	grid.mouse_default_cursor_shape = Control.CURSOR_ARROW if state else Control.CURSOR_FORBIDDEN
 
 #region Listeners
 

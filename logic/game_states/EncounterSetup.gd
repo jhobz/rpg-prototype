@@ -9,6 +9,7 @@ signal encounter_started()
 var current_encounter: int = 0
 
 func init():
+	%Instructions.toggle_input(false)
 	current_encounter = 0
 
 func enter():
