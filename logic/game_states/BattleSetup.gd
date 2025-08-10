@@ -8,31 +8,34 @@ extends State
 @onready var game_manager: GameManager = %GameManager
 @onready var ui_manager: UIManager = %UI
 
-var encounter: Encounter
-var next_battle := 0
+var _encounter: Encounter
+var _next_battle := 0
+var _has_advanced_dialogue := false
 
-func init(_encounter: Encounter):
-	encounter = _encounter
-	next_battle = 0
+func init(encounter: Encounter):
+	_encounter = encounter
+	_next_battle = 0
 	battle_idle_state.reset_turn()
 
 func enter():
-	if next_battle < encounter.battles.size():
-		ui_manager.show_message("An enemy is approaching!")
+	Globals.dialogue_completed.connect(_on_dialogue_completed)
+
+	if _next_battle < _encounter.battles.size():
+		_has_advanced_dialogue = false
+		ui_manager.queue_message("An enemy is approaching!", 1)
 
 func exit():
-	ui_manager.hide_message()
+	Globals.dialogue_completed.disconnect(_on_dialogue_completed)
 	
 func process(_delta: float) -> State:
-	if next_battle >= encounter.battles.size():
+	if _next_battle >= _encounter.battles.size():
 		return encounter_complete_state
 		
-	# whee artificial delays, let's pretend it's for "loading"
-	if time_active < 1:
+	if !_has_advanced_dialogue:
 		return null
 		
 	enemies.clear()
-	var battle = encounter.battles[next_battle]
+	var battle = _encounter.battles[_next_battle]
 	assert(battle.enemies.size() == 1)
 	
 	var enemy: Node2D = battle.enemies[0].instantiate()
@@ -40,6 +43,9 @@ func process(_delta: float) -> State:
 	game_manager.current_enemy = enemy
 	enemy.position = %DummyEnemy.position
 	
-	next_battle += 1
+	_next_battle += 1
 	battle_idle_state.init()
 	return battle_idle_state
+
+func _on_dialogue_completed():
+	_has_advanced_dialogue = true

@@ -146,7 +146,7 @@ script = ExtResource("18_1kice")
 [node name="DummyEnemy" type="Node2D" parent="."]
 unique_name_in_owner = true
 visible = false
-position = Vector2(779, 312)
+position = Vector2(779, 158)
 
 [node name="DemonKing" parent="DummyEnemy" instance=ExtResource("21_5newe")]
 

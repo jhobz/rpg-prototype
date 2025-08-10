@@ -15,9 +15,7 @@ var current_character: Character
 var current_enemy_instruction: Instruction
 
 func _ready() -> void:
-	# Engine.time_scale = 4
 	Globals.game_manager = self
-	print_debug('GameManager initializing state machine')
 	ui_manager.ready.connect(
 		func():
 			state_machine.init_state_machine()
