@@ -24,6 +24,11 @@ CharacterManager="*res://character_manager.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+
+[gui]
+
+theme/custom="uid://dt28hksanooxk"
 
 [gui]
 
