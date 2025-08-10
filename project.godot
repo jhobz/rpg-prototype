@@ -28,10 +28,6 @@ window/stretch/mode="canvas_items"
 
 [gui]
 
-theme/custom="uid://dt28hksanooxk"
-
-[gui]
-
 timers/tooltip_delay_sec=0.1
 theme/custom="uid://dt28hksanooxk"
 

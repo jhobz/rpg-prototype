@@ -2,10 +2,19 @@ class_name InstructionsUIManager extends Control
 
 @onready var grid: GridContainer = $PanelContainer/ScrollContainer/VBoxContainer/MarginContainer/GridContainer
 
+var active_instruction: int = -1
+var last_instruction: int = -1
+
+func _process(_delta: float) -> void:
+	if active_instruction != last_instruction:
+		update_active_instruction()
+		last_instruction = active_instruction
+
 func add_instruction(instruction: Instruction):
 	var source_name = instruction.source.char_name
 	var action_name = instruction.action.action_name
 
+	var indicator = grid.get_node('Indicator').duplicate()
 	var source_label = grid.get_node('Source').duplicate()
 	var uses_label = grid.get_node('Label').duplicate()
 	var action_btn: MenuButton = grid.get_node('Action').duplicate()
@@ -14,9 +23,11 @@ func add_instruction(instruction: Instruction):
 	action_btn.text = action_name
 	action_btn.set_tooltip_text(instruction.action.tooltip)
 	populate_menu_items(action_btn, instruction)
+	grid.add_child(indicator)
 	grid.add_child(source_label)
 	grid.add_child(uses_label)
 	grid.add_child(action_btn)
+	indicator.visible = true
 	source_label.visible = true
 	uses_label.visible = true
 	action_btn.visible = true
@@ -33,12 +44,9 @@ func populate_menu_items(btn: MenuButton, instruction: Instruction) -> void:
 		index += 1
 
 func replace_instruction_at_index(index: int, instruction: Instruction) -> void:
-	print('index', index)
-	# there are 3 ui items per instruction, +3 nodes for positioning, +2 to get to action
-	var i := index * 3 + 3 + 2
+	# there are 4 ui items per instruction, +4 nodes for positioning, +3 to get to action
+	var i := index * 4 + 4 + 3
 	var ui_items = grid.get_children()
-	print('size', ui_items.size())
-	print(ui_items[i])
 	ui_items[i].text = instruction.action.action_name
 	ui_items[i].set_tooltip_text(instruction.action.tooltip)
 
@@ -46,6 +54,21 @@ func toggle_input(state: bool):
 	var value = Control.MOUSE_FILTER_PASS if state else Control.MOUSE_FILTER_IGNORE
 	self.propagate_call("set_mouse_filter", [value])
 	# self.propagate_call('mouse_default_cursor_shape', [Control.CURSOR_ARROW if state else Control.CURSOR_FORBIDDEN])
+	
+func update_active_instruction():
+	var ui_items = grid.get_children()
+	
+	# there are 4 ui items per instruction, +4 nodes for positioning
+	if last_instruction >= 0:
+		var i := last_instruction * 4 + 4
+		ui_items[i].get_node("Texture").visible = false
+	
+	if active_instruction >= 0:
+		var i = active_instruction * 4 + 4
+		ui_items[i].get_node("Texture").visible = true
+	
+func set_active_instruction(index: int):
+	active_instruction = index
 
 #region Listeners
 

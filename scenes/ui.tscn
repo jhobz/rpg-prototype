@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://d34kj08qefmyp"]
+[gd_scene load_steps=7 format=3 uid="uid://d34kj08qefmyp"]
 
 [ext_resource type="Script" uid="uid://bk4nrf3hatx2u" path="res://scenes/instructions_ui_manager.gd" id="1_x4jx1"]
 [ext_resource type="Script" uid="uid://dv4bud7l05v2a" path="res://scenes/ui_manager.gd" id="1_yev5y"]
 [ext_resource type="Script" uid="uid://ddbhdfuiub5a4" path="res://scenes/scroll_container.gd" id="2_yev5y"]
+[ext_resource type="Texture2D" uid="uid://dmqmc0xuvbvp" path="res://assets/sprites/64px-Green_Arrow_Right.svg.png" id="4_gdt2y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37s47"]
 bg_color = Color(0.180392, 0.180392, 0.180392, 1)
@@ -98,7 +99,22 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.8
-columns = 3
+columns = 4
+
+[node name="Indicator" type="Control" parent="HSplitContainer/Instructions/PanelContainer/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Texture" type="TextureRect" parent="HSplitContainer/Instructions/PanelContainer/ScrollContainer/VBoxContainer/MarginContainer/GridContainer/Indicator"]
+visible = false
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+size_flags_vertical = 4
+texture = ExtResource("4_gdt2y")
+expand_mode = 3
 
 [node name="Source" type="Label" parent="HSplitContainer/Instructions/PanelContainer/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
 visible = false

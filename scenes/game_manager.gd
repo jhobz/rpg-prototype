@@ -53,10 +53,12 @@ func try_advance_playback():
 		print('skipping instruction because character is dead', skip_instruction.action, skip_instruction.source, skip_instruction.target)
 		current_instruction_index += 1
 		turn_state_machine.change_state(turn_end_state)
+		return
 
 	print('debug: ' + str(current_instruction_index))
 	# we're done if we pass the end of the list
 	if current_instruction_index >= instructions.size():
+		ui_manager.set_active_instruction(-1)
 		print('done executing playback')
 		return
 
@@ -111,6 +113,7 @@ func _on_character_turn_turn_active(character: Character):
 	if character is PlayerCharacter and current_instruction_index < instructions.size():
 		if instructions[current_instruction_index].action.action_name != 'Dead':
 			character.gui_component.toggle_action_menu(false)
+			ui_manager.set_active_instruction(current_instruction_index)
 			playback_current_instruction()
 			return
 
@@ -123,6 +126,10 @@ func _on_character_turn_turn_active(character: Character):
 			current_instruction_index += 1
 		else:
 			character.gui_component.toggle_action_menu(true)
+			if current_instruction_index < instructions.size():
+				ui_manager.set_active_instruction(current_instruction_index)
+			else:
+				ui_manager.set_active_instruction(-1)
 
 
 func _on_playback_button_pressed() -> void:

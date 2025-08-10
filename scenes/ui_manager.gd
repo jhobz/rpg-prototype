@@ -20,6 +20,9 @@ func replace_instruction_at_index(index: int, instruction: Instruction) -> void:
 func set_instructions_input_enabled(enabled: bool) -> void:
 	instructions_control.toggle_input(enabled)
 
+func set_active_instruction(index: int) -> void:
+	instructions_control.set_active_instruction(index)
+
 # Messages
 
 func show_message(message: String) -> void:
