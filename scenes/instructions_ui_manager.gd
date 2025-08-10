@@ -12,6 +12,7 @@ func add_instruction(instruction: Instruction):
 	source_label.text = source_name
 	uses_label.text = 'uses'
 	action_btn.text = action_name
+	action_btn.set_tooltip_text(instruction.action.tooltip)
 	populate_menu_items(action_btn, instruction)
 	grid.add_child(source_label)
 	grid.add_child(uses_label)
@@ -23,12 +24,13 @@ func add_instruction(instruction: Instruction):
 
 func populate_menu_items(btn: MenuButton, instruction: Instruction) -> void:
 	var popup: PopupMenu = btn.get_popup()
-	var items = []
 	popup.clear()
-	items.append_array(instruction.source.available_actions.map(func(a): return a.action_name))
 
-	for item in items:
-		popup.add_item(item)
+	var index := 0
+	for action in instruction.source.available_actions:
+		popup.add_item(action.action_name)
+		popup.set_item_tooltip(index, action.tooltip)
+		index += 1
 
 func replace_instruction_at_index(index: int, instruction: Instruction) -> void:
 	print('index', index)
@@ -38,6 +40,7 @@ func replace_instruction_at_index(index: int, instruction: Instruction) -> void:
 	print('size', ui_items.size())
 	print(ui_items[i])
 	ui_items[i].text = instruction.action.action_name
+	ui_items[i].set_tooltip_text(instruction.action.tooltip)
 
 func toggle_input(state: bool):
 	var value = Control.MOUSE_FILTER_PASS if state else Control.MOUSE_FILTER_IGNORE
@@ -51,5 +54,6 @@ func _on_popup_window_index_pressed(index: int, instruction: Instruction, btn: M
 	instruction.action = new_action
 	instruction.target = null
 	btn.text = new_action.action_name
+	btn.set_tooltip_text(new_action.tooltip)
 
 #endregion
