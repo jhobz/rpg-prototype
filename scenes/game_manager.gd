@@ -20,6 +20,7 @@ func _ready() -> void:
 		func():
 			state_machine.init_state_machine()
 			ui_manager.set_instructions_input_enabled(false)
+			ui_manager.toggle_instruction_list(false)
 	)
 
 	for character in player_characters:

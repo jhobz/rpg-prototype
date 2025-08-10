@@ -24,6 +24,12 @@ func set_instructions_input_enabled(enabled: bool) -> void:
 func set_active_instruction(index: int) -> void:
 	instructions_control.set_active_instruction(index)
 
+func toggle_instruction_list(state: bool) -> void:
+	if state:
+		instructions_control.show()
+	else:
+		instructions_control.hide()
+
 # Messages
 
 func queue_message(message: String, duration: float = 0) -> void:
@@ -86,7 +92,7 @@ func _input(event: InputEvent) -> void:
 	if !_is_showing_message:
 		return
 
-	if event.is_action("ui_accept"):
+	if event.is_action_released("ui_accept"):
 		hide_message()
 
 func _on_next_run_button_pressed() -> void:

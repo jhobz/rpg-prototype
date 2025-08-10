@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b33y6mn6fv2mw"]
+[gd_scene load_steps=23 format=3 uid="uid://b33y6mn6fv2mw"]
 
 [ext_resource type="Script" uid="uid://c4t4igimji1m2" path="res://logic/state_machine.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://da38x83w6ofja" path="res://scenes/game_manager.gd" id="1_uwrxv"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://ckjw2y4erudd7" path="res://scenes/Character/Characters/PlayerCharacters/knight.tscn" id="13_kvuet"]
 [ext_resource type="Script" uid="uid://ckgj35awmpkwb" path="res://logic/game_states/RunResults.gd" id="15_1kice"]
 [ext_resource type="PackedScene" uid="uid://d34kj08qefmyp" path="res://scenes/ui.tscn" id="16_1kice"]
+[ext_resource type="Script" uid="uid://d0vgbjkm5m7vw" path="res://logic/game_states/InstructionTutorial.gd" id="16_37s47"]
 [ext_resource type="Script" uid="uid://31qx03oyx10a" path="res://scenes/Character/Actions/dead.gd" id="17_ssvqc"]
 [ext_resource type="Script" uid="uid://d246jol7cepep" path="res://scenes/Character/character_group.gd" id="18_1kice"]
 [ext_resource type="Script" uid="uid://daadsqqlq05r5" path="res://scenes/Character/Actions/nothing.gd" id="18_264po"]
@@ -42,10 +43,11 @@ battle_setup_state = NodePath("../BattleSetup")
 run_complete_state = NodePath("../RunComplete")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
-[node name="BattleSetup" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("battle_idle_state", "encounter_complete_state")]
+[node name="BattleSetup" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("battle_idle_state", "encounter_complete_state", "instruction_tutorial_state")]
 script = ExtResource("4_ca42v")
 battle_idle_state = NodePath("../BattleIdle")
 encounter_complete_state = NodePath("../EncounterComplete")
+instruction_tutorial_state = NodePath("../InstructionTutorial")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
 [node name="BattleIdle" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("turn_state", "battle_setup_state", "run_failed_state")]
@@ -107,6 +109,11 @@ metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 [node name="RunResults" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("encounter_setup_state")]
 script = ExtResource("15_1kice")
 encounter_setup_state = NodePath("../EncounterSetup")
+metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
+
+[node name="InstructionTutorial" type="Node" parent="GameStateMachine" node_paths=PackedStringArray("battle_idle_state")]
+script = ExtResource("16_37s47")
+battle_idle_state = NodePath("../BattleIdle")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
 [node name="UI" parent="." instance=ExtResource("16_1kice")]

@@ -10,7 +10,10 @@ func enter():
 	Globals.dialogue_completed.connect(_on_dialogue_completed)
 	_has_advanced_dialogue = false
 	ui_manager.queue_message("You've defeated the enemies!", 2)
-	
+
+	if !Globals.save_state.has_cleared_first_encounter:
+		Globals.save_state.has_cleared_first_encounter = true
+
 func exit():
 	Globals.dialogue_completed.disconnect(_on_dialogue_completed)
 	

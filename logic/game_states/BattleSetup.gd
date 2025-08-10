@@ -2,6 +2,7 @@ extends State
 
 @export var battle_idle_state: State
 @export var encounter_complete_state: State
+@export var instruction_tutorial_state: State
 
 @onready var players: CharacterGroup = %Characters/Players
 @onready var enemies: CharacterGroup = %Characters/Enemies
@@ -42,9 +43,12 @@ func process(_delta: float) -> State:
 	enemies.add_character(enemy)
 	game_manager.current_enemy = enemy
 	enemy.position = %DummyEnemy.position
-	
 	_next_battle += 1
 	battle_idle_state.init()
+
+	if Globals.save_state.has_cleared_first_encounter and !Globals.save_state.has_seen_instruction_tutorial:
+		return instruction_tutorial_state
+
 	return battle_idle_state
 
 func _on_dialogue_completed():
