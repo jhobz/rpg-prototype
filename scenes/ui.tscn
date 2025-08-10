@@ -1,0 +1,194 @@
+[gd_scene load_steps=6 format=3 uid="uid://d34kj08qefmyp"]
+
+[ext_resource type="Script" uid="uid://bk4nrf3hatx2u" path="res://scenes/instructions_ui_manager.gd" id="1_x4jx1"]
+[ext_resource type="Script" uid="uid://dv4bud7l05v2a" path="res://scenes/ui_manager.gd" id="1_yev5y"]
+[ext_resource type="Script" uid="uid://ddbhdfuiub5a4" path="res://scenes/scroll_container.gd" id="2_yev5y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37s47"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kice"]
+content_margin_left = 50.0
+content_margin_right = 50.0
+bg_color = Color(0.0980392, 0.462745, 0.823529, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[node name="UI" type="MarginContainer"]
+visibility_layer = 2
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_yev5y")
+
+[node name="Commands" type="Control" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Commands"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 6.0
+offset_right = 228.0
+offset_bottom = 158.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Commands/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="PlaybackButton" type="Button" parent="Commands/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Playback"
+flat = true
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 2
+dragging_enabled = false
+dragger_visibility = 1
+
+[node name="Instructions" type="Control" parent="HSplitContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("1_x4jx1")
+
+[node name="PanelContainer" type="PanelContainer" parent="HSplitContainer/Instructions"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer/Instructions/PanelContainer"]
+layout_mode = 2
+follow_focus = true
+draw_focus_border = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 4
+script = ExtResource("2_yev5y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/Instructions/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/Instructions/PanelContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="HSplitContainer/Instructions/PanelContainer/ScrollContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.8
+columns = 3
+
+[node name="Source" type="Label" parent="HSplitContainer/Instructions/PanelContainer/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "John"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="HSplitContainer/Instructions/PanelContainer/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0.407843)
+text = "uses"
+horizontal_alignment = 1
+
+[node name="Action" type="MenuButton" parent="HSplitContainer/Instructions/PanelContainer/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "Hate"
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RunResultsPanel" type="VBoxContainer" parent="HSplitContainer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="HSplitContainer/MarginContainer/RunResultsPanel"]
+custom_minimum_size = Vector2(0, 640)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_37s47")
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/MarginContainer/RunResultsPanel/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="NextRunButton" type="Button" parent="HSplitContainer/MarginContainer/RunResultsPanel"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_1kice")
+text = "Next run →"
+icon_alignment = 2
+expand_icon = true
+
+[node name="StatusContainer" type="CenterContainer" parent="HSplitContainer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HSplitContainer/MarginContainer/StatusContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/MarginContainer/StatusContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 25
+
+[node name="Status" type="Label" parent="HSplitContainer/MarginContainer/StatusContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+visibility_layer = 2
+z_index = 2
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "An enemy is approaching!"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="HSplitContainer/MarginContainer/RunResultsPanel/NextRunButton" to="." method="_on_next_run_button_pressed"]

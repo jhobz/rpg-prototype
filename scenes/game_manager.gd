@@ -7,7 +7,7 @@ class_name GameManager extends Node
 @onready var player_characters: Array[Node] = %Characters/Players.get_children()
 @onready var state_machine: StateMachine = %GameStateMachine
 @onready var turn_state_machine: StateMachine = %GameStateMachine/CharacterTurn/TurnStateMachine
-@onready var instructions_control: InstructionsUIManager = %Instructions
+@onready var ui_manager: UIManager = %UI
 
 var instructions: Array[Instruction] = []
 var current_instruction_index := 0
@@ -17,7 +17,12 @@ var current_enemy_instruction: Instruction
 func _ready() -> void:
 	# Engine.time_scale = 4
 	Globals.game_manager = self
-	state_machine.init_state_machine()
+	print_debug('GameManager initializing state machine')
+	ui_manager.ready.connect(
+		func():
+			state_machine.init_state_machine()
+			ui_manager.set_instructions_input_enabled(false)
+	)
 
 	for character in player_characters:
 		if character is PlayerCharacter:
@@ -36,7 +41,7 @@ func log_instruction(instruction: Instruction) -> void:
 		instruction.target = null
 		
 	instructions.append(instruction)
-	instructions_control.add_instruction(instruction)
+	ui_manager.add_instruction(instruction)
 
 func playback_current_instruction():
 	turn_state_machine.change_state(action_source_state)
@@ -88,7 +93,7 @@ func replace_instruction_action_at_index(index: int, action: Action):
 
 	instruction.action = action
 	instruction.target = target
-	instructions_control.replace_instruction_at_index(index, instruction)
+	ui_manager.replace_instruction_at_index(index, instruction)
 
 
 #region Listeners

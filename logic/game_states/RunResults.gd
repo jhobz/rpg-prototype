@@ -4,19 +4,22 @@ extends State
 
 var ready_for_next_run := false
 
+@onready var ui_manager: UIManager = %UI
+
 func enter():
-	%Status.text = "The party perished! But the adventure does not end there...\nUse the left panel to modify your moves and try again!"
-	%StatusContainer.size_flags_vertical = Control.SizeFlags.SIZE_FILL
-	%StatusContainer.visible = true
-	%Instructions.toggle_input(true)
-	%RunResultsPanel.visible = true
+	ui_manager.set_message_position('center')
+	ui_manager.show_message("The party perished! But the adventure does not end there...\nUse the left panel to modify your moves and try again!")
+	ui_manager.set_instructions_input_enabled(true)
+	ui_manager.show_run_results()
 	ready_for_next_run = false
-	
+	Globals.next_run_requested.connect(_on_next_run_requested)
+
 func exit():
-	%StatusContainer.visible = false
-	%StatusContainer.size_flags_vertical = Control.SizeFlags.SIZE_SHRINK_BEGIN
-	%RunResultsPanel.visible = false
-	
+	ui_manager.hide_message()
+	ui_manager.hide_run_results()
+	ui_manager.set_message_position('top')
+	Globals.next_run_requested.disconnect(_on_next_run_requested)
+
 func process(_delta: float) -> State:
 	if ready_for_next_run:
 		encounter_setup_state.init()
@@ -25,6 +28,5 @@ func process(_delta: float) -> State:
 	return null
 
 
-func _on_next_run_button_pressed() -> void:
+func _on_next_run_requested() -> void:
 	ready_for_next_run = true
-	pass

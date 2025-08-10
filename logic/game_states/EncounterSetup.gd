@@ -8,8 +8,10 @@ signal encounter_started()
 
 var current_encounter: int = 0
 
+@onready var ui_manager: UIManager = %UI
+
 func init():
-	%Instructions.toggle_input(false)
+	ui_manager.set_instructions_input_enabled(false)
 	current_encounter = 0
 
 func enter():
@@ -17,17 +19,15 @@ func enter():
 		encounter_started.emit()
 
 	if current_encounter == 0:
-		%Status.text = "Our heroes' journey begins!"
-		%StatusContainer.visible = true
+		ui_manager.show_message("Our heroes' journey begins!")
 		for character in CharacterManager.player_characters:
 			character.refill_hp()
 			character.visible = true
 	elif current_encounter < run.encounters.size():
-		%Status.text = "More enemies have been spotted!"
-		%StatusContainer.visible = true
-	
+		ui_manager.show_message("More enemies have been spotted!")
+
 func exit():
-	%StatusContainer.visible = false
+	ui_manager.hide_message()
 	
 func process(_delta: float) -> State:
 	if current_encounter >= run.encounters.size():

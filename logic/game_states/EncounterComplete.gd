@@ -2,12 +2,13 @@ extends State
 
 @export var encounter_setup_state: State = null
 
+@onready var ui_manager: UIManager = %UI
+
 func enter():
-	%Status.text = "You've defeated the enemies!"
-	%StatusContainer.visible = true
+	ui_manager.show_message("You've defeated the enemies!")
 	
 func exit():
-	%StatusContainer.visible = false
+	ui_manager.hide_message()
 	
 func process(_delta: float) -> State:
 	if time_active >= 2:

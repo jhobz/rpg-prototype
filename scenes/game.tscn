@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b33y6mn6fv2mw"]
+[gd_scene load_steps=21 format=3 uid="uid://b33y6mn6fv2mw"]
 
 [ext_resource type="Script" uid="uid://c4t4igimji1m2" path="res://logic/state_machine.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://da38x83w6ofja" path="res://scenes/game_manager.gd" id="1_uwrxv"]
@@ -16,27 +16,12 @@
 [ext_resource type="Script" uid="uid://eellji2s7jel" path="res://logic/turn_states/turn_inactive.gd" id="11_bt5mj"]
 [ext_resource type="PackedScene" uid="uid://ckjw2y4erudd7" path="res://scenes/Character/Characters/PlayerCharacters/knight.tscn" id="13_kvuet"]
 [ext_resource type="Script" uid="uid://ckgj35awmpkwb" path="res://logic/game_states/RunResults.gd" id="15_1kice"]
-[ext_resource type="Script" uid="uid://bk4nrf3hatx2u" path="res://scenes/instructions_ui_manager.gd" id="15_rysoc"]
-[ext_resource type="Script" uid="uid://ddbhdfuiub5a4" path="res://scenes/scroll_container.gd" id="17_5newe"]
+[ext_resource type="PackedScene" uid="uid://d34kj08qefmyp" path="res://scenes/ui.tscn" id="16_1kice"]
 [ext_resource type="Script" uid="uid://31qx03oyx10a" path="res://scenes/Character/Actions/dead.gd" id="17_ssvqc"]
 [ext_resource type="Script" uid="uid://d246jol7cepep" path="res://scenes/Character/character_group.gd" id="18_1kice"]
 [ext_resource type="Script" uid="uid://daadsqqlq05r5" path="res://scenes/Character/Actions/nothing.gd" id="18_264po"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37s47"]
-bg_color = Color(0.180392, 0.180392, 0.180392, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kice"]
-content_margin_left = 50.0
-content_margin_right = 50.0
-bg_color = Color(0.0980392, 0.462745, 0.823529, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-shadow_size = 2
-shadow_offset = Vector2(2, 2)
-
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node"]
 
 [node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("action_source_state", "turn_end_state")]
 unique_name_in_owner = true
@@ -123,180 +108,8 @@ script = ExtResource("15_1kice")
 encounter_setup_state = NodePath("../EncounterSetup")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
-[node name="Control" type="Control" parent="."]
-visibility_layer = 2
-z_index = 1
-layout_mode = 3
-anchors_preset = 0
-offset_left = -576.0
-offset_top = -324.0
-offset_right = -576.0
-offset_bottom = -324.0
-
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 647.0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Commands" type="Control" parent="Control/MarginContainer"]
-visible = false
-layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/Commands"]
-layout_mode = 0
-offset_left = 11.0
-offset_top = 6.0
-offset_right = 228.0
-offset_bottom = 158.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/Commands/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alignment = 1
-
-[node name="PlaybackButton" type="Button" parent="Control/MarginContainer/Commands/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "Playback"
-flat = true
-
-[node name="HSplitContainer" type="HSplitContainer" parent="Control/MarginContainer"]
-layout_mode = 2
-dragging_enabled = false
-dragger_visibility = 1
-
-[node name="Instructions" type="Control" parent="Control/MarginContainer/HSplitContainer"]
+[node name="UI" parent="." instance=ExtResource("16_1kice")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 2
-script = ExtResource("15_rysoc")
-
-[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HSplitContainer/Instructions"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 256.0
-grow_vertical = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Control/MarginContainer/HSplitContainer/Instructions/PanelContainer"]
-layout_mode = 2
-follow_focus = true
-draw_focus_border = true
-vertical_scroll_mode = 4
-script = ExtResource("17_5newe")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/HSplitContainer/Instructions/PanelContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/HSplitContainer/Instructions/PanelContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="GridContainer" type="GridContainer" parent="Control/MarginContainer/HSplitContainer/Instructions/PanelContainer/ScrollContainer/VBoxContainer/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 5.8
-mouse_default_cursor_shape = 8
-columns = 3
-
-[node name="Source" type="Label" parent="Control/MarginContainer/HSplitContainer/Instructions/PanelContainer/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-text = "John"
-horizontal_alignment = 1
-
-[node name="Label" type="Label" parent="Control/MarginContainer/HSplitContainer/Instructions/PanelContainer/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 1, 1, 0.407843)
-text = "uses"
-horizontal_alignment = 1
-
-[node name="Action" type="MenuButton" parent="Control/MarginContainer/HSplitContainer/Instructions/PanelContainer/ScrollContainer/VBoxContainer/MarginContainer/GridContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-mouse_default_cursor_shape = 2
-text = "Hate"
-
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/HSplitContainer"]
-layout_mode = 2
-
-[node name="BoxContainer" type="BoxContainer" parent="Control/MarginContainer/HSplitContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="RunResultsPanel" type="GridContainer" parent="Control/MarginContainer/HSplitContainer/MarginContainer/BoxContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/HSplitContainer/MarginContainer/BoxContainer/RunResultsPanel"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_bottom = 10
-
-[node name="Panel" type="Panel" parent="Control/MarginContainer/HSplitContainer/MarginContainer/BoxContainer/RunResultsPanel/MarginContainer"]
-custom_minimum_size = Vector2(0, 550)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_37s47")
-
-[node name="NextRunButton" type="Button" parent="Control/MarginContainer/HSplitContainer/MarginContainer/BoxContainer/RunResultsPanel"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 3
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_1kice")
-text = "Next run →"
-icon_alignment = 2
-expand_icon = true
-
-[node name="StatusContainer" type="CenterContainer" parent="Control/MarginContainer/HSplitContainer/MarginContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-mouse_filter = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HSplitContainer/MarginContainer/StatusContainer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/HSplitContainer/MarginContainer/StatusContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 25
-
-[node name="Status" type="Label" parent="Control/MarginContainer/HSplitContainer/MarginContainer/StatusContainer/PanelContainer/MarginContainer"]
-unique_name_in_owner = true
-visibility_layer = 2
-z_index = 2
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "An enemy is approaching!"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="SpecialActions" type="Node" parent="."]
 
@@ -315,21 +128,24 @@ unique_name_in_owner = true
 script = ExtResource("18_1kice")
 
 [node name="Jane" parent="Characters/Players" instance=ExtResource("13_kvuet")]
-position = Vector2(-216, 240)
+position = Vector2(488, 638)
 char_name = "Jane"
 
 [node name="John" parent="Characters/Players" instance=ExtResource("13_kvuet")]
-position = Vector2(75, 240)
+position = Vector2(779, 638)
 char_name = "John"
 
 [node name="Jill" parent="Characters/Players" instance=ExtResource("13_kvuet")]
-position = Vector2(362, 239)
+position = Vector2(1066, 637)
 char_name = "Jill"
 
 [node name="Enemies" type="Node" parent="Characters"]
 script = ExtResource("18_1kice")
 
+[node name="DummyEnemy" type="Node2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(779, 312)
+
 [connection signal="encounter_started" from="GameStateMachine/EncounterSetup" to="GameManager" method="_on_encounter_setup_encounter_started"]
 [connection signal="turn_active" from="GameStateMachine/CharacterTurn" to="GameManager" method="_on_character_turn_turn_active"]
-[connection signal="pressed" from="Control/MarginContainer/Commands/PanelContainer/VBoxContainer/PlaybackButton" to="GameManager" method="_on_playback_button_pressed"]
-[connection signal="pressed" from="Control/MarginContainer/HSplitContainer/MarginContainer/BoxContainer/RunResultsPanel/NextRunButton" to="GameStateMachine/RunResults" method="_on_next_run_button_pressed"]
