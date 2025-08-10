@@ -4,6 +4,7 @@ class_name Cure extends Action
 
 func _ready() -> void:
 	action_name = 'Cure'
+	tooltip = 'Restore 20 HP to all party members.'
 	default_target = DefaultActionTarget.SELF
 
 func execute(source: Character, target: Character):

@@ -22,6 +22,7 @@ func _add_button(action: Action):
 	var button := Button.new()
 	button.text = action.action_name
 	button.pressed.connect(_button_pressed.bind(action))
+	button.set_tooltip_text(action.tooltip)
 	container.add_child(button)
 
 

@@ -2,6 +2,7 @@ class_name Oblivion extends Action
 
 func _ready() -> void:
 	action_name = 'Oblivion'
+	tooltip = 'Consign the next nine actions to oblivion, replacing them with No Action.'
 
 func execute(_source: Character, _target: Character) -> void:
 	var instruction_index = Globals.game_manager.current_instruction_index

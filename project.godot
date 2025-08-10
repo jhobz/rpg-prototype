@@ -43,6 +43,10 @@ debug_reset_game_speed={
 ]
 }
 
+[gui]
+
+theme/custom="uid://dt28hksanooxk"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

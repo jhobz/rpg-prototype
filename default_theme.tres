@@ -1,6 +1,24 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dt28hksanooxk"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dt28hksanooxk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bp0wp"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.158472, 0.158472, 0.158472, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.625597, 0.625597, 0.625597, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="SystemFont" id="SystemFont_bp0wp"]
 
 [resource]
 default_font = SubResource("SystemFont_bp0wp")
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_bp0wp")

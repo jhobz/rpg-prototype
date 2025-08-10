@@ -6,7 +6,8 @@ enum DefaultActionTarget {
 	SELF,
 }
 
-var action_name: String
+var action_name: String = ""
+var tooltip: String = ""
 var default_target: DefaultActionTarget = DefaultActionTarget.ENEMY
 
 # Called when the node enters the scene tree for the first time.

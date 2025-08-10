@@ -5,6 +5,7 @@ class_name Spell extends Action
 
 func _ready() -> void:
 	action_name = 'Spell'
+	tooltip = 'Cast a spell at the enemy, dealing 10 magic damage.'
 
 func execute(source: Character, target: Character):
 	var damage = base_dmg * source.get_stat('magic') / max(1, target.get_stat('magic_defense'))
