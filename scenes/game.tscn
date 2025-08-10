@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b33y6mn6fv2mw"]
+[gd_scene load_steps=22 format=3 uid="uid://b33y6mn6fv2mw"]
 
 [ext_resource type="Script" uid="uid://c4t4igimji1m2" path="res://logic/state_machine.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://da38x83w6ofja" path="res://scenes/game_manager.gd" id="1_uwrxv"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://31qx03oyx10a" path="res://scenes/Character/Actions/dead.gd" id="17_ssvqc"]
 [ext_resource type="Script" uid="uid://d246jol7cepep" path="res://scenes/Character/character_group.gd" id="18_1kice"]
 [ext_resource type="Script" uid="uid://daadsqqlq05r5" path="res://scenes/Character/Actions/nothing.gd" id="18_264po"]
+[ext_resource type="PackedScene" uid="uid://bgk4jejtmso1f" path="res://scenes/Character/Characters/Enemies/demon_king.tscn" id="21_5newe"]
 
 [node name="Game" type="Node"]
 
@@ -146,6 +147,8 @@ script = ExtResource("18_1kice")
 unique_name_in_owner = true
 visible = false
 position = Vector2(779, 312)
+
+[node name="DemonKing" parent="DummyEnemy" instance=ExtResource("21_5newe")]
 
 [connection signal="encounter_started" from="GameStateMachine/EncounterSetup" to="GameManager" method="_on_encounter_setup_encounter_started"]
 [connection signal="turn_active" from="GameStateMachine/CharacterTurn" to="GameManager" method="_on_character_turn_turn_active"]
