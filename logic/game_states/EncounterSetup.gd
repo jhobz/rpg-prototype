@@ -6,36 +6,44 @@ extends State
 
 signal encounter_started()
 
-var current_encounter: int = 0
+var _current_encounter := 0
+var _has_advanced_dialogue := false
 
 @onready var ui_manager: UIManager = %UI
 
 func init():
 	ui_manager.set_instructions_input_enabled(false)
-	current_encounter = 0
+	_current_encounter = 0
 
 func enter():
-	if current_encounter == 0 or current_encounter < run.encounters.size():
+	Globals.dialogue_completed.connect(_on_dialogue_completed)
+
+	if _current_encounter == 0 or _current_encounter < run.encounters.size():
 		encounter_started.emit()
 
-	if current_encounter == 0:
-		ui_manager.show_message("Our heroes' journey begins!")
+	if _current_encounter == 0:
+		_has_advanced_dialogue = false
+		ui_manager.queue_message("Our heroes' journey begins!", 2)
 		for character in CharacterManager.player_characters:
 			character.refill_hp()
 			character.visible = true
-	elif current_encounter < run.encounters.size():
-		ui_manager.show_message("More enemies have been spotted!")
+	elif _current_encounter < run.encounters.size():
+		_has_advanced_dialogue = false
+		ui_manager.queue_message("More enemies have been spotted!", 2)
 
 func exit():
-	ui_manager.hide_message()
-	
+	Globals.dialogue_completed.disconnect(_on_dialogue_completed)
+
 func process(_delta: float) -> State:
-	if current_encounter >= run.encounters.size():
+	if _current_encounter >= run.encounters.size():
 		return run_complete_state
-		
-	if time_active < 2:
+
+	if !_has_advanced_dialogue:
 		return null
-		
-	battle_setup_state.init(run.encounters[current_encounter])
-	current_encounter += 1
+
+	battle_setup_state.init(run.encounters[_current_encounter])
+	_current_encounter += 1
 	return battle_setup_state
+
+func _on_dialogue_completed():
+	_has_advanced_dialogue = true

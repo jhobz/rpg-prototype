@@ -19,6 +19,8 @@ corner_radius_bottom_left = 5
 shadow_size = 2
 shadow_offset = Vector2(2, 2)
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_yev5y"]
+
 [node name="UI" type="MarginContainer"]
 visibility_layer = 2
 z_index = 1
@@ -183,7 +185,7 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 0
+size_flags_vertical = 4
 mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="HSplitContainer/MarginContainer/StatusContainer"]
@@ -191,6 +193,8 @@ layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/MarginContainer/StatusContainer/PanelContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 50
@@ -206,5 +210,13 @@ text = "An enemy is approaching!"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="AdvanceDialogueIcon" type="TextureRect" parent="HSplitContainer/MarginContainer/StatusContainer/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = SubResource("PlaceholderTexture2D_yev5y")
 
 [connection signal="pressed" from="HSplitContainer/MarginContainer/RunResultsPanel/NextRunButton" to="." method="_on_next_run_button_pressed"]

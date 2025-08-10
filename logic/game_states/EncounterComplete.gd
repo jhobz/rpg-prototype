@@ -2,15 +2,23 @@ extends State
 
 @export var encounter_setup_state: State = null
 
+var _has_advanced_dialogue := false
+
 @onready var ui_manager: UIManager = %UI
 
 func enter():
-	ui_manager.show_message("You've defeated the enemies!")
+	Globals.dialogue_completed.connect(_on_dialogue_completed)
+	_has_advanced_dialogue = false
+	ui_manager.queue_message("You've defeated the enemies!", 2)
 	
 func exit():
-	ui_manager.hide_message()
+	Globals.dialogue_completed.disconnect(_on_dialogue_completed)
 	
 func process(_delta: float) -> State:
-	if time_active >= 2:
-		return encounter_setup_state
-	return null
+	if !_has_advanced_dialogue:
+		return null
+
+	return encounter_setup_state
+
+func _on_dialogue_completed():
+	_has_advanced_dialogue = true
