@@ -4,6 +4,13 @@
 
 Almost everything: [JHobz](https://twitch.tv/jhobz296) & [Vulajin](https://twitch.tv/vulajin)
 
+### Sound
+
+All sound effects sourced from:
+
+- [Minifantasy Dungeon SFX Pack](https://leohpaz.itch.io/minifantasy-dungeon-sfx-pack) by [Leohpaz](https://leohpaz.itch.io)
+- [Retro RPG Battle SFX Pack](https://leohpaz.itch.io/90-rpg-battle-sfx) (demo sounds only) by [Leohpaz](https://leohpaz.itch.io)
+
 ### Art
 
 Knight and Slimes
