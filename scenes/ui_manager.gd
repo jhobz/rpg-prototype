@@ -10,6 +10,11 @@ class_name UIManager
 var _messages: Array = []
 var _is_showing_message: bool = false
 
+func _ready() -> void:
+	set_instructions_input_enabled(false)
+	toggle_instruction_list(false)
+	hide_run_results()
+
 # Instructions
 
 func add_instruction(instruction: Instruction) -> void:
