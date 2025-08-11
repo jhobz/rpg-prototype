@@ -1,19 +1,49 @@
-[gd_scene load_steps=11 format=3 uid="uid://ckjw2y4erudd7"]
+[gd_scene load_steps=25 format=3 uid="uid://ckjw2y4erudd7"]
 
 [ext_resource type="Script" uid="uid://lkdoxweingm3" path="res://scenes/Character/Characters/PlayerCharacters/player_character.gd" id="1_hcu37"]
+[ext_resource type="AudioStream" uid="uid://vgo1bfn1tcys" path="res://assets/audio/13_human_jump_land_1.wav" id="2_hxc7j"]
 [ext_resource type="Script" uid="uid://c0xybc034keh1" path="res://scenes/Components/stats_component.gd" id="2_p2drc"]
 [ext_resource type="Script" uid="uid://c57m8elb52dp7" path="res://scenes/Components/hp_component.gd" id="3_l0wqb"]
+[ext_resource type="AudioStream" uid="uid://bbt8vf1m1orin" path="res://assets/audio/13_human_jump_land_2.wav" id="3_vmiim"]
+[ext_resource type="AudioStream" uid="uid://qeqs4gdi1sq1" path="res://assets/audio/23_orc_jump_land.wav" id="4_5sgn3"]
 [ext_resource type="SpriteFrames" uid="uid://b3u8br252ur1v" path="res://resources/animations/knight_sprite_frames.tres" id="4_55yqc"]
 [ext_resource type="Script" uid="uid://c0fhxyw6tkwyo" path="res://scenes/Components/gui_component.gd" id="5_4o581"]
 [ext_resource type="PackedScene" uid="uid://cwyohqsv2tht6" path="res://scenes/Components/action_ui_component.tscn" id="6_p2drc"]
 [ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="7_4o581"]
 [ext_resource type="Script" uid="uid://c0jywajlfoi5w" path="res://scenes/Character/Actions/cure.gd" id="8_4o581"]
+[ext_resource type="AudioStream" uid="uid://dr4pnd2r2bd1n" path="res://assets/audio/07_human_atk_sword_1.wav" id="8_uj6h7"]
 [ext_resource type="Script" uid="uid://ddakrcdkm2aku" path="res://scenes/Character/Actions/spell.gd" id="8_ywkx2"]
 [ext_resource type="Script" uid="uid://cyrlkjq7sj35o" path="res://scenes/Character/Actions/roll.gd" id="9_6a2p1"]
+[ext_resource type="AudioStream" uid="uid://cqb52pxx4e5of" path="res://assets/audio/07_human_atk_sword_2.wav" id="9_y058y"]
+[ext_resource type="AudioStream" uid="uid://sqv7i737pyt5" path="res://assets/audio/07_human_atk_sword_3.wav" id="10_ub04l"]
+[ext_resource type="AudioStream" uid="uid://dnoba8nsa4hy2" path="res://assets/audio/10_human_special_atk_2.wav" id="12_hxc7j"]
+[ext_resource type="AudioStream" uid="uid://cw3kquonsb2hw" path="res://assets/audio/08_human_charge_2.wav" id="14_vmiim"]
+[ext_resource type="AudioStream" uid="uid://dfosxqjyp20mq" path="res://assets/audio/12_human_jump_1.wav" id="16_5sgn3"]
+[ext_resource type="AudioStream" uid="uid://cuyaua3sfoibt" path="res://assets/audio/12_human_jump_2.wav" id="17_5ap22"]
+[ext_resource type="AudioStream" uid="uid://bj08p5oagkij4" path="res://assets/audio/12_human_jump_3.wav" id="18_h3lcv"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5ap22"]
+streams_count = 3
+stream_0/stream = ExtResource("2_hxc7j")
+stream_1/stream = ExtResource("3_vmiim")
+stream_2/stream = ExtResource("4_5sgn3")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dqqq8"]
+streams_count = 3
+stream_0/stream = ExtResource("8_uj6h7")
+stream_1/stream = ExtResource("9_y058y")
+stream_2/stream = ExtResource("10_ub04l")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xalfm"]
+streams_count = 3
+stream_0/stream = ExtResource("16_5sgn3")
+stream_1/stream = ExtResource("17_5ap22")
+stream_2/stream = ExtResource("18_h3lcv")
 
 [node name="Knight" type="Node2D"]
 script = ExtResource("1_hcu37")
 char_name = "Knight"
+hit_sfx = SubResource("AudioStreamRandomizer_5ap22")
 metadata/_custom_type_script = "uid://lkdoxweingm3"
 
 [node name="StatsComponent" type="Node" parent="."]
@@ -36,6 +66,10 @@ sprite_frames = ExtResource("4_55yqc")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.496907
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+bus = &"SFX"
 
 [node name="GUIComponent" type="Control" parent="."]
 layout_mode = 3
@@ -90,18 +124,22 @@ offset_bottom = -101.0
 [node name="Attack" type="Node2D" parent="Actions"]
 script = ExtResource("7_4o581")
 base_dmg = 10
+sfx = SubResource("AudioStreamRandomizer_dqqq8")
 metadata/_custom_type_script = "uid://dolcf35kui0ao"
 
 [node name="Spell" type="Node2D" parent="Actions"]
 script = ExtResource("8_ywkx2")
 base_dmg = 10
+sfx = ExtResource("12_hxc7j")
 metadata/_custom_type_script = "uid://ddakrcdkm2aku"
 
 [node name="Cure" type="Node2D" parent="Actions"]
 script = ExtResource("8_4o581")
 base_heal = 2
+sfx = ExtResource("14_vmiim")
 metadata/_custom_type_script = "uid://c0jywajlfoi5w"
 
 [node name="Roll" type="Node2D" parent="Actions"]
 script = ExtResource("9_6a2p1")
+sfx = SubResource("AudioStreamRandomizer_xalfm")
 metadata/_custom_type_script = "uid://cyrlkjq7sj35o"

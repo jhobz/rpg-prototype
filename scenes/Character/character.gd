@@ -2,8 +2,11 @@ class_name Character
 extends Node2D
 
 @export var char_name := "Character"
+@export var hit_sfx: AudioStream
+@export var death_sfx: AudioStream
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var gui_component: GUIComponent = $GUIComponent
 @onready var hp_component: HPComponent = $HPComponent
 @onready var stats_component: StatsComponent = $StatsComponent
@@ -18,10 +21,11 @@ var _is_queued_for_death := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	assert(animated_sprite)
+	assert(audio_player)
+	assert(gui_component)
 	assert(hp_component)
 	assert(stats_component)
-	assert(animated_sprite)
-	assert(gui_component)
 
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 	hp_component.hp_changed.connect(_on_hp_changed)
@@ -65,6 +69,22 @@ func die():
 		_is_queued_for_death = true
 	else:
 		animated_sprite.play('death')
+		play_death_sfx()
+
+func play_hit_sfx():
+	if hit_sfx:
+		audio_player.set_stream(hit_sfx)
+		audio_player.play()
+
+func play_action_sfx(action: Action):
+	if action.sfx:
+		audio_player.set_stream(action.sfx)
+		audio_player.play()
+
+func play_death_sfx():
+	if death_sfx:
+		audio_player.set_stream(death_sfx)
+		audio_player.play()
 
 #endregion
 
@@ -77,6 +97,7 @@ func _on_animation_finished():
 	# then immediately forces a hit animation
 	if is_dead() and animated_sprite.animation == 'hit':
 		animated_sprite.play('death')
+		play_death_sfx()
 		return
 	if !_is_queued_for_death and animated_sprite.animation != 'death':
 		return

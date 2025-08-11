@@ -6,6 +6,8 @@ enum DefaultActionTarget {
 	SELF,
 }
 
+@export var sfx: AudioStream
+
 var action_name: String = ""
 var tooltip: String = ""
 var default_target: DefaultActionTarget = DefaultActionTarget.ENEMY

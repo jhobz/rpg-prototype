@@ -28,11 +28,12 @@ func enter() -> void:
 		game_manager.execute_instruction(current_instruction)
 
 	# TODO: change this to a match case based on ActionType enum of the current instruction (e.g. cure vs. hit)
-	if current_instruction.action.action_name == 'Roll' or current_instruction.action.action_name == 'No Action':
+	if current_instruction.action.action_name == 'Roll' or current_instruction.action.action_name == 'No Action' or current_instruction.action.action_name == 'Cure':
 		cleanup()
 		return
 
 	animated_sprite.play('hit')
+	target.play_hit_sfx()
 
 func exit() -> void:
 	super.exit()

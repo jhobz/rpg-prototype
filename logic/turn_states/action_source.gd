@@ -32,6 +32,7 @@ func enter() -> void:
 	animated_sprite = source.animated_sprite
 	animated_sprite.play(animation)
 	animated_sprite.animation_finished.connect(_on_animated_sprite_animation_finished)
+	source.play_action_sfx(current_instruction.action)
 
 func exit() -> void:
 	super.exit()
