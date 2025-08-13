@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dmibkg1qgdo14"
+path="res://.godot/imported/15. Volcanic Crater.ogg-e3d5085dfe3b6a3d9cb396e9e239535c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/15. Volcanic Crater.ogg"
+dest_files=["res://.godot/imported/15. Volcanic Crater.ogg-e3d5085dfe3b6a3d9cb396e9e239535c.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

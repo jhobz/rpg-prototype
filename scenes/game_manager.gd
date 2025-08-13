@@ -8,6 +8,7 @@ class_name GameManager extends Node
 @onready var state_machine: StateMachine = %GameStateMachine
 @onready var turn_state_machine: StateMachine = %GameStateMachine/CharacterTurn/TurnStateMachine
 @onready var ui_manager: UIManager = %UI
+@onready var bgm_player: AudioStreamPlayer = %BGMPlayer
 
 var instructions: Array[Instruction] = []
 var current_instruction_index := 0

@@ -116,6 +116,10 @@ script = ExtResource("16_37s47")
 battle_idle_state = NodePath("../BattleIdle")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"Music"
+
 [node name="UI" parent="." instance=ExtResource("16_1kice")]
 unique_name_in_owner = true
 

@@ -11,6 +11,9 @@ var save_state: Dictionary = {
 	"current_battle_index": 0,
 }
 
+var default_music: AudioStream = preload("res://assets/audio/11. Dangerous Cave.ogg")
+var boss_music: AudioStream = preload("res://assets/audio/15. Volcanic Crater.ogg")
+
 # TODO: Signal stuff would go in a global EventBus
 signal next_run_requested()
 signal dialogue_completed()
