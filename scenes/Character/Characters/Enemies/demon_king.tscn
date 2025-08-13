@@ -57,10 +57,8 @@ metadata/_custom_type_script = "uid://c57m8elb52dp7"
 texture_filter = 1
 scale = Vector2(4, 4)
 sprite_frames = ExtResource("4_yhgpr")
-animation = &"hit"
+animation = &"death"
 autoplay = "idle"
-frame = 4
-frame_progress = 1.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -20.0

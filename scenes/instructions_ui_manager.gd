@@ -5,6 +5,7 @@ class_name InstructionsUIManager extends Control
 
 var active_instruction: int = -1
 var last_instruction: int = -1
+var tween: Tween
 
 func _process(_delta: float) -> void:
 	if active_instruction != last_instruction:
@@ -67,10 +68,15 @@ func update_active_instruction():
 	if active_instruction >= 0:
 		var i = active_instruction * 4 + 4
 		ui_items[i].get_node("Texture").visible = true
+
 		# update scrollbar position
 		var scrollbar = scroll_container.get_v_scroll_bar()
-		var ratio = float(i - 4) / (ui_items.size() - 4) / 4
-		var tween = get_tree().create_tween()
+		# scrollbars are stupid
+		const MAX_VISIBLE_INSTRUCTIONS = 20
+		var ratio = clamp(0.0, float(i - 4) / float(ui_items.size() - 4 + (MAX_VISIBLE_INSTRUCTIONS * 4)), 1.0)
+		if tween:
+			tween.kill()
+		tween = get_tree().create_tween()
 		tween.tween_property(scrollbar, "ratio", ratio, 0.15).set_trans(Tween.TRANS_QUAD)
 
 func set_active_instruction(index: int):
