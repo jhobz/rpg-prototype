@@ -146,7 +146,6 @@ size_flags_horizontal = 3
 
 [node name="RunResultsPanel" type="VBoxContainer" parent="HSplitContainer/MarginContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -165,10 +164,41 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/MarginContainer/RunResultsPanel/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="ResultsTitle" type="RichTextLabel" parent="HSplitContainer/MarginContainer/RunResultsPanel/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/text_highlight_v_padding = -19
+theme_override_constants/text_highlight_h_padding = 4
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/normal_font_size = 33
+bbcode_enabled = true
+text = "YOU SUCCUMBED TO THE [fgcolor=black]CURSE[/fgcolor] [fgcolor=black]SPELL[/fgcolor] [fgcolor=black]TIME LOOP[/fgcolor]... [wave][outline_size=16][color=#aa22aa]CURSE![/color][/outline_size][/wave]"
+horizontal_alignment = 1
+
+[node name="EnemiesTitle" type="RichTextLabel" parent="HSplitContainer/MarginContainer/RunResultsPanel/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "Your run"
+
+[node name="ResultsContainer" type="HFlowContainer" parent="HSplitContainer/MarginContainer/RunResultsPanel/Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="NextRunButton" type="Button" parent="HSplitContainer/MarginContainer/RunResultsPanel"]
 layout_mode = 2

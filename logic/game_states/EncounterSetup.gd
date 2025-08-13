@@ -14,8 +14,14 @@ var _has_advanced_dialogue := false
 func init():
 	ui_manager.set_instructions_input_enabled(false)
 	_current_encounter = 0
+	Globals.save_state.current_battle_index = 0
 
 func enter():
+	if !Globals.save_state.current_run:
+		Globals.save_state.current_run = run
+	else:
+		assert(Globals.save_state.current_run == run)
+
 	Globals.dialogue_completed.connect(_on_dialogue_completed)
 
 	if _current_encounter == 0 or _current_encounter < run.encounters.size():

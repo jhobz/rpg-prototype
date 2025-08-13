@@ -1,0 +1,8 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://ckrp7uvjwft3d"]
+
+[ext_resource type="Texture2D" uid="uid://c5lb2mleyo0ai" path="res://assets/sprites/demon_king_slash_oversize.png" id="1_ijqwt"]
+
+[resource]
+atlas = ExtResource("1_ijqwt")
+region = Rect2(960, 384, 192, 192)
+margin = Rect2(-64, -64, -110, -124)

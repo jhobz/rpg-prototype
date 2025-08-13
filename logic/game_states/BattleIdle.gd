@@ -29,6 +29,7 @@ func process(_delta: float) -> State:
 	if not players.any_alive():
 		return run_failed_state
 	elif not enemies.any_alive():
+		Globals.save_state.current_battle_index += 1
 		return battle_setup_state
 		
 	# loop the character list (wrapping around) until we find the next not-dead character

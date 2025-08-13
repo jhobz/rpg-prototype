@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://bxki5onopiujt"]
+
+[ext_resource type="Texture2D" uid="uid://b3y4efau8hhvf" path="res://assets/sprites/skeleton_hurt.png" id="1_7ir4l"]
+
+[resource]
+atlas = ExtResource("1_7ir4l")
+region = Rect2(320, 0, 64, 64)

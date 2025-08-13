@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnsr5bnlmec77"]
+
+[ext_resource type="StyleBox" uid="uid://ccsf8dehvlys6" path="res://resources/results_encounter_group_red_box.tres" id="1_77y8r"]
+
+[node name="ResultsEncounterGroup" type="PanelContainer"]
+theme_override_styles/panel = ExtResource("1_77y8r")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, 192)
+layout_mode = 2
+
+[node name="Placeholder" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+visible = false
+texture_filter = 1
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+expand_mode = 3

@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8t3u20c4a6l3"]
+[gd_scene load_steps=12 format=3 uid="uid://b8t3u20c4a6l3"]
 
 [ext_resource type="Script" uid="uid://4v303nifdpdg" path="res://scenes/Character/Characters/Enemies/non_player_character.gd" id="1_b8ylj"]
 [ext_resource type="AudioStream" uid="uid://c2skt4kivi4jy" path="res://assets/audio/77_flesh_02.wav" id="2_bo1oq"]
+[ext_resource type="Texture2D" uid="uid://dip7xfsjif51a" path="res://resources/textures/slime_atlas_texture_dead.tres" id="2_ck7se"]
 [ext_resource type="Script" uid="uid://c0xybc034keh1" path="res://scenes/Components/stats_component.gd" id="2_iiei6"]
 [ext_resource type="Script" uid="uid://c57m8elb52dp7" path="res://scenes/Components/hp_component.gd" id="3_6qpe4"]
+[ext_resource type="Texture2D" uid="uid://bnpf0pv8f3vtp" path="res://resources/textures/slime_atlas_texture_alive.tres" id="3_6ww36"]
 [ext_resource type="SpriteFrames" uid="uid://bunoqs26lcfvl" path="res://resources/animations/slime_sprite_frames.tres" id="4_b8ylj"]
 [ext_resource type="Script" uid="uid://c0fhxyw6tkwyo" path="res://scenes/Components/gui_component.gd" id="5_ck7se"]
 [ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="6_iiei6"]
@@ -12,6 +14,8 @@
 
 [node name="Slime" type="Node2D"]
 script = ExtResource("1_b8ylj")
+end_screen_image_dead = ExtResource("2_ck7se")
+end_screen_image_alive = ExtResource("3_6ww36")
 char_name = "Slime"
 hit_sfx = ExtResource("2_bo1oq")
 metadata/_custom_type_script = "uid://4v303nifdpdg"
@@ -30,9 +34,9 @@ metadata/_custom_type_script = "uid://c57m8elb52dp7"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(4.5, 4.5)
+scale = Vector2(4, 4)
 sprite_frames = ExtResource("4_b8ylj")
-animation = &"idle"
+animation = &"hit"
 autoplay = "idle"
 frame_progress = 0.188669
 
