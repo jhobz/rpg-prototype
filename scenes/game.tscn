@@ -156,6 +156,8 @@ visible = false
 position = Vector2(779, 158)
 
 [node name="DemonKing" parent="DummyEnemy" instance=ExtResource("21_5newe")]
+end_screen_image_dead = null
+end_screen_image_alive = null
 
 [connection signal="encounter_started" from="GameStateMachine/EncounterSetup" to="GameManager" method="_on_encounter_setup_encounter_started"]
 [connection signal="turn_active" from="GameStateMachine/CharacterTurn" to="GameManager" method="_on_character_turn_turn_active"]
