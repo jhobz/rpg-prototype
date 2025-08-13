@@ -21,6 +21,9 @@ func _ready() -> void:
 		func():
 			state_machine.init_state_machine()
 	)
+	
+	bgm_player.set_stream(Globals.default_music)
+	bgm_player.play()
 
 	for character in player_characters:
 		if character is PlayerCharacter:
@@ -89,7 +92,6 @@ func replace_instruction_action_at_index(index: int, action: Action):
 	instruction.target = target
 	ui_manager.replace_instruction_at_index(index, instruction)
 
-
 #region Listeners
 
 func _on_character_turn_turn_active(character: Character):
@@ -152,7 +154,27 @@ func _on_action_ui_component_action_selected(action: Action, source: Character) 
 		log_instruction(instruction)
 	playback_current_instruction()
 
-func _on_encounter_setup_encounter_started() -> void:
+func _on_encounter_setup_encounter_started(encounter: Encounter) -> void:
 	current_instruction_index = 0
+	
+	var next_music: AudioStream = null
+	
+	# this is totally the way you should check if it's the boss encounter lol
+	if encounter.battles.size() == 1:
+		next_music = Globals.boss_music
+	elif bgm_player.stream == Globals.boss_music:
+		next_music = Globals.default_music
+		
+	if next_music:
+		var tween := bgm_player.create_tween()
+		tween.set_ease(Tween.EASE_IN)
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.finished.connect(_on_bgm_tween_finished.bind(next_music))
+		tween.tween_property(bgm_player, "volume_db", -80.0, 1.0)
+
+func _on_bgm_tween_finished(new_bgm: AudioStream):
+	bgm_player.set_stream(new_bgm)
+	bgm_player.set_volume_db(0.0)
+	bgm_player.play()
 
 #endregion

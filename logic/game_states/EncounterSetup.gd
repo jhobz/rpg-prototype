@@ -4,7 +4,7 @@ extends State
 @export var battle_setup_state: State = null
 @export var run_complete_state: State = null
 
-signal encounter_started()
+signal encounter_started(encounter: Encounter)
 
 var _current_encounter := 0
 var _has_advanced_dialogue := false
@@ -25,7 +25,7 @@ func enter():
 	Globals.dialogue_completed.connect(_on_dialogue_completed)
 
 	if _current_encounter == 0 or _current_encounter < run.encounters.size():
-		encounter_started.emit()
+		encounter_started.emit(run.encounters[_current_encounter])
 
 	if _current_encounter == 0:
 		_has_advanced_dialogue = false
