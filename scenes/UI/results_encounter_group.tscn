@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bnsr5bnlmec77"]
 
 [ext_resource type="StyleBox" uid="uid://ccsf8dehvlys6" path="res://resources/results_encounter_group_red_box.tres" id="1_77y8r"]
-[ext_resource type="Material" uid="uid://bftnfm26n38ym" path="res://resources/results_encounter_group_shader_material.tres" id="2_2j62w"]
+[ext_resource type="Material" uid="uid://bepdve4lfa8of" path="res://resources/results_encounter_group_shader_material.tres" id="2_2j62w"]
 [ext_resource type="Texture2D" uid="uid://bnpf0pv8f3vtp" path="res://resources/textures/slime_atlas_texture_alive.tres" id="2_sb7df"]
 
 [node name="ResultsEncounterGroup" type="PanelContainer"]
