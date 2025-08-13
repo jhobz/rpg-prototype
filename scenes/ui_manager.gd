@@ -85,8 +85,6 @@ func hide_run_results() -> void:
 	run_results_panel.hide()
 
 func populate_run_results(run: Run, last_battle_index: int) -> void:
-	print_debug('run', run)
-	print_debug('last_battle_index', last_battle_index)
 	_clear_run_results()
 
 	var i := 0

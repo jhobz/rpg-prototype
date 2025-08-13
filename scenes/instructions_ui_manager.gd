@@ -1,6 +1,7 @@
 class_name InstructionsUIManager extends Control
 
 @onready var grid: GridContainer = $PanelContainer/ScrollContainer/VBoxContainer/MarginContainer/GridContainer
+@onready var scroll_container = $PanelContainer/ScrollContainer
 
 var active_instruction: int = -1
 var last_instruction: int = -1
@@ -66,7 +67,12 @@ func update_active_instruction():
 	if active_instruction >= 0:
 		var i = active_instruction * 4 + 4
 		ui_items[i].get_node("Texture").visible = true
-	
+		# update scrollbar position
+		var scrollbar = scroll_container.get_v_scroll_bar()
+		var ratio = float(i - 4) / (ui_items.size() - 4) / 4
+		var tween = get_tree().create_tween()
+		tween.tween_property(scrollbar, "ratio", ratio, 0.15).set_trans(Tween.TRANS_QUAD)
+
 func set_active_instruction(index: int):
 	active_instruction = index
 

@@ -102,7 +102,6 @@ func _on_animation_finished():
 	if !_is_queued_for_death and animated_sprite.animation != 'death':
 		return
 
-	print(char_name + ' died')
 	visible = false
 
 func _on_hp_changed(amount: int, current_hp: int):

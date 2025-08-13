@@ -9,7 +9,6 @@ signal turn_active(character: Character)
 signal turn_complete(character: Character)
 
 func enter():
-	print("It's " + character.char_name + "'s turn!")
 	turn_active.emit(character)
 	
 func exit():
