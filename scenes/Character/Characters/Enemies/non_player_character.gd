@@ -1,5 +1,8 @@
 class_name NonPlayerCharacter extends Character
 
+@export var end_screen_image_dead: AtlasTexture
+@export var end_screen_image_alive: AtlasTexture
+
 @onready var ai: AIComponent = $BattleAI
 
 func _init() -> void:

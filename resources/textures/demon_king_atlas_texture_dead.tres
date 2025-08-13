@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://frqvmkumexpv"]
+
+[ext_resource type="Texture2D" uid="uid://dmfn0bb7rvb2m" path="res://assets/sprites/demon_king_hurt.png" id="1_xki71"]
+
+[resource]
+atlas = ExtResource("1_xki71")
+region = Rect2(320, 0, 64, 64)

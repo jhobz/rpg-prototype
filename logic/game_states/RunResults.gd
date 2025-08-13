@@ -2,22 +2,32 @@ extends State
 
 @export var encounter_setup_state: State = null
 
+var _was_shown_dialogue := false
 var _has_advanced_dialogue := false
 var _ready_for_next_run := false
 
 @onready var ui_manager: UIManager = %UI
 
 func enter():
-	Globals.dialogue_completed.connect(on_dialogue_completed)
 	Globals.next_run_requested.connect(_on_next_run_requested)
-	_has_advanced_dialogue = false
-	ui_manager.queue_message("The party perished! But the adventure does not end there...\nUse the left panel to modify your moves and try again!")
+	_was_shown_dialogue = false
+
+	if !Globals.save_state.has_seen_editing_tutorial:
+		Globals.dialogue_completed.connect(on_dialogue_completed)
+		_was_shown_dialogue = true
+		_has_advanced_dialogue = false
+		ui_manager.queue_message("The party perished! But the adventure does not end there...\nUse the left panel to modify your moves and try again!")
+	else:
+		ui_manager.populate_run_results(Globals.save_state.current_run, Globals.save_state.current_battle_index)
+
 	ui_manager.set_instructions_input_enabled(true)
 	ui_manager.show_run_results()
 	_ready_for_next_run = false
 
 func exit():
-	Globals.dialogue_completed.disconnect(on_dialogue_completed)
+	if _was_shown_dialogue:
+		Globals.dialogue_completed.disconnect(on_dialogue_completed)
+
 	Globals.next_run_requested.disconnect(_on_next_run_requested)
 	ui_manager.hide_run_results()
 
@@ -30,6 +40,8 @@ func process(_delta: float) -> State:
 
 func on_dialogue_completed():
 	_has_advanced_dialogue = true
+	Globals.save_state.has_seen_editing_tutorial = true
+	ui_manager.populate_run_results(Globals.save_state.current_run, Globals.save_state.current_battle_index)
 
 func _on_next_run_requested() -> void:
 	_ready_for_next_run = true

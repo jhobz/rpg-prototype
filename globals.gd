@@ -1,12 +1,14 @@
 extends Node
 
 var game_manager: GameManager
-
 var dead_action: Action
 var nothing_action: Action
 var save_state: Dictionary = {
 	"has_cleared_first_encounter": false,
-	"has_seen_instruction_tutorial": false
+	"has_seen_instruction_tutorial": false,
+	"has_seen_editing_tutorial": false,
+	"current_run": null,
+	"current_battle_index": 0,
 }
 
 # TODO: Signal stuff would go in a global EventBus

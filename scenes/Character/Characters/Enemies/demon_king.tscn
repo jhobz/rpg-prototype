@@ -1,20 +1,18 @@
-[gd_scene load_steps=48 format=3 uid="uid://bgk4jejtmso1f"]
+[gd_scene load_steps=22 format=3 uid="uid://bgk4jejtmso1f"]
 
 [ext_resource type="Script" uid="uid://4v303nifdpdg" path="res://scenes/Character/Characters/Enemies/non_player_character.gd" id="1_87pbj"]
 [ext_resource type="Script" uid="uid://c0xybc034keh1" path="res://scenes/Components/stats_component.gd" id="2_6lrbv"]
 [ext_resource type="AudioStream" uid="uid://vgo1bfn1tcys" path="res://assets/audio/13_human_jump_land_1.wav" id="2_e5syi"]
+[ext_resource type="Texture2D" uid="uid://frqvmkumexpv" path="res://resources/textures/demon_king_atlas_texture_dead.tres" id="2_pii60"]
+[ext_resource type="Texture2D" uid="uid://ckrp7uvjwft3d" path="res://resources/textures/demon_king_atlas_texture_alive.tres" id="3_diva6"]
 [ext_resource type="AudioStream" uid="uid://bbt8vf1m1orin" path="res://assets/audio/13_human_jump_land_2.wav" id="3_thopt"]
 [ext_resource type="Script" uid="uid://c57m8elb52dp7" path="res://scenes/Components/hp_component.gd" id="3_uvmin"]
-[ext_resource type="Texture2D" uid="uid://c5lb2mleyo0ai" path="res://assets/sprites/demon_king_slash_oversize.png" id="4_diva6"]
 [ext_resource type="AudioStream" uid="uid://qeqs4gdi1sq1" path="res://assets/audio/23_orc_jump_land.wav" id="4_kumdl"]
+[ext_resource type="SpriteFrames" uid="uid://dw2sih67m0bw6" path="res://resources/animations/demon_king_sprite_frames.tres" id="4_yhgpr"]
 [ext_resource type="Script" uid="uid://c0fhxyw6tkwyo" path="res://scenes/Components/gui_component.gd" id="5_irw1t"]
-[ext_resource type="Texture2D" uid="uid://b7y5ulkfmuvyr" path="res://assets/sprites/slime_purple.png" id="5_ys8x3"]
 [ext_resource type="Script" uid="uid://dolcf35kui0ao" path="res://scenes/Character/Actions/attack.gd" id="6_pii60"]
 [ext_resource type="Script" uid="uid://df36e3iijkjt5" path="res://scenes/Components/boss_attack_ai_component.gd" id="6_uvmin"]
-[ext_resource type="Texture2D" uid="uid://bh63ixbgw1x7g" path="res://assets/sprites/demon_king_idle.png" id="6_uyj26"]
-[ext_resource type="Texture2D" uid="uid://dmfn0bb7rvb2m" path="res://assets/sprites/demon_king_hurt.png" id="6_ys8x3"]
 [ext_resource type="Script" uid="uid://5ff8nljtxq1" path="res://scenes/Character/Actions/cleave.gd" id="7_6lrbv"]
-[ext_resource type="Texture2D" uid="uid://dc7bufts8305d" path="res://assets/sprites/knight.png" id="7_dh5wq"]
 [ext_resource type="Script" uid="uid://omdrnwv21n1n" path="res://scenes/Character/Actions/oblivion.gd" id="9_yhgpr"]
 [ext_resource type="AudioStream" uid="uid://b4c6tw6fgw6k" path="res://assets/audio/17_orc_atk_sword_1.wav" id="15_owpt8"]
 [ext_resource type="AudioStream" uid="uid://dn7qot0s611md" path="res://assets/audio/17_orc_atk_sword_2.wav" id="16_vrgn2"]
@@ -28,201 +26,6 @@ stream_0/stream = ExtResource("2_e5syi")
 stream_1/stream = ExtResource("3_thopt")
 stream_2/stream = ExtResource("4_kumdl")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e5syi"]
-atlas = ExtResource("4_diva6")
-region = Rect2(0, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_thopt"]
-atlas = ExtResource("4_diva6")
-region = Rect2(192, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kumdl"]
-atlas = ExtResource("4_diva6")
-region = Rect2(384, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2nv5v"]
-atlas = ExtResource("4_diva6")
-region = Rect2(576, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_owpt8"]
-atlas = ExtResource("4_diva6")
-region = Rect2(768, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vrgn2"]
-atlas = ExtResource("4_diva6")
-region = Rect2(960, 384, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3dwxn"]
-atlas = ExtResource("5_ys8x3")
-region = Rect2(24, 48, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eijfp"]
-atlas = ExtResource("5_ys8x3")
-region = Rect2(48, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p8frr"]
-atlas = ExtResource("5_ys8x3")
-region = Rect2(24, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3urrt"]
-atlas = ExtResource("5_ys8x3")
-region = Rect2(0, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uyj26"]
-atlas = ExtResource("6_ys8x3")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dh5wq"]
-atlas = ExtResource("6_ys8x3")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ocu42"]
-atlas = ExtResource("6_ys8x3")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gb236"]
-atlas = ExtResource("6_uyj26")
-region = Rect2(0, 128, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ibotm"]
-atlas = ExtResource("6_uyj26")
-region = Rect2(64, 128, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1kice"]
-atlas = ExtResource("7_dh5wq")
-region = Rect2(0, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5newe"]
-atlas = ExtResource("7_dh5wq")
-region = Rect2(32, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_37s47"]
-atlas = ExtResource("7_dh5wq")
-region = Rect2(64, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bt5mj"]
-atlas = ExtResource("7_dh5wq")
-region = Rect2(96, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e1j6l"]
-atlas = ExtResource("7_dh5wq")
-region = Rect2(128, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pl11u"]
-atlas = ExtResource("7_dh5wq")
-region = Rect2(160, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bhx41"]
-atlas = ExtResource("7_dh5wq")
-region = Rect2(192, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qnb83"]
-atlas = ExtResource("7_dh5wq")
-region = Rect2(224, 160, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ocu42"]
-animations = [{
-"frames": [{
-"duration": 8.0,
-"texture": SubResource("AtlasTexture_e5syi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_thopt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kumdl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2nv5v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_owpt8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vrgn2")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 30.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3dwxn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eijfp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p8frr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3urrt")
-}],
-"loop": false,
-"name": &"death",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uyj26")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dh5wq")
-}, {
-"duration": 4.0,
-"texture": SubResource("AtlasTexture_ocu42")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dh5wq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uyj26")
-}],
-"loop": false,
-"name": &"hit",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gb236")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ibotm")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1kice")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5newe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_37s47")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bt5mj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e1j6l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pl11u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bhx41")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qnb83")
-}],
-"loop": false,
-"name": &"roll",
-"speed": 10.0
-}]
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ocu42"]
 streams_count = 3
 stream_0/stream = ExtResource("15_owpt8")
@@ -231,6 +34,8 @@ stream_2/stream = ExtResource("17_gb236")
 
 [node name="DemonKing" type="Node2D"]
 script = ExtResource("1_87pbj")
+end_screen_image_dead = ExtResource("2_pii60")
+end_screen_image_alive = ExtResource("3_diva6")
 char_name = "Demon King"
 hit_sfx = SubResource("AudioStreamRandomizer_2nv5v")
 metadata/_custom_type_script = "uid://4v303nifdpdg"
@@ -250,8 +55,8 @@ metadata/_custom_type_script = "uid://c57m8elb52dp7"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(4.5, 4.5)
-sprite_frames = SubResource("SpriteFrames_ocu42")
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("4_yhgpr")
 animation = &"hit"
 autoplay = "idle"
 frame = 4

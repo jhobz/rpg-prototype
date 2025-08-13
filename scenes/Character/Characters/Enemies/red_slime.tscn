@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://ckp66wttmrqym"]
+[gd_scene load_steps=12 format=3 uid="uid://ckp66wttmrqym"]
 
 [ext_resource type="Script" uid="uid://4v303nifdpdg" path="res://scenes/Character/Characters/Enemies/non_player_character.gd" id="1_fgqk7"]
 [ext_resource type="Script" uid="uid://c0xybc034keh1" path="res://scenes/Components/stats_component.gd" id="2_bxy7a"]
 [ext_resource type="AudioStream" uid="uid://c2skt4kivi4jy" path="res://assets/audio/77_flesh_02.wav" id="2_ncha2"]
+[ext_resource type="Texture2D" uid="uid://x1x6qcndsyr1" path="res://resources/textures/red_slime_atlas_texture_dead.tres" id="2_p8frr"]
+[ext_resource type="Texture2D" uid="uid://b3y88ugejexhr" path="res://resources/textures/red_slime_atlas_texture_alive.tres" id="3_3urrt"]
 [ext_resource type="Script" uid="uid://c57m8elb52dp7" path="res://scenes/Components/hp_component.gd" id="3_lcy1c"]
 [ext_resource type="SpriteFrames" uid="uid://cfort03ximp0y" path="res://resources/animations/red_slime_sprite_frames.tres" id="4_y17g3"]
 [ext_resource type="Script" uid="uid://c0fhxyw6tkwyo" path="res://scenes/Components/gui_component.gd" id="5_lcy1c"]
@@ -12,6 +14,8 @@
 
 [node name="RedSlime" type="Node2D"]
 script = ExtResource("1_fgqk7")
+end_screen_image_dead = ExtResource("2_p8frr")
+end_screen_image_alive = ExtResource("3_3urrt")
 char_name = "Red Slime"
 hit_sfx = ExtResource("2_ncha2")
 metadata/_custom_type_script = "uid://4v303nifdpdg"
@@ -30,7 +34,7 @@ metadata/_custom_type_script = "uid://c57m8elb52dp7"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(4.5, 4.5)
+scale = Vector2(4, 4)
 sprite_frames = ExtResource("4_y17g3")
 animation = &"idle"
 autoplay = "idle"
