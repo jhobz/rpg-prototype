@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bftnfm26n38ym"]
+
+[ext_resource type="Shader" uid="uid://chitaky476x3j" path="res://scenes/UI/results_encounter_group.gdshader" id="1_4freq"]
+
+[resource]
+shader = ExtResource("1_4freq")
+shader_parameter/desaturate_strength = 0.246

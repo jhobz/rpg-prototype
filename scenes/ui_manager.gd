@@ -106,6 +106,7 @@ func populate_run_results(run: Run, last_battle_index: int) -> void:
 
 				if last_battle_index == i:
 					enemy_node.texture = npc.end_screen_image_alive
+					enemy_node.material = null
 
 				npc.queue_free()
 				container.add_child(enemy_node)
