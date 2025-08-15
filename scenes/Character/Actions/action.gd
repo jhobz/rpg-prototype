@@ -2,6 +2,7 @@ class_name Action
 extends Node2D
 
 enum DefaultActionTarget {
+	NONE,
 	ENEMY,
 	ENEMY_ALL,
 	SELF,

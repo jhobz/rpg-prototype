@@ -73,26 +73,28 @@ func try_advance_playback():
 		execute_instruction(instructions[current_instruction_index])
 		current_instruction_index += 1
 
+func get_default_target_for_action(action: Action, source: Character) -> Character:
+	match action.default_target:
+		Action.DefaultActionTarget.NONE:
+			return source
+		Action.DefaultActionTarget.ENEMY:
+			return current_enemy
+		Action.DefaultActionTarget.ENEMY_ALL:
+			return current_enemy
+		Action.DefaultActionTarget.SELF:
+			return source
+	return null
+
 func execute_instruction(instruction: Instruction):
 	var target = instruction.target
 	if not target:
-		match instruction.action.default_target:
-			Action.DefaultActionTarget.SELF:
-				target = instruction.source
-			Action.DefaultActionTarget.ENEMY:
-				target = current_enemy
+		target = get_default_target_for_action(instruction.action, instruction.source)
 	
 	instruction.source.execute_action(instruction.action, target)
 
 func replace_instruction_action_at_index(index: int, action: Action):
 	var instruction = instructions[index]
-	var target: Character
-
-	match action.default_target:
-		Action.DefaultActionTarget.ENEMY:
-			target = current_enemy
-		Action.DefaultActionTarget.SELF:
-			target = instruction.source
+	var target := get_default_target_for_action(action, instruction.source)
 
 	instruction.action = action
 	instruction.target = target
@@ -145,12 +147,7 @@ func _on_action_ui_component_action_selected(action: Action, source: Character) 
 	if current_character != source:
 		return
 	
-	var target: Character
-	match action.default_target:
-		Action.DefaultActionTarget.ENEMY:
-			target = current_enemy
-		Action.DefaultActionTarget.SELF:
-			target = source
+	var target := get_default_target_for_action(action, source)
 
 	if current_instruction_index < instructions.size():
 		assert(instructions[current_instruction_index].action.action_name == 'Dead')
