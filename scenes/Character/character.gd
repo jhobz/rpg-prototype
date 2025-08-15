@@ -34,7 +34,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
-	pass
 	if !animated_sprite.is_playing():
 		animated_sprite.play('idle')
 
@@ -62,7 +61,6 @@ func take_damage(amount: int):
 
 func roll():
 	print("stunt on 'em, kid")
-	pass
 
 func die():
 	if animated_sprite.is_playing() and animated_sprite.animation == 'hit':

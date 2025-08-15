@@ -105,7 +105,7 @@ func _on_character_turn_turn_active(character: Character):
 
 	# if we have instructions left to execute, bypass player input
 	if character is PlayerCharacter and current_instruction_index < instructions.size():
-		if instructions[current_instruction_index].action.action_name != 'Dead':
+		if !character.is_dead() and instructions[current_instruction_index].action.action_name != 'Dead':
 			character.gui_component.toggle_action_menu(false)
 			ui_manager.set_active_instruction(current_instruction_index)
 			playback_current_instruction()
