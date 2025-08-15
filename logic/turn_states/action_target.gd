@@ -33,7 +33,7 @@ func enter() -> void:
 
 	animated_sprite.play("hit")
 	target.play_hit_sfx()
-	
+
 	if instruction.action.default_target == Action.DefaultActionTarget.ENEMY_ALL:
 		for character in CharacterManager.player_characters:
 			if character != target:
