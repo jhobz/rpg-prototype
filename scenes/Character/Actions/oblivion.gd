@@ -4,6 +4,7 @@ var iteration_count := 0
 
 func _ready() -> void:
 	action_name = 'Oblivion'
+	default_target = DefaultActionTarget.ENEMY_ALL
 	tooltip = 'Consign the next nine actions to oblivion, replacing them with No Action.'
 
 func execute(_source: Character, _target: Character) -> void:

@@ -5,6 +5,7 @@ extends State
 
 var _has_advanced_dialogue := false
 
+@onready var game_manager: GameManager = %GameManager
 @onready var ui_manager: UIManager = %UI
 
 func enter():
@@ -13,6 +14,7 @@ func enter():
 	ui_manager.queue_message("Alas, all of our heroes have perished...", 5)
 
 func exit():
+	game_manager.current_enemy.visible = false
 	Globals.dialogue_completed.disconnect(on_dialogue_completed)
 
 func process(_delta: float) -> State:

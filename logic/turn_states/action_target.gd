@@ -24,15 +24,22 @@ func enter() -> void:
 		game_manager.execute_instruction(instruction)
 
 	# TODO: change this to a match case based on ActionType enum of the current instruction (e.g. cure vs. hit)
-	if instruction.action.action_name == 'Roll' or instruction.action.action_name == 'No Action' or instruction.action.action_name == 'Cure':
+	if instruction.action.action_name == "Roll" or instruction.action.action_name == "No Action" or instruction.action.action_name == "Cure":
 		return
 
 	is_animating = true
-	animated_sprite = target.get_node('AnimatedSprite2D')
+	animated_sprite = target.get_node("AnimatedSprite2D")
 	animated_sprite.animation_finished.connect(_on_animated_sprite_animation_finished)
 
-	animated_sprite.play('hit')
+	animated_sprite.play("hit")
 	target.play_hit_sfx()
+	
+	if instruction.action.default_target == Action.DefaultActionTarget.ENEMY_ALL:
+		for character in CharacterManager.player_characters:
+			if character != target:
+				animated_sprite = character.get_node("AnimatedSprite2D")
+				animated_sprite.play("hit")
+				character.play_hit_sfx()
 
 func exit() -> void:
 	super.exit()

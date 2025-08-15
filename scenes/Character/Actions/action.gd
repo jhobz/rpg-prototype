@@ -3,6 +3,7 @@ extends Node2D
 
 enum DefaultActionTarget {
 	ENEMY,
+	ENEMY_ALL,
 	SELF,
 }
 
