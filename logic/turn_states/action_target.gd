@@ -32,7 +32,7 @@ func enter() -> void:
 	is_animating = true
 	animated_sprite = target.get_node("AnimatedSprite2D")
 	animated_sprite.animation_finished.connect(_on_animated_sprite_animation_finished)
-	
+
 	if instruction.action.default_target == Action.DefaultActionTarget.ENEMY_ALL:
 		for character in CharacterManager.player_characters:
 			var other_animated_sprite = character.get_node("AnimatedSprite2D")
