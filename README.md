@@ -11,6 +11,10 @@ All sound effects sourced from:
 - [Minifantasy Dungeon SFX Pack](https://leohpaz.itch.io/minifantasy-dungeon-sfx-pack) by [Leohpaz](https://leohpaz.itch.io)
 - [Retro RPG Battle SFX Pack](https://leohpaz.itch.io/90-rpg-battle-sfx) (demo sounds only) by [Leohpaz](https://leohpaz.itch.io)
 
+Music sourced from:
+
+- [High Quality 16-bit RPG Music](https://hydrogene.itch.io/high-quality-16-bit-music) by [HydroGene](https://hydrogene.itch.io)
+
 ### Art
 
 Knight and Slimes
