@@ -3,26 +3,35 @@ extends State
 @export var action_target_state: State
 
 @onready var game_manager: GameManager = %GameManager
+@onready var ui_manager: UIManager = %UI
 
 var animated_sprite: AnimatedSprite2D
 var is_animating := false
+var is_awaiting_dialogue := false
+
+var instruction: Instruction
 
 func enter() -> void:
 	super.enter()
+	instruction = game_manager.get_current_instruction()
+	if instruction.action.action_name == "Oblivion" and instruction.action.iteration_count == 0:
+		ui_manager.queue_message("Demon King: \"Heh heh...that's a nice action list you've got there.\"")
+		ui_manager.queue_message("Demon King: \"It would be a shame if something were to happen to it!\"")
+		Globals.dialogue_completed.connect(_on_dialogue_completed)
+		is_awaiting_dialogue = true
+		return
+	
+	start_animation()
 
-	var current_instruction: Instruction
-	if game_manager.current_character is PlayerCharacter:
-		current_instruction = game_manager.instructions[game_manager.current_instruction_index]
-	else:
-		current_instruction = game_manager.current_enemy_instruction
-	var source = current_instruction.source
+func start_animation() -> void:
+	var source = instruction.source
 
 	if source is PlayerCharacter:
 		source.gui_component.toggle_action_menu(false)
 
 	var animation := 'attack'
 	# TODO: add an ActionType enum to Action and match case off of that instead of name
-	match current_instruction.action.action_name:
+	match instruction.action.action_name:
 		'Roll':
 			animation = 'roll'
 		'No Action':
@@ -32,12 +41,14 @@ func enter() -> void:
 	animated_sprite = source.animated_sprite
 	animated_sprite.play(animation)
 	animated_sprite.animation_finished.connect(_on_animated_sprite_animation_finished)
-	source.play_action_sfx(current_instruction.action)
+	source.play_action_sfx(instruction.action)
 
 func exit() -> void:
 	super.exit()
 
 func process(_delta: float) -> State:
+	if is_awaiting_dialogue:
+		return
 	if is_animating:
 		return
 
@@ -49,3 +60,8 @@ func cleanup():
 
 func _on_animated_sprite_animation_finished():
 	cleanup()
+
+func _on_dialogue_completed():
+	is_awaiting_dialogue = false
+	Globals.dialogue_completed.disconnect(_on_dialogue_completed)
+	start_animation()

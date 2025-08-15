@@ -77,9 +77,10 @@ script = ExtResource("8_1kice")
 action_target_state = NodePath("../ActionTarget")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
-[node name="ActionTarget" type="Node" parent="GameStateMachine/CharacterTurn/TurnStateMachine" node_paths=PackedStringArray("turn_end_state")]
+[node name="ActionTarget" type="Node" parent="GameStateMachine/CharacterTurn/TurnStateMachine" node_paths=PackedStringArray("turn_end_state", "action_source_state")]
 script = ExtResource("9_5newe")
 turn_end_state = NodePath("../TurnEnd")
+action_source_state = NodePath("../ActionSource")
 metadata/_custom_type_script = "uid://drjq2ahjmnkhw"
 
 [node name="TurnEnd" type="Node" parent="GameStateMachine/CharacterTurn/TurnStateMachine" node_paths=PackedStringArray("turn_inactive_state")]

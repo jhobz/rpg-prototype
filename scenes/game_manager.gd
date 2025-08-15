@@ -47,6 +47,12 @@ func log_instruction(instruction: Instruction) -> void:
 func playback_current_instruction():
 	turn_state_machine.change_state(action_source_state)
 
+func get_current_instruction() -> Instruction:
+	if current_character is PlayerCharacter:
+		return instructions[current_instruction_index]
+	else:
+		return current_enemy_instruction
+
 func try_advance_playback():
 	# end turn for characters who died
 	if current_instruction_index < instructions.size() and instructions[current_instruction_index].source.is_dead():
