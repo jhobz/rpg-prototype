@@ -34,6 +34,8 @@ window/stretch/mode="canvas_items"
 
 timers/tooltip_delay_sec=0.1
 theme/custom="uid://dt28hksanooxk"
+theme/custom_font="uid://1fcqhxclqhiy"
+theme/default_font_antialiasing=0
 
 [input]
 
