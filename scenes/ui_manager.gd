@@ -133,3 +133,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_next_run_button_pressed() -> void:
 	Globals.start_next_run()
+
+func _on_mute_button_toggled(toggled_on: bool) -> void:
+	var bus_index := AudioServer.get_bus_index("Master")
+	AudioServer.set_bus_mute(bus_index, toggled_on)

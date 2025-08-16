@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://d34kj08qefmyp"]
+[gd_scene load_steps=9 format=3 uid="uid://d34kj08qefmyp"]
 
 [ext_resource type="Script" uid="uid://bk4nrf3hatx2u" path="res://scenes/instructions_ui_manager.gd" id="1_x4jx1"]
 [ext_resource type="Script" uid="uid://dv4bud7l05v2a" path="res://scenes/ui_manager.gd" id="1_yev5y"]
 [ext_resource type="Script" uid="uid://ddbhdfuiub5a4" path="res://scenes/scroll_container.gd" id="2_yev5y"]
 [ext_resource type="Texture2D" uid="uid://dmqmc0xuvbvp" path="res://assets/sprites/64px-Green_Arrow_Right.svg.png" id="4_gdt2y"]
+[ext_resource type="Texture2D" uid="uid://clrucaa3nbp5i" path="res://assets/ui/Speaker-0.png" id="5_8dubc"]
+[ext_resource type="Texture2D" uid="uid://jlk6l67hw62o" path="res://assets/ui/Speaker-Crossed.png" id="6_p7vwb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kice"]
 content_margin_left = 50.0
@@ -141,6 +143,17 @@ text = "Hate"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="MuteButton" type="TextureButton" parent="HSplitContainer/MarginContainer"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+tooltip_text = "Toggle game audio."
+toggle_mode = true
+texture_normal = ExtResource("5_8dubc")
+texture_pressed = ExtResource("6_p7vwb")
+stretch_mode = 3
+
 [node name="RunResultsPanel" type="VBoxContainer" parent="HSplitContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -245,4 +258,5 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 texture = SubResource("PlaceholderTexture2D_yev5y")
 
+[connection signal="toggled" from="HSplitContainer/MarginContainer/MuteButton" to="." method="_on_mute_button_toggled"]
 [connection signal="pressed" from="HSplitContainer/MarginContainer/RunResultsPanel/NextRunButton" to="." method="_on_next_run_button_pressed"]
