@@ -61,7 +61,7 @@ metadata/_custom_type_script = "uid://c57m8elb52dp7"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(4.5, 4.5)
+scale = Vector2(3, 3)
 sprite_frames = ExtResource("4_55yqc")
 animation = &"idle"
 autoplay = "idle"
