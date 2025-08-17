@@ -7,7 +7,7 @@ var _has_advanced_dialogue := false
 func enter():
 	Globals.dialogue_completed.connect(on_dialogue_completed)
 	_has_advanced_dialogue = false
-	ui_manager.queue_message("You've done it! All of the enemies have been defeated forever!")
+	DialogueManager.play_victory_dialogue()
 
 func exit():
 	Globals.dialogue_completed.disconnect(on_dialogue_completed)

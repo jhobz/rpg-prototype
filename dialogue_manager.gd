@@ -63,6 +63,12 @@ var post_death_title: Dictionary = {
 	2: "You succumbed to the [fgcolor=black]CURSE[/fgcolor] [wave][outline_size=16][color=#aa22aa]TIME LOOP![/color][/outline_size][/wave]"
 }
 
+var victory_dialogue = [
+	"You've done it! All of the enemies have been defeated forever!",
+	"...no, like, literally forever. I didn't have time to implement restarting the game.",
+	"I'm sure you can find the F5 key yourself, though. Thanks for playing!"
+]
+
 var game_manager: GameManager = null
 var ui_manager: UIManager = null
 
@@ -121,3 +127,6 @@ func get_post_death_title():
 		if i in post_death_title:
 			title = post_death_title[i]
 	return title
+
+func play_victory_dialogue():
+	ui_manager.queue_messages(victory_dialogue)
