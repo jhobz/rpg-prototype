@@ -53,9 +53,14 @@ func replace_instruction_at_index(index: int, instruction: Instruction) -> void:
 	ui_items[i].set_tooltip_text(instruction.action.tooltip)
 
 func toggle_input(state: bool):
-	var value = Control.MOUSE_FILTER_PASS if state else Control.MOUSE_FILTER_IGNORE
-	self.propagate_call("set_mouse_filter", [value])
-	# self.propagate_call('mouse_default_cursor_shape', [Control.CURSOR_ARROW if state else Control.CURSOR_FORBIDDEN])
+	var mouse_shape = Control.CURSOR_POINTING_HAND if state else Control.CURSOR_FORBIDDEN
+	var ui_items = grid.get_children()
+
+	for btn in ui_items.filter(func(item: Control):
+		return item is MenuButton
+	):
+		btn.disabled = !state
+		btn.mouse_default_cursor_shape = mouse_shape
 	
 func update_active_instruction():
 	var ui_items = grid.get_children()
@@ -72,7 +77,7 @@ func update_active_instruction():
 		# update scrollbar position
 		var scrollbar = scroll_container.get_v_scroll_bar()
 		# scrollbars are stupid
-		const MAX_VISIBLE_INSTRUCTIONS = 20
+		const MAX_VISIBLE_INSTRUCTIONS = 18
 		var ratio = clamp(0.0, float(i - 4) / float(ui_items.size() - 4 + (MAX_VISIBLE_INSTRUCTIONS * 4)), 1.0)
 		if tween:
 			tween.kill()
