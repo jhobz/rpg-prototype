@@ -14,7 +14,6 @@ var _has_advanced_dialogue := false
 func init():
 	ui_manager.set_instructions_input_enabled(false)
 	_current_encounter = 0
-	Globals.save_state.current_battle_index = 0
 
 func enter():
 	if !Globals.save_state.current_run:
@@ -22,23 +21,20 @@ func enter():
 	else:
 		assert(Globals.save_state.current_run == run)
 
-	Globals.dialogue_completed.connect(_on_dialogue_completed)
-
-	if _current_encounter == 0 or _current_encounter < run.encounters.size():
+	if _current_encounter <= run.encounters.size():
+		Globals.start_encounter(_current_encounter)
+		if DialogueManager.play_encounter_dialogue(_current_encounter):
+			Globals.dialogue_completed.connect(_on_dialogue_completed)
+			_has_advanced_dialogue = false
 		encounter_started.emit(run.encounters[_current_encounter])
 
 	if _current_encounter == 0:
-		_has_advanced_dialogue = false
-		ui_manager.queue_message("Our heroes' journey begins!", 2)
 		for character in CharacterManager.player_characters:
 			character.refill_hp()
 			character.visible = true
-	elif _current_encounter < run.encounters.size():
-		_has_advanced_dialogue = false
-		ui_manager.queue_message("More enemies have been spotted!", 2)
 
 func exit():
-	Globals.dialogue_completed.disconnect(_on_dialogue_completed)
+	pass
 
 func process(_delta: float) -> State:
 	if _current_encounter >= run.encounters.size():
@@ -53,3 +49,4 @@ func process(_delta: float) -> State:
 
 func _on_dialogue_completed():
 	_has_advanced_dialogue = true
+	Globals.dialogue_completed.disconnect(_on_dialogue_completed)

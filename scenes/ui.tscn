@@ -234,18 +234,27 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/margin_left = 50
+theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 50
+theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="Status" type="Label" parent="HSplitContainer/MarginContainer/StatusContainer/PanelContainer/MarginContainer"]
+[node name="Status" type="RichTextLabel" parent="HSplitContainer/MarginContainer/StatusContainer/PanelContainer/MarginContainer"]
 unique_name_in_owner = true
 visibility_layer = 2
 z_index = 2
+custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
 text = "An enemy is approaching!"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true

@@ -12,13 +12,13 @@ func enter():
 	Globals.next_run_requested.connect(_on_next_run_requested)
 	_was_shown_dialogue = false
 
-	if !Globals.save_state.has_seen_editing_tutorial:
+	if DialogueManager.play_post_death_dialogue():
 		Globals.dialogue_completed.connect(on_dialogue_completed)
+		ui_manager._clear_run_results()
 		_was_shown_dialogue = true
 		_has_advanced_dialogue = false
-		ui_manager.queue_message("The party perished! But the adventure does not end there...\nUse the left panel to modify your moves and try again!")
 	else:
-		ui_manager.populate_run_results(Globals.save_state.current_run, Globals.save_state.current_battle_index)
+		ui_manager.populate_run_results(Globals.save_state.current_run)
 
 	ui_manager.set_instructions_input_enabled(true)
 	ui_manager.show_run_results()
@@ -41,7 +41,7 @@ func process(_delta: float) -> State:
 func on_dialogue_completed():
 	_has_advanced_dialogue = true
 	Globals.save_state.has_seen_editing_tutorial = true
-	ui_manager.populate_run_results(Globals.save_state.current_run, Globals.save_state.current_battle_index)
+	ui_manager.populate_run_results(Globals.save_state.current_run)
 
 func _on_next_run_requested() -> void:
 	_ready_for_next_run = true

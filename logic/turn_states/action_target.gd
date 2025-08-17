@@ -23,15 +23,17 @@ func enter() -> void:
 	else:
 		game_manager.execute_instruction(instruction)
 
-	match instruction.action.default_target:
-		Action.DefaultActionTarget.NONE:
-			return
-		Action.DefaultActionTarget.SELF:
-			return
-
 	is_animating = true
 	animated_sprite = target.get_node("AnimatedSprite2D")
 	animated_sprite.animation_finished.connect(_on_animated_sprite_animation_finished)
+
+	match instruction.action.default_target:
+		Action.DefaultActionTarget.NONE:
+			cleanup()
+			return
+		Action.DefaultActionTarget.SELF:
+			cleanup()
+			return
 
 	if instruction.action.default_target == Action.DefaultActionTarget.ENEMY_ALL:
 		for character in CharacterManager.player_characters:
@@ -59,9 +61,13 @@ func process(_delta: float) -> State:
 func cleanup():
 	animated_sprite.animation_finished.disconnect(_on_animated_sprite_animation_finished)
 	is_animating = false
-	if instruction.action.action_name == "Oblivion" and instruction.action.iteration_count == 0:
+	
+	if instruction.source is PlayerCharacter and DialogueManager.play_turn_dialogue():
 		is_awaiting_dialogue = true
-		ui_manager.queue_message("Demon King: \"Now, it's time for some pain.\"")
+		Globals.dialogue_completed.connect(_on_dialogue_completed)
+	elif instruction.action.action_name == "Oblivion" and instruction.action.iteration_count == 0:
+		DialogueManager.play_demon_king_post_oblivion_dialogue()
+		is_awaiting_dialogue = true
 		Globals.dialogue_completed.connect(_on_dialogue_completed)
 
 func _on_animated_sprite_animation_finished():

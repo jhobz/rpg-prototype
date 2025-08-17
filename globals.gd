@@ -8,7 +8,10 @@ var save_state: Dictionary = {
 	"has_seen_instruction_tutorial": false,
 	"has_seen_editing_tutorial": false,
 	"current_run": null,
+	"current_encounter_index": 0,
 	"current_battle_index": 0,
+	"new_instructions_this_encounter": 0,
+	"current_run_count": 0,
 }
 
 var default_music: AudioStream = preload("res://assets/audio/11. Dangerous Cave.ogg")
@@ -20,6 +23,15 @@ signal dialogue_completed()
 
 func start_next_run():
 	next_run_requested.emit()
+	save_state.current_run_count += 1
+
+func start_battle(battle_index: int):
+	save_state.current_battle_index = battle_index
+
+func start_encounter(encounter_index: int):
+	save_state.current_encounter_index = encounter_index
+	save_state.new_instructions_this_encounter = 0
+	start_battle(0)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released('debug_increase_game_speed'):

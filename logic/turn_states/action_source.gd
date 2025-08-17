@@ -15,8 +15,7 @@ func enter() -> void:
 	super.enter()
 	instruction = game_manager.get_current_instruction()
 	if instruction.action.action_name == "Oblivion" and instruction.action.iteration_count == 0:
-		ui_manager.queue_message("Demon King: \"Heh heh...that's a nice action list you've got there.\"")
-		ui_manager.queue_message("Demon King: \"It would be a shame if something were to happen to it!\"")
+		DialogueManager.play_demon_king_oblivion_dialogue()
 		Globals.dialogue_completed.connect(_on_dialogue_completed)
 		is_awaiting_dialogue = true
 		return

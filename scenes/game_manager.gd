@@ -17,6 +17,7 @@ var current_enemy_instruction: Instruction
 
 func _ready() -> void:
 	Globals.game_manager = self
+	DialogueManager.ui_manager = ui_manager
 	ui_manager.ready.connect(
 		func():
 			state_machine.init_state_machine()
@@ -43,6 +44,7 @@ func log_instruction(instruction: Instruction) -> void:
 		
 	instructions.append(instruction)
 	ui_manager.add_instruction(instruction)
+	Globals.save_state.new_instructions_this_encounter += 1
 
 func playback_current_instruction():
 	turn_state_machine.change_state(action_source_state)

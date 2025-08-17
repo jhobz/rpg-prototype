@@ -23,6 +23,7 @@ buses/default_bus_layout="uid://cc5kq5mgy4g4"
 
 Globals="*res://globals.gd"
 CharacterManager="*res://character_manager.gd"
+DialogueManager="*res://dialogue_manager.gd"
 
 [display]
 

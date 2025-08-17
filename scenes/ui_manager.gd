@@ -3,7 +3,7 @@ class_name UIManager
 
 @onready var instructions_control: InstructionsUIManager = %Instructions
 @onready var status_container: CenterContainer = %StatusContainer
-@onready var status_label: Label = %Status
+@onready var status_label: RichTextLabel = %Status
 @onready var run_results_panel: VBoxContainer = %RunResultsPanel
 @onready var results_container: HFlowContainer = %ResultsContainer
 @onready var advance_dialogue_icon: TextureRect = %AdvanceDialogueIcon
@@ -52,6 +52,10 @@ func queue_message(message: String, duration: float = 0) -> void:
 
 	_messages.push_back(message_data)
 
+func queue_messages(messages: Array, duration: float = 0):
+	for message in messages:
+		queue_message(message, duration)
+
 func show_message() -> void:
 	if _messages.size() == 0:
 		return
@@ -79,19 +83,25 @@ func hide_message() -> void:
 # Run results
 
 func show_run_results() -> void:
+	var title = run_results_panel.get_node("Panel/MarginContainer/VBoxContainer/ResultsTitle")
+	title.text = DialogueManager.get_post_death_title()
 	run_results_panel.show()
 
 func hide_run_results() -> void:
 	run_results_panel.hide()
 
-func populate_run_results(run: Run, last_battle_index: int) -> void:
+func populate_run_results(run: Run) -> void:
 	_clear_run_results()
 
-	var i := 0
+	var current_encounter_index = Globals.save_state.current_encounter_index
+	var current_battle_index = Globals.save_state.current_battle_index
+	var encounter_index := 0
+	
 	for encounter in run.encounters:
 		var scene: PackedScene = load("res://scenes/UI/results_encounter_group.tscn")
 		var node := scene.instantiate()
 		results_container.add_child(node)
+		var battle_index := 0
 
 		for battle in encounter.battles:
 			for enemy in battle.enemies:
@@ -102,7 +112,7 @@ func populate_run_results(run: Run, last_battle_index: int) -> void:
 				enemy_node.texture = npc.end_screen_image_dead
 				enemy_node.custom_minimum_size = enemy_node.texture.get_size() * scale_factor
 
-				if last_battle_index == i:
+				if encounter_index == current_encounter_index and battle_index == current_battle_index:
 					enemy_node.texture = npc.end_screen_image_alive
 					enemy_node.material = null
 
@@ -112,10 +122,14 @@ func populate_run_results(run: Run, last_battle_index: int) -> void:
 				# possibly do this on a delay
 				enemy_node.show()
 				await get_tree().create_timer(0.1).timeout
-				i += 1
+				battle_index += 1
 
-				if i > last_battle_index:
+				if encounter_index == current_encounter_index and battle_index > current_battle_index:
 					return
+					
+		encounter_index += 1
+		if encounter_index > current_encounter_index:
+			return
 
 func _clear_run_results() -> void:
 	for child in results_container.get_children():

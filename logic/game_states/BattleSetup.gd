@@ -43,10 +43,12 @@ func process(_delta: float) -> State:
 	enemies.add_character(enemy)
 	game_manager.current_enemy = enemy
 	enemy.position = %DummyEnemy.position
-	_next_battle += 1
 	battle_idle_state.init()
 
-	if Globals.save_state.has_cleared_first_encounter and !Globals.save_state.has_seen_instruction_tutorial:
+	Globals.start_battle(_next_battle)
+	_next_battle += 1
+
+	if Globals.save_state.current_encounter_index == 2 and !Globals.save_state.has_seen_instruction_tutorial:
 		return instruction_tutorial_state
 
 	return battle_idle_state
