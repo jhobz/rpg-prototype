@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d34kj08qefmyp"]
+[gd_scene load_steps=10 format=3 uid="uid://d34kj08qefmyp"]
 
 [ext_resource type="Script" uid="uid://bk4nrf3hatx2u" path="res://scenes/instructions_ui_manager.gd" id="1_x4jx1"]
 [ext_resource type="Script" uid="uid://dv4bud7l05v2a" path="res://scenes/ui_manager.gd" id="1_yev5y"]
@@ -6,23 +6,21 @@
 [ext_resource type="Texture2D" uid="uid://dmqmc0xuvbvp" path="res://assets/sprites/64px-Green_Arrow_Right.svg.png" id="4_gdt2y"]
 [ext_resource type="Texture2D" uid="uid://clrucaa3nbp5i" path="res://assets/ui/Speaker-0.png" id="5_8dubc"]
 [ext_resource type="Texture2D" uid="uid://jlk6l67hw62o" path="res://assets/ui/Speaker-Crossed.png" id="6_p7vwb"]
+[ext_resource type="Texture2D" uid="uid://8aidb7vyie2b" path="res://assets/ui/default_theme/Keyboard Extras.png" id="7_p7vwb"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kice"]
-content_margin_left = 50.0
-content_margin_right = 50.0
-bg_color = Color(0.0980392, 0.462745, 0.823529, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-shadow_size = 2
-shadow_offset = Vector2(2, 2)
+[sub_resource type="LabelSettings" id="LabelSettings_8dubc"]
+font_size = 24
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_yev5y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7vwb"]
+atlas = ExtResource("7_p7vwb")
+region = Rect2(98, 18, 28, 12)
 
 [node name="UI" type="MarginContainer"]
 visibility_layer = 2
 z_index = 1
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -128,7 +126,8 @@ horizontal_alignment = 1
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 1, 1, 0.407843)
+theme_override_colors/font_color = Color(0.129412, 0.129412, 0.129412, 1)
+theme_override_constants/outline_size = 0
 text = "uses"
 horizontal_alignment = 1
 
@@ -138,21 +137,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Hate"
+flat = false
 
 [node name="MarginContainer" type="MarginContainer" parent="HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="MuteButton" type="TextureButton" parent="HSplitContainer/MarginContainer"]
-custom_minimum_size = Vector2(56, 56)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-tooltip_text = "Toggle game audio."
-toggle_mode = true
-texture_normal = ExtResource("5_8dubc")
-texture_pressed = ExtResource("6_p7vwb")
-stretch_mode = 3
 
 [node name="RunResultsPanel" type="VBoxContainer" parent="HSplitContainer/MarginContainer"]
 unique_name_in_owner = true
@@ -197,12 +186,14 @@ text = "YOU SUCCUMBED TO THE [fgcolor=black]CURSE[/fgcolor] [fgcolor=black]SPELL
 horizontal_alignment = 1
 
 [node name="EnemiesTitle" type="RichTextLabel" parent="HSplitContainer/MarginContainer/RunResultsPanel/Panel/MarginContainer/VBoxContainer"]
+clip_contents = false
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "Your run"
+horizontal_alignment = 1
 
 [node name="ResultsContainer" type="HFlowContainer" parent="HSplitContainer/MarginContainer/RunResultsPanel/Panel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -214,14 +205,12 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_1kice")
 text = "Next run →"
 icon_alignment = 2
 expand_icon = true
 
 [node name="StatusContainer" type="CenterContainer" parent="HSplitContainer/MarginContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -244,19 +233,35 @@ unique_name_in_owner = true
 visibility_layer = 2
 z_index = 2
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
 text = "An enemy is approaching!"
+label_settings = SubResource("LabelSettings_8dubc")
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="AdvanceDialogueIcon" type="TextureRect" parent="HSplitContainer/MarginContainer/StatusContainer/PanelContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="HSplitContainer/MarginContainer/StatusContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="AdvanceDialogueIcon" type="TextureRect" parent="HSplitContainer/MarginContainer/StatusContainer/PanelContainer/MarginContainer2"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(20, 20)
+custom_minimum_size = Vector2(42, 18)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-texture = SubResource("PlaceholderTexture2D_yev5y")
+texture = SubResource("AtlasTexture_p7vwb")
 
-[connection signal="toggled" from="HSplitContainer/MarginContainer/MuteButton" to="." method="_on_mute_button_toggled"]
+[node name="MuteButton" type="TextureButton" parent="HSplitContainer/MarginContainer"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+tooltip_text = "Toggle game audio."
+toggle_mode = true
+texture_normal = ExtResource("5_8dubc")
+texture_pressed = ExtResource("6_p7vwb")
+stretch_mode = 3
+
 [connection signal="pressed" from="HSplitContainer/MarginContainer/RunResultsPanel/NextRunButton" to="." method="_on_next_run_button_pressed"]
+[connection signal="toggled" from="HSplitContainer/MarginContainer/MuteButton" to="." method="_on_mute_button_toggled"]
