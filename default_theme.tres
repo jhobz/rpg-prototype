@@ -190,6 +190,7 @@ Panel/styles/panel = SubResource("StyleBoxTexture_3taad")
 PanelContainer/styles/panel = ExtResource("2_3taad")
 ProgressBar/styles/background = SubResource("StyleBoxTexture_s87n4")
 ProgressBar/styles/fill = SubResource("StyleBoxTexture_xgv2l")
+RichTextLabel/constants/outline_size = 3
 TooltipPanel/styles/panel = SubResource("StyleBoxFlat_bp0wp")
 VScrollBar/styles/grabber = SubResource("StyleBoxTexture_juax2")
 VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_uinvw")

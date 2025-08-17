@@ -4,10 +4,10 @@ var encounter_dialogue: Dictionary = {
 	0: ["Thanks for playing my first game! I'm a big fan of RPGs, so I decided to try making one.",
 		"It should be pretty straightforward if you've ever played an RPG before. Have fun!"],
 	1: ["Nice job! I think there's some tougher enemies ahead, though, so get ready!"],
-	3: ["Okay, I'm gonna level with you. I think I like it. [font_size=8](and I have no idea how to fix it)[/font_size]",
-		"But I think we might've stumbled into gold here. So... we're officially leaning into it.",
+	3: ["Okay, I'm gonna level with you. I think I like it.\n[font_size=12](and I have no idea how to fix it)[/font_size]",
+		"I think we might've stumbled into gold here.\nSo... we're officially leaning into it.",
 		"It's not a bug, it's a... uh... a CURSE! The [wave]spooooky cuuurrrrse[/wave] of the Demon King!"],
-	4: ["Woah, these next enemies are pretty scary. I think you might be closing in on the [outline_size=8][color=#990000]Demon King[/color][/outline_size]!"]
+	4: ["Woah, these next enemies are pretty scary.\nI think you might be closing in on the [outline_size=8][color=#990000]Demon King[/color][/outline_size]!"]
 }
 var encounter_dialogue_seen := {}
 
@@ -27,19 +27,19 @@ var turn_dialogue_post_replay: Dictionary = {
 	},
 	2: {
 		1: ["Ooohhh, okay, I get it now. It's just remembering everything you're doing and repeating it?",
-			"Interesting... I'll see what I can do and you... just keep at it. You're doing great, champ."]
+			"Interesting... I'll see what I can do and you...\nyou just keep at it. You're doing great, champ."]
 	}
 }
 var turn_dialogue_post_replay_seen := {}
 
 var instruction_tutorial: Array[String] = [
-	"Okay, I've got bad news and good news. The bad news is... I still have no idea what's happening.",
-	"But the good news is, I've hacked together this command list so we can see what the game is doing."
+	"Okay, I've got good news and bad news.\nThe bad news is... I still have no idea what's happening.",
+	"The good news is, I've hacked together this command list\nso we can see what the game is doing."
 ]
 
 var demon_king_oblivion_dialogue: Array[String] = [
 	"OMG, I just had the coolest idea. You're gonna love this. Ahem...",
-	"[DEEP VOICE] \"Nice commands you've got there. It'd be a shame if something happened to them...\"",
+	"[DEEP VOICE] \"Nice commands you've got there.\nIt'd be a shame if something happened to them...\"",
 	"[DEEP VOICE] [font_size=32][outline_size=8][color=#990000][wave]\"OBLIVION!!!\"[/wave][/color][/outline_size][/font_size]"
 ]
 var demon_king_oblivion_dialogue_seen := false
@@ -50,23 +50,23 @@ var demon_king_post_oblivion_dialogue: Array[String] = [
 ]
 
 var post_death_dialogue: Dictionary = {
-	0: ["Alright, I admit, that was pretty rough to watch. But look! I've added a way for you to edit your commands!",
-		"Err, I mean... um, you've now learned a [b]SPELL[/b] to fight the [b]CURSE[/b] and... change your fate!",
-		"Now, uh, go forth, adventurer, and defeat the Demon King to break the curse! [font_size=8](man, I'm good)[/font_size]"],
+	0: ["Alright, I admit, that was pretty rough to watch.\nBut look! I've added a way for you to edit your commands!",
+		"Err, I mean... um, you've now learned a [b][color=#ffbf00]SPELL[/color][/b] to fight the [b][color=#aa22aa]CURSE[/color][/b] and... [color=#ffbf00]change your fate![/color]",
+		"Now, uh, go forth, adventurer, and defeat the Demon King to break the curse! [font_size=12](man, I'm good)[/font_size]"],
 	1: ["Ouch. Well, it's okay, at least you can rewrite history and try again.",
-		"Wait, \"rewrite history\"...? Should it be a time loop? Maybe it's a time loop."],
-	2: ["Aww man, you have to change all your moves back. Hm... I should fix that in a day 1 patch..."],
+		"Wait, \"rewrite history\"...? Should it be a [i]time loop[/i]? Maybe it's a time loop."],
+	2: ["Oof, still dying? Maybe the game's too hard...\nHm... I should fix that in a day 1 patch..."],
 }
 
 var post_death_title: Dictionary = {
-	0: "You succumbed to the [wave][outline_size=16][color=#aa22aa]CURSE![/color][/outline_size][/wave]",
-	2: "You succumbed to the [fgcolor=black]CURSE[/fgcolor] [wave][outline_size=16][color=#aa22aa]TIME LOOP![/color][/outline_size][/wave]"
+	0: "YOU SUCCUMBED TO THE [wave][outline_size=16][color=#aa22aa]CURSE![/color][/outline_size][/wave]",
+	2: "YOU SUCCUMBED TO THE [fgcolor=black]CURSE[/fgcolor] [wave][outline_size=16][color=#aa22aa]TIME LOOP![/color][/outline_size][/wave]"
 }
 
 var victory_dialogue = [
 	"You've done it! All of the enemies have been defeated forever!",
 	"...no, like, literally forever. I didn't have time to implement restarting the game.",
-	"I'm sure you can find the F5 key yourself, though. Thanks for playing!"
+	"I'm sure you can figure something out yourself, though. Thanks for playing!"
 ]
 
 var game_manager: GameManager = null
