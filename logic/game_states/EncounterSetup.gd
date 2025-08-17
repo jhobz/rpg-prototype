@@ -21,7 +21,7 @@ func enter():
 	else:
 		assert(Globals.save_state.current_run == run)
 
-	if _current_encounter <= run.encounters.size():
+	if _current_encounter < run.encounters.size():
 		Globals.start_encounter(_current_encounter)
 		if DialogueManager.play_encounter_dialogue(_current_encounter):
 			Globals.dialogue_completed.connect(_on_dialogue_completed)
